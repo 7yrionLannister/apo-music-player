@@ -12,8 +12,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="719.0" stylesheets="@PrimaryStageStyleSheet.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.PrimaryStageController">
    <bottom>
@@ -35,7 +37,7 @@
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
                               <Label fx:id="songNameLabel" text="Song nameeeeeee" />
-                              <Label fx:id="SongAlbumLabel" text="Albummmmmmmmmmmmm" />
+                              <Label fx:id="songAlbumLabel" text="Albummmmmmmmmmmmm" />
                               <Label fx:id="songArtistLabel" text="Artistttttttttttttttttt" />
                            </children>
                            <HBox.margin>
@@ -188,8 +190,18 @@
    <center>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab text="Track view" />
-          <Tab text="Equalizer" />
+          <Tab text="Track view">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Circle fx:id="coverImageCircle" fill="#ced4da" layoutX="355.0" layoutY="114.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+                     </children>
+                  </Pane>
+               </content></Tab>
+          <Tab text="Equalizer">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0" />
+               </content></Tab>
         </tabs>
       </TabPane>
    </center>
