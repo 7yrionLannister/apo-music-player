@@ -1,0 +1,19 @@
+.button {
+    -fx-background-color: null;
+    -fx-background-radius: 50%;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
+}
+
+.slider . track {
+    -fx-background-color:null;
+    -fx-background-radius: 2.5, 2.5, 1.5;
+    -fx-padding: 0.208333em;
+}
+
+BorderPane {
+    -fx-background-color:Azure;
+}
+
+ProgressBar {
+    -fx-accent:darkcyan;
+}
