@@ -20,15 +20,15 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import model.MusicPlayer;
 
 public class PrimaryStageController {
 	public final static Image DEFAULT_THUMBNAIL = new Image(new File("imgs/music-player.png").toURI().toString());
 	public final static Image PAUSE_ICON = new Image(new File("imgs/pause.png").toURI().toString(), 50, 50, false, false);
 	public final static Image PLAY_ICON = new Image(new File("imgs/play-button.png").toURI().toString(), 50, 50, false, false);
-	
-	private Media media;
-	private MediaPlayer mediaPlayer;
 
+	private MusicPlayer musicPlayer;
+	
 	@FXML
 	private Circle coverImageCircle;
 	
@@ -92,6 +92,11 @@ public class PrimaryStageController {
 	@FXML
 	public void initialize() {
 		//TODO complete this
+		try {
+			musicPlayer = new MusicPlayer(this);
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
 		volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
 			public void changed(ObservableValue<? extends Number> ov,
 					Number old_val, Number new_val) {
@@ -104,10 +109,6 @@ public class PrimaryStageController {
 				trackTimeProgressBar.setProgress(new_val.doubleValue()/100.0);
 			}
 		});
-		//TODO Delete this, is a test
-		File temp = new File("samples/bensound-summer.mp3");
-		media = new Media(temp.toURI().toString());
-		mediaPlayer = new MediaPlayer(media);
 	}
 
 	@FXML
@@ -132,31 +133,11 @@ public class PrimaryStageController {
 
 	@FXML
 	public void playPauseButtonPressed(ActionEvent event) {
-		ObservableMap<String, Object> metadata = media.getMetadata();
-		metadata.addListener(new MapChangeListener<String, Object>() {
-			@Override
-			public void onChanged(Change<? extends String, ? extends Object> ch) {
-				if (ch.wasAdded()) {
-					try {
-						handleMetadata(ch.getKey(), ch.getValueAdded());
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		});
-		if(metadata.isEmpty()) {
-			songAlbumLabel.setText("unknown");
-			songArtistLabel.setText("unknown");
-			songNameLabel.setText("unknown");
-			songThumbnail.setImage(DEFAULT_THUMBNAIL);
-			coverImageCircle.setFill(new ImagePattern(DEFAULT_THUMBNAIL));
-		}
-		if(mediaPlayer.getStatus().compareTo(MediaPlayer.Status.PLAYING) == 0) {
-			mediaPlayer.pause();
+		if(musicPlayer.getMediaPlayer().getStatus().compareTo(MediaPlayer.Status.PLAYING) == 0) {
+			musicPlayer.getMediaPlayer().pause();
 			playPauseButton.setGraphic(new ImageView(PLAY_ICON));
 		} else {
-			mediaPlayer.play();
+			musicPlayer.getMediaPlayer().play();
 			playPauseButton.setGraphic(new ImageView(PAUSE_ICON));
 		}
 	}
@@ -181,17 +162,51 @@ public class PrimaryStageController {
 
 	}
 
-	private void handleMetadata(String key, Object value) throws IOException {
-		//TODO Fix this
-		if (key.equals("album")) {
-			songAlbumLabel.setText(value.toString());
-		} if (key.equals("artist")) {
-			songArtistLabel.setText(value.toString());
-		} if (key.equals("title")) {
-			songNameLabel.setText(value.toString());
-		}
-		if (key.equals("image")) {
-			songThumbnail.setImage((Image)value);
-		}
+	public Circle getCoverImageCircle() {
+		return coverImageCircle;
+	}
+
+	public ImageView getSongThumbnail() {
+		return songThumbnail;
+	}
+
+	public Label getSongNameLabel() {
+		return songNameLabel;
+	}
+
+	public Label getSongAlbumLabel() {
+		return songAlbumLabel;
+	}
+
+	public Label getSongArtistLabel() {
+		return songArtistLabel;
+	}
+
+	public Button getPrevTrackButton() {
+		return prevTrackButton;
+	}
+
+	public Button getNextTrackButton() {
+		return nextTrackButton;
+	}
+
+	public Label getCurrentTimeLabel() {
+		return currentTimeLabel;
+	}
+
+	public Slider getTrackTimeSlider() {
+		return trackTimeSlider;
+	}
+
+	public Label getDurationLabel() {
+		return durationLabel;
+	}
+
+	public Slider getVolumeSlider() {
+		return volumeSlider;
+	}
+
+	public Button getShuffleSwitchButton() {
+		return shuffleSwitchButton;
 	}
 }
