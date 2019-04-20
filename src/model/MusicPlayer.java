@@ -12,7 +12,7 @@ import javafx.scene.paint.ImagePattern;
 import ui.PrimaryStageController;
 
 public class MusicPlayer {
-	public final static String MUSIC_FOLDERS_PATH = "mscfldrs.got";
+	public final static String MUSIC_FOLDERS_PATH = "data/mscfldrs.got";
 	
 	private Media media;
 	private MediaPlayer mediaPlayer;
