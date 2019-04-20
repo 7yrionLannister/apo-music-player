@@ -3,11 +3,8 @@ package ui;
 import java.io.File;
 import java.io.IOException;
 
-import javafx.animation.Animation.Status;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.MapChangeListener;
-import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,7 +13,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -26,6 +22,8 @@ public class PrimaryStageController {
 	public final static Image DEFAULT_THUMBNAIL = new Image(new File("imgs/music-player.png").toURI().toString());
 	public final static Image PAUSE_ICON = new Image(new File("imgs/pause.png").toURI().toString(), 50, 50, false, false);
 	public final static Image PLAY_ICON = new Image(new File("imgs/play-button.png").toURI().toString(), 50, 50, false, false);
+	public final static Image MUTE_ENABLED_ICON = new Image(new File("imgs/mute.png").toURI().toString(), 40, 40, false, false);
+	public final static Image MUTE_DISABLED_ICON = new Image(new File("imgs/volume-1.png").toURI().toString(), 40, 40, false, false);
 
 	private MusicPlayer musicPlayer;
 	
@@ -66,7 +64,7 @@ public class PrimaryStageController {
 	private Label durationLabel;
 
 	@FXML
-	private Button volumeSwitch;
+	private Button volumeSwitchButton;
 
 	@FXML
 	private ProgressBar volumeProgressBar;
@@ -94,6 +92,10 @@ public class PrimaryStageController {
 		//TODO complete this
 		try {
 			musicPlayer = new MusicPlayer(this);
+			songNameLabel.textProperty().bind(musicPlayer.getCurrentSongTitle());
+			songAlbumLabel.textProperty().bind(musicPlayer.getCurrentSongAlbum());
+			songArtistLabel.textProperty().bind(musicPlayer.getCurrentSongArtist());
+			coverImageCircle.setFill(new ImagePattern(songThumbnail.getImage()));
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
@@ -101,6 +103,7 @@ public class PrimaryStageController {
 			public void changed(ObservableValue<? extends Number> ov,
 					Number old_val, Number new_val) {
 				volumeProgressBar.setProgress(new_val.doubleValue()/100.0);
+				musicPlayer.getMediaPlayer().setVolume(new_val.doubleValue() / 100.0);
 			}
 		});
 		trackTimeSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -109,11 +112,12 @@ public class PrimaryStageController {
 				trackTimeProgressBar.setProgress(new_val.doubleValue()/100.0);
 			}
 		});
+		volumeSwitchButton.setUserData(true);
 	}
 
 	@FXML
 	public void aboutButtonPressed(ActionEvent event) {
-
+		
 	}
 
 	@FXML
@@ -158,8 +162,14 @@ public class PrimaryStageController {
 	}
 
 	@FXML
-	public void volumeSwitchPressed(ActionEvent event) {
-
+	public void volumeSwitchButtonPressed(ActionEvent event) {
+		volumeSwitchButton.setUserData(!(boolean)volumeSwitchButton.getUserData());
+		musicPlayer.getMediaPlayer().setMute((boolean)volumeSwitchButton.getUserData());
+		if(musicPlayer.getMediaPlayer().isMute()) {
+			volumeSwitchButton.setGraphic(new ImageView(MUTE_ENABLED_ICON));
+		} else {
+			volumeSwitchButton.setGraphic(new ImageView(MUTE_DISABLED_ICON));
+		}
 	}
 
 	public Circle getCoverImageCircle() {
