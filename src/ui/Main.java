@@ -27,7 +27,6 @@ import javafx.stage.Stage;
  * title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    
  * title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
  * <br>
- * <div>Royalty Free Music from <a href="https://www.bensound.com" title="Bensound">Bensound</a><div>
  * */
 public class Main extends Application {
 

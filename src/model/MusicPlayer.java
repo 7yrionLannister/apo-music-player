@@ -43,7 +43,7 @@ public class MusicPlayer {
 		if(file.exists()) {
 			loadMusicFolders(file);
 		}
-		currentSong = new Song(new File("samples/bensound-summer.mp3"));
+		currentSong = new Song(new File("samples/Spectre.mp3"));
 		chargeMedia();
 	}
 
