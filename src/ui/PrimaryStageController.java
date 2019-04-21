@@ -57,7 +57,7 @@ public class PrimaryStageController {
 	@FXML private TableView<MusicFolder> librariesTableView;
 	@FXML private TableColumn<MusicFolder, String> libraryTableColumn;
 	@FXML private TableColumn<MusicFolder, String> songsTableColumn;
-	@FXML private ListView<Button> deleteListView;
+	@FXML private Button deleteListButton;
 	@FXML private TableView<Song> musicInfoTableView;
 	@FXML private TableColumn<Song, String> fileTableColumn;
 	@FXML private TableColumn<Song, String> titleTableColumn;
@@ -152,6 +152,10 @@ public class PrimaryStageController {
 		}
 	}
 
+	@FXML
+	public void deleteListButtonPressed(ActionEvent event) {
+		
+	}
 	public void save(WindowEvent event) {
 		try {
 			musicPlayer.save();

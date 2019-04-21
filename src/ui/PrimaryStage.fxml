@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
@@ -217,24 +216,28 @@
                                   <TableColumn fx:id="songsTableColumn" prefWidth="45.0" text="Songs" />
                                 </columns>
                               </TableView>
-                              <ListView fx:id="deleteListView" prefHeight="349.0" prefWidth="49.0">
-                                 <HBox.margin>
-                                    <Insets top="24.0" />
-                                 </HBox.margin>
-                              </ListView>
                            </children>
                         </HBox>
                      </left>
                      <center>
-                        <TableView fx:id="musicInfoTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                          <columns>
-                            <TableColumn fx:id="fileTableColumn" prefWidth="124.0" text="File" />
-                            <TableColumn fx:id="titleTableColumn" prefWidth="101.0" text="Title" />
-                              <TableColumn fx:id="albumTableColumn" prefWidth="106.0" text="Album" />
-                              <TableColumn fx:id="artistTableColumn" prefWidth="104.0" text="Artist" />
-                              <TableColumn fx:id="sizeTableColumn" prefWidth="73.0" text="Size(MB)" />
-                          </columns>
-                        </TableView>
+                        <VBox BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="deleteListButton" mnemonicParsing="false" onAction="#deleteListButtonPressed" text="X">
+                                 <VBox.margin>
+                                    <Insets left="250.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <TableView fx:id="musicInfoTableView" prefHeight="357.0" prefWidth="546.0">
+                                <columns>
+                                  <TableColumn fx:id="fileTableColumn" prefWidth="124.0" text="File" />
+                                  <TableColumn fx:id="titleTableColumn" prefWidth="101.0" text="Title" />
+                                    <TableColumn fx:id="albumTableColumn" prefWidth="106.0" text="Album" />
+                                    <TableColumn fx:id="artistTableColumn" prefWidth="104.0" text="Artist" />
+                                    <TableColumn fx:id="sizeTableColumn" prefWidth="73.0" text="Size(MB)" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
                      </center>
                   </BorderPane>
                </content>

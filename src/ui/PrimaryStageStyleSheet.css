@@ -17,3 +17,8 @@ BorderPane {
 ProgressBar {
     -fx-accent:darkcyan;
 }
+
+#deleteListButton {
+    -fx-background-color: lightgrey;
+    -fx-font-weight: bold;
+}
