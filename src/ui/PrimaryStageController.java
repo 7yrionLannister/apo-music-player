@@ -9,14 +9,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.WindowEvent;
+import model.MusicFolder;
 import model.MusicPlayer;
+import model.Song;
 
 public class PrimaryStageController {
 	public final static Image DEFAULT_THUMBNAIL = new Image(new File("imgs/music-player.png").toURI().toString());
@@ -26,73 +33,44 @@ public class PrimaryStageController {
 	public final static Image MUTE_DISABLED_ICON = new Image(new File("imgs/volume-1.png").toURI().toString(), 40, 40, false, false);
 
 	private MusicPlayer musicPlayer;
+
+	@FXML private Circle coverImageCircle;
+	@FXML private ImageView songThumbnail;
+	@FXML private Label songTitleLabel;
+	@FXML private Label songAlbumLabel;
+	@FXML private Label songArtistLabel;
+	@FXML private Button prevTrackButton;
+	@FXML private Button playPauseButton;
+	@FXML private Button nextTrackButton;
+	@FXML private Label currentTimeLabel;
+	@FXML private ProgressBar trackTimeProgressBar;
+	@FXML private Slider trackTimeSlider;
+	@FXML private Label durationLabel;
+	@FXML private Button volumeSwitchButton;
+	@FXML private ProgressBar volumeProgressBar;
+	@FXML private Slider volumeSlider;
+	@FXML private Button equalizerSwitchButton;
+	@FXML private Button shuffleSwitchButton;
+	@FXML private Button addListButton;
+	@FXML private Button settingsButton;
+	@FXML private Button aboutButton;
+	@FXML private TableView<MusicFolder> librariesTableView;
+	@FXML private TableColumn<MusicFolder, String> libraryTableColumn;
+	@FXML private TableColumn<MusicFolder, String> songsTableColumn;
+	@FXML private ListView<Button> deleteListView;
+	@FXML private TableView<Song> musicInfoTableView;
+	@FXML private TableColumn<Song, String> fileTableColumn;
+	@FXML private TableColumn<Song, String> titleTableColumn;
+	@FXML private TableColumn<Song, String> albumTableColumn;
+	@FXML private TableColumn<Song, String> artistTableColumn;
+	@FXML private TableColumn<Song, Double> sizeTableColumn;
 	
-	@FXML
-	private Circle coverImageCircle;
-	
-	@FXML
-	private ImageView songThumbnail;
-
-	@FXML
-	private Label songNameLabel;
-
-	@FXML
-	private Label songAlbumLabel;
-
-	@FXML
-	private Label songArtistLabel;
-
-	@FXML
-	private Button prevTrackButton;
-
-	@FXML
-	private Button playPauseButton;
-
-	@FXML
-	private Button nextTrackButton;
-
-	@FXML
-	private Label currentTimeLabel;
-
-	@FXML
-	private ProgressBar trackTimeProgressBar;
-
-	@FXML
-	private Slider trackTimeSlider;
-
-	@FXML
-	private Label durationLabel;
-
-	@FXML
-	private Button volumeSwitchButton;
-
-	@FXML
-	private ProgressBar volumeProgressBar;
-
-	@FXML
-	private Slider volumeSlider;
-
-	@FXML
-	private Button equalizerSwitchButton;
-
-	@FXML
-	private Button shuffleSwitchButton;
-
-	@FXML
-	private Button listOptionsButton;
-
-	@FXML
-	private Button settingsButton;
-
-	@FXML
-	private Button aboutButton;
-
 	@FXML
 	public void initialize() {
 		//TODO complete this
 		try {
 			musicPlayer = new MusicPlayer(this);
-			songNameLabel.textProperty().bind(musicPlayer.getCurrentSongTitle());
+			songTitleLabel.textProperty().bind(musicPlayer.getCurrentSongTitle());
 			songAlbumLabel.textProperty().bind(musicPlayer.getCurrentSongAlbum());
 			songArtistLabel.textProperty().bind(musicPlayer.getCurrentSongArtist());
 			coverImageCircle.setFill(new ImagePattern(songThumbnail.getImage()));
@@ -112,12 +90,11 @@ public class PrimaryStageController {
 				trackTimeProgressBar.setProgress(new_val.doubleValue()/100.0);
 			}
 		});
-		volumeSwitchButton.setUserData(true);
 	}
 
 	@FXML
 	public void aboutButtonPressed(ActionEvent event) {
-		
+
 	}
 
 	@FXML
@@ -126,8 +103,11 @@ public class PrimaryStageController {
 	}
 
 	@FXML
-	public void listOptionsButtonPressed(ActionEvent event) {
-
+	public void addListButtonPressed(ActionEvent event) {
+		DirectoryChooser dc = new DirectoryChooser();
+		dc.setTitle("Choose a music directory");
+		File directory = dc.showDialog(coverImageCircle.getParent().getScene().getWindow());
+		musicPlayer.addMusicFolder(directory);
 	}
 
 	@FXML
@@ -172,6 +152,14 @@ public class PrimaryStageController {
 		}
 	}
 
+	public void save(WindowEvent event) {
+		try {
+			musicPlayer.save();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public Circle getCoverImageCircle() {
 		return coverImageCircle;
 	}
@@ -180,8 +168,8 @@ public class PrimaryStageController {
 		return songThumbnail;
 	}
 
-	public Label getSongNameLabel() {
-		return songNameLabel;
+	public Label getSongTitleLabel() {
+		return songTitleLabel;
 	}
 
 	public Label getSongAlbumLabel() {

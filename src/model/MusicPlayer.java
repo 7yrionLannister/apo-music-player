@@ -2,8 +2,10 @@ package model;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
@@ -25,7 +27,6 @@ public class MusicPlayer {
 	private SimpleStringProperty currentSongAlbum;
 	private ObjectProperty<Image> currentCoverArt; 
 
-	//TODO delete this line
 	private Song currentSong;
 	
 	public MusicPlayer(PrimaryStageController psc) throws ClassNotFoundException, IOException {
@@ -36,14 +37,13 @@ public class MusicPlayer {
 		currentSongTitle = new SimpleStringProperty();
 		currentCoverArt = new SimpleObjectProperty<Image>();
 		
-		firstMusicFolder = new MusicFolder(new File("samples").toURI());
+		firstMusicFolder = new MusicFolder(new File("samples"));
 
 		File file = new File(MUSIC_FOLDERS_PATH);
 		if(file.exists()) {
 			loadMusicFolders(file);
 		}
-		//TODO the next song is a test, delete it an uncomment bensound-summer.mp3
-		currentSong = new Song(new File(/*"samples/bensound-summer.mp3"*/"E:/Spectre.mp3"));
+		currentSong = new Song(new File("samples/bensound-summer.mp3"));
 		chargeMedia();
 	}
 
@@ -57,15 +57,15 @@ public class MusicPlayer {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				psc.getSongThumbnail().setImage(currentSong.getCoverArt().get());
-				psc.getCoverImageCircle().setFill(new ImagePattern(currentSong.getCoverArt().get()));
+				psc.getSongThumbnail().setImage(currentSong.getCoverArt());
+				psc.getCoverImageCircle().setFill(new ImagePattern(currentSong.getCoverArt()));
 			}
 		});
 		
-		currentSongAlbum.setValue(currentSong.getAlbum().getValue());
-		currentSongArtist.setValue(currentSong.getArtist().getValue());
-		currentSongTitle.setValue(currentSong.getTitle().getValue());
-		currentCoverArt.setValue(currentSong.getCoverArt().getValue());
+		currentSongAlbum.setValue(currentSong.getAlbum());
+		currentSongArtist.setValue(currentSong.getArtist());
+		currentSongTitle.setValue(currentSong.getTitle());
+		currentCoverArt.setValue(currentSong.getCoverArt());
 	}
 
 	private void loadMusicFolders(File mf) throws IOException, ClassNotFoundException {
@@ -116,5 +116,32 @@ public class MusicPlayer {
 
 	public ObjectProperty<Image> getCurrentCoverArt() {
 		return currentCoverArt;
+	}
+	
+	public void addMusicFolder(File dir) {
+		if(dir != null) {
+			MusicFolder toAdd = new MusicFolder(dir);
+			MusicFolder current = firstMusicFolder;
+			boolean done = false;
+			while(current != null && !done) {
+				if(current.equals(toAdd)) {
+					done = true;
+				} else if(current.getNextMusicFolder() == null) {
+					current.setNextMusicFolder(toAdd);
+				}
+				current = current.getNextMusicFolder();
+			}
+		}
+	}
+	
+	public void save() throws IOException {
+		File file = new File(MUSIC_FOLDERS_PATH);
+		FileOutputStream fos = new FileOutputStream(file);
+		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		
+		oos.writeObject(firstMusicFolder);
+		
+		oos.close();
+		fos.close();
 	}
 }

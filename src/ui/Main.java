@@ -37,12 +37,14 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-		Parent root = FXMLLoader.load(getClass().getResource("PrimaryStage.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("PrimaryStage.fxml"));
+		Parent root = loader.load();
+		PrimaryStageController psc = loader.getController();
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("APO Music Player");
 		primaryStage.setResizable(false);
+		primaryStage.setOnCloseRequest(psc::save);
 		primaryStage.show();
 	}
 
