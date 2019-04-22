@@ -1,15 +1,22 @@
 package ui;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
+import com.beaglebuddy.id3.enums.PictureType;
+import com.beaglebuddy.id3.pojo.AttachedPicture;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
@@ -67,13 +74,11 @@ public class PrimaryStageController {
 	
 	@FXML
 	public void initialize() {
-		//TODO complete this
 		try {
 			musicPlayer = new MusicPlayer(this);
 			songTitleLabel.textProperty().bind(musicPlayer.getCurrentSongTitle());
 			songAlbumLabel.textProperty().bind(musicPlayer.getCurrentSongAlbum());
 			songArtistLabel.textProperty().bind(musicPlayer.getCurrentSongArtist());
-			coverImageCircle.setFill(new ImagePattern(songThumbnail.getImage()));
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
@@ -90,6 +95,10 @@ public class PrimaryStageController {
 				trackTimeProgressBar.setProgress(new_val.doubleValue()/100.0);
 			}
 		});
+		librariesTableView.setItems(musicPlayer.getMusicFolders());
+		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
+		volumeSwitchButton.setUserData(false);
+		refreshIcons();
 	}
 
 	@FXML
@@ -107,7 +116,12 @@ public class PrimaryStageController {
 		DirectoryChooser dc = new DirectoryChooser();
 		dc.setTitle("Choose a music directory");
 		File directory = dc.showDialog(coverImageCircle.getParent().getScene().getWindow());
-		musicPlayer.addMusicFolder(directory);
+		try {
+			musicPlayer.addMusicFolder(directory);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -210,5 +224,21 @@ public class PrimaryStageController {
 
 	public Button getShuffleSwitchButton() {
 		return shuffleSwitchButton;
+	}
+
+	public void refreshIcons() {
+		songThumbnail.setImage(DEFAULT_THUMBNAIL);
+		coverImageCircle.setFill(new ImagePattern(songThumbnail.getImage()));
+		byte[] picture = musicPlayer.getCurrentCoverArt();
+		if(picture != null && picture.length>0) {
+			ByteArrayInputStream bais = new ByteArrayInputStream(picture);
+			try {
+				Image img = SwingFXUtils.toFXImage(ImageIO.read(bais), null);
+				songThumbnail.setImage(img);
+				coverImageCircle.setFill(new ImagePattern(songThumbnail.getImage()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

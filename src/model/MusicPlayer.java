@@ -7,17 +7,22 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import com.beaglebuddy.id3.enums.PictureType;
+import com.beaglebuddy.id3.pojo.AttachedPicture;
+
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import ui.PrimaryStageController;
 
 public class MusicPlayer {
-	public final static String MUSIC_FOLDERS_PATH = "data/mscfldrs.got";
+	public final static String MUSIC_FOLDERS_PATH = "resources/mscfldrs.got";
 
 	private MediaPlayer mediaPlayer;
 	private MusicFolder firstMusicFolder;
@@ -25,7 +30,7 @@ public class MusicPlayer {
 	private SimpleStringProperty currentSongTitle;
 	private SimpleStringProperty currentSongArtist;
 	private SimpleStringProperty currentSongAlbum;
-	private ObjectProperty<Image> currentCoverArt; 
+	private byte[] currentCoverArt; 
 
 	private Song currentSong;
 	
@@ -35,15 +40,14 @@ public class MusicPlayer {
 		currentSongAlbum = new SimpleStringProperty();
 		currentSongArtist = new SimpleStringProperty();
 		currentSongTitle = new SimpleStringProperty();
-		currentCoverArt = new SimpleObjectProperty<Image>();
 		
-		firstMusicFolder = new MusicFolder(new File("samples"));
+		firstMusicFolder = new MusicFolder(new File("resources"));
 
 		File file = new File(MUSIC_FOLDERS_PATH);
 		if(file.exists()) {
 			loadMusicFolders(file);
 		}
-		currentSong = new Song(new File("samples/Spectre.mp3"));
+		currentSong = new Song(new File("resources/Spectre.mp3"));
 		chargeMedia();
 	}
 
@@ -54,18 +58,17 @@ public class MusicPlayer {
 		mediaPlayer = new MediaPlayer(currentSong.getSong());
 		mediaPlayer.stop();
 
+		currentCoverArt = currentSong.getImage();
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				psc.getSongThumbnail().setImage(currentSong.getCoverArt());
-				psc.getCoverImageCircle().setFill(new ImagePattern(currentSong.getCoverArt()));
+				psc.refreshIcons();
 			}
 		});
 		
 		currentSongAlbum.setValue(currentSong.getAlbum());
 		currentSongArtist.setValue(currentSong.getArtist());
 		currentSongTitle.setValue(currentSong.getTitle());
-		currentCoverArt.setValue(currentSong.getCoverArt());
 	}
 
 	private void loadMusicFolders(File mf) throws IOException, ClassNotFoundException {
@@ -114,11 +117,11 @@ public class MusicPlayer {
 		return currentSongAlbum;
 	}
 
-	public ObjectProperty<Image> getCurrentCoverArt() {
+	public byte[] getCurrentCoverArt() {
 		return currentCoverArt;
 	}
 	
-	public void addMusicFolder(File dir) {
+	public void addMusicFolder(File dir) throws IOException {
 		if(dir != null) {
 			MusicFolder toAdd = new MusicFolder(dir);
 			MusicFolder current = firstMusicFolder;
@@ -132,6 +135,16 @@ public class MusicPlayer {
 				current = current.getNextMusicFolder();
 			}
 		}
+	}
+	
+	public ObservableList<MusicFolder> getMusicFolders() {
+		ObservableList<MusicFolder> folders = FXCollections.observableArrayList();
+		MusicFolder current = firstMusicFolder;
+		while(current != null) {
+			folders.add(current);
+			current = current.getNextMusicFolder();
+		}
+		return folders;
 	}
 	
 	public void save() throws IOException {
