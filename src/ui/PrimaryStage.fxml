@@ -94,14 +94,14 @@
                         <Separator prefWidth="200.0" />
                         <HBox spacing="4.0">
                            <children>
-                              <Label fx:id="currentTimeLabel" text="--:--" />
+                              <Label fx:id="currentTimeLabel" prefHeight="17.0" prefWidth="44.0" text="--:--" />
                               <StackPane prefWidth="200.0">
                                  <children>
-                                    <ProgressBar fx:id="trackTimeProgressBar" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="240.0" progress="0.0" />
-                                    <Slider fx:id="trackTimeSlider" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="240.0" />
+                                    <ProgressBar fx:id="trackTimeProgressBar" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="18.0" prefWidth="215.0" progress="0.0" />
+                                    <Slider fx:id="trackTimeSlider" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="14.0" prefWidth="214.0" />
                                  </children>
                               </StackPane>
-                              <Label fx:id="durationLabel" text="--:--" />
+                              <Label fx:id="durationLabel" prefHeight="17.0" prefWidth="53.0" text="--:--" />
                            </children>
                         </HBox>
                      </children>
