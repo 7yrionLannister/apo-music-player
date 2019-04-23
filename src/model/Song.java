@@ -25,7 +25,7 @@ public class Song implements Serializable {
 		title = mp3.getTitle()!=null?mp3.getTitle():"unknown";
 		size = mp3.getAudioSize() / 1000000.0;
 		genre = mp3.getMusicType()!=null?mp3.getMusicType():"unknown";
-		image = mp3.getPicture(PictureType.FRONT_COVER).getImage();
+		image = mp3.getPicture(PictureType.FRONT_COVER)!=null?mp3.getPicture(PictureType.FRONT_COVER).getImage():null;
 	}
 
 	public String getTitle() {

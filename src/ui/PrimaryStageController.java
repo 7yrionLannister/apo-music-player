@@ -29,6 +29,7 @@ import javafx.stage.WindowEvent;
 import model.MusicFolder;
 import model.MusicPlayer;
 import model.Song;
+import threads.CoverArtAnimationThread;
 
 public class PrimaryStageController {
 	public final static Image DEFAULT_THUMBNAIL = new Image(new File("imgs/music-player.png").toURI().toString());
@@ -38,6 +39,7 @@ public class PrimaryStageController {
 	public final static Image MUTE_DISABLED_ICON = new Image(new File("imgs/volume-1.png").toURI().toString(), 40, 40, false, false);
 
 	private MusicPlayer musicPlayer;
+	private CoverArtAnimationThread caat;
 
 	@FXML private Circle coverImageCircle;
 	@FXML private ImageView songThumbnail;
@@ -106,6 +108,12 @@ public class PrimaryStageController {
 		albumTableColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("album"));
 		artistTableColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("artist"));
 		sizeTableColumn.setCellValueFactory(new PropertyValueFactory<Song, Double>("size"));
+		librariesTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+		    musicInfoTableView.setItems(FXCollections.observableArrayList(newSelection.getSongs()));
+		});
+		musicInfoTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+		    musicPlayer.setMedia(newSelection);
+		});
 		
 		refreshIcons();
 	}
@@ -140,12 +148,20 @@ public class PrimaryStageController {
 
 	@FXML
 	public void playPauseButtonPressed(ActionEvent event) {
+		applyChangesToPlayPauseButton();
+	}
+	
+	public void applyChangesToPlayPauseButton() {
 		if(musicPlayer.getMediaPlayer().getStatus().compareTo(MediaPlayer.Status.PLAYING) == 0) {
 			musicPlayer.getMediaPlayer().pause();
 			playPauseButton.setGraphic(new ImageView(PLAY_ICON));
+			caat.pause();
 		} else {
 			musicPlayer.getMediaPlayer().play();
 			playPauseButton.setGraphic(new ImageView(PAUSE_ICON));
+			caat = new CoverArtAnimationThread(coverImageCircle);
+			caat.setDaemon(true);
+			caat.start();
 		}
 	}
 

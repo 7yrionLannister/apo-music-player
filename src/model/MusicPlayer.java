@@ -80,6 +80,9 @@ public class MusicPlayer {
 
 	public void setMedia(Song media) {
 		this.currentSong = media;
+		mediaPlayer.stop();
+		chargeMedia();
+		psc.applyChangesToPlayPauseButton();
 	}
 
 	public MediaPlayer getMediaPlayer() {
