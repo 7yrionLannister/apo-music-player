@@ -150,7 +150,6 @@ public class MusicPlayer {
 		oos.close();
 		fos.close();
 	}
-	//TODO esto parece util para el label del tiempo :)
 	
 	public void updateCurrentTime(Observable value) {
 		double totalMillis = currentAudio.getDuration().toMillis();
@@ -168,5 +167,4 @@ public class MusicPlayer {
 	        psc.getTrackTimeSlider().setValue(millis/totalMillis*psc.getTrackTimeSlider().getMax());
 	    });
 	  }
-	
 }

@@ -91,9 +91,7 @@ public class PrimaryStageController {
 			public void changed(ObservableValue<? extends Number> ov,
 					Number old_val, Number new_val) {
 				trackTimeProgressBar.setProgress(new_val.doubleValue()/100.0);
-				if(musicPlayer.getMediaPlayer() != null) {
-					//TODO sincronizar el progreso de la cancion con el progressbar y el slider
-				}
+				//TODO hacer que se pueda mover la reproduccion con el slider
 			}
 		});
 		librariesTableView.setItems(musicPlayer.getMusicFolders());
@@ -181,6 +179,7 @@ public class PrimaryStageController {
 	public void deleteListButtonPressed(ActionEvent event) {
 		
 	}
+	
 	public void save(WindowEvent event) {
 		try {
 			musicPlayer.save();
