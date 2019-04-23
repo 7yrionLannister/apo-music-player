@@ -3,6 +3,7 @@ package ui;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -71,7 +72,7 @@ public class PrimaryStageController {
 	@FXML private TableColumn<Song, String> albumTableColumn;
 	@FXML private TableColumn<Song, String> artistTableColumn;
 	@FXML private TableColumn<Song, Double> sizeTableColumn;
-	
+
 	@FXML
 	public void initialize() {
 		try {
@@ -99,22 +100,24 @@ public class PrimaryStageController {
 		librariesTableView.setItems(musicPlayer.getMusicFolders());
 		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 		volumeSwitchButton.setUserData(false);
-		
+
 		libraryTableColumn.setCellValueFactory(new PropertyValueFactory<MusicFolder, String>("folderName"));
 		songsTableColumn.setCellValueFactory(new PropertyValueFactory<MusicFolder, Integer>("numberOfSongs"));
-		
+
 		genreTableColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("genre"));
 		titleTableColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("title"));
 		albumTableColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("album"));
 		artistTableColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("artist"));
 		sizeTableColumn.setCellValueFactory(new PropertyValueFactory<Song, Double>("size"));
 		librariesTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-		    musicInfoTableView.setItems(FXCollections.observableArrayList(newSelection.getSongs()));
+			musicInfoTableView.setItems(FXCollections.observableArrayList(newSelection.getSongs()));
 		});
 		musicInfoTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-		    musicPlayer.setMedia(newSelection);
+			if(newSelection != null) {
+				musicPlayer.setMedia(newSelection);
+			}
 		});
-		
+
 		refreshIcons();
 	}
 
@@ -143,14 +146,21 @@ public class PrimaryStageController {
 
 	@FXML
 	public void nextTrackButtonPressed(ActionEvent event) {
+		try {
+			ArrayList<Song> songs = musicPlayer.getCurrentSong().getContainer().getSongs();
+			int currentIndex = musicPlayer.getCurrentSong().getIndexInContainer();
+			int newIndex = currentIndex+1;
+			musicPlayer.setMedia(songs.get(newIndex));
+		} catch(IndexOutOfBoundsException aioobe) {
 
+		}
 	}
 
 	@FXML
 	public void playPauseButtonPressed(ActionEvent event) {
 		applyChangesToPlayPauseButton();
 	}
-	
+
 	public void applyChangesToPlayPauseButton() {
 		if(musicPlayer.getMediaPlayer().getStatus().compareTo(MediaPlayer.Status.PLAYING) == 0) {
 			musicPlayer.getMediaPlayer().pause();
@@ -167,7 +177,14 @@ public class PrimaryStageController {
 
 	@FXML
 	public void prevTrackButtonPressed(ActionEvent event) {
+		try {
+			ArrayList<Song> songs = musicPlayer.getCurrentSong().getContainer().getSongs();
+			int currentIndex = musicPlayer.getCurrentSong().getIndexInContainer();
+			int newIndex = currentIndex-1;
+			musicPlayer.setMedia(songs.get(newIndex));
+		} catch(IndexOutOfBoundsException aioobe) {
 
+		}
 	}
 
 	@FXML
@@ -193,9 +210,9 @@ public class PrimaryStageController {
 
 	@FXML
 	public void deleteListButtonPressed(ActionEvent event) {
-		
+
 	}
-	
+
 	public void save(WindowEvent event) {
 		try {
 			musicPlayer.save();

@@ -17,7 +17,7 @@ public class MusicFolder implements Serializable {
 		songs = new ArrayList<Song>();
 		for(int i = 0; i < content.length; i++) {
 			if(content[i].isFile() && content[i].getPath().endsWith(".mp3")) {
-				songs.add(new Song(content[i]));
+				songs.add(new Song(content[i], this));
 			}
 		}
 		folderName = folder.getName();

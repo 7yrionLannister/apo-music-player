@@ -15,9 +15,12 @@ public class Song implements Serializable {
 	private double size;
 	private String songPath;
 	private byte[] image;
+	
+	private MusicFolder container;
 
-	public Song(File song) throws IOException {
+	public Song(File song, MusicFolder container) throws IOException {
 		this.songPath = song.toURI().toString();
+		this.container = container;
 		MP3 mp3 = new MP3(song);
 		
 		album = mp3.getAlbum()!=null?mp3.getAlbum():"unknown";
@@ -58,5 +61,17 @@ public class Song implements Serializable {
 	
 	public double getSize() {
 		return size;
+	}
+	
+	public MusicFolder getContainer() {
+		return container;
+	}
+	
+	public int getIndexInContainer() {
+		return container.getSongs().indexOf(this);
+	}
+	
+	public int getPlayListSize() {
+		return container.getSongs().size();
 	}
 }

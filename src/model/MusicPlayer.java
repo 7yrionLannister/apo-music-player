@@ -38,12 +38,12 @@ public class MusicPlayer {
 		currentSongTitle = new SimpleStringProperty();
 		
 		firstMusicFolder = new MusicFolder(new File("resources"));
-
+		currentSong = firstMusicFolder.getSongs().get(0);
+		
 		File file = new File(MUSIC_FOLDERS_PATH);
 		if(file.exists()) {
 			loadMusicFolders(file);
 		}
-		currentSong = new Song(new File("resources/Spectre.mp3"));
 		chargeMedia();
 	}
 
