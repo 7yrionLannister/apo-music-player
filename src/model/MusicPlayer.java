@@ -7,23 +7,18 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import com.beaglebuddy.id3.enums.PictureType;
-import com.beaglebuddy.id3.pojo.AttachedPicture;
-
 import javafx.application.Platform;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.image.Image;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.ImagePattern;
 import ui.PrimaryStageController;
 
 public class MusicPlayer {
 	public final static String MUSIC_FOLDERS_PATH = "resources/mscfldrs.got";
 
+	private Media currentAudio;
 	private MediaPlayer mediaPlayer;
 	private MusicFolder firstMusicFolder;
 	private PrimaryStageController psc;
@@ -55,14 +50,21 @@ public class MusicPlayer {
 		if(mediaPlayer != null) {
 			mediaPlayer.stop();
 		}
-		mediaPlayer = new MediaPlayer(currentSong.getSong());
+		currentAudio = new Media(currentSong.getSongPath());
+		mediaPlayer = new MediaPlayer(currentAudio);
 		mediaPlayer.stop();
 
 		currentCoverArt = currentSong.getImage();
+		
+		double millis = currentAudio.getDuration().toMillis();
+	    int seconds = (int) (millis / 1000) % 60;
+	    int minutes = (int) (millis / (1000 * 60));
+	    
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				psc.refreshIcons();
+				psc.getDurationLabel().setText(String.format("%02d:%02d", minutes, seconds));
 			}
 		});
 		

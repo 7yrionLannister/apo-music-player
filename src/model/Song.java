@@ -4,9 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
+import com.beaglebuddy.id3.enums.PictureType;
 import com.beaglebuddy.mp3.MP3;
-
-import javafx.scene.media.Media;
 
 public class Song implements Serializable {
 	private String title;
@@ -14,11 +13,11 @@ public class Song implements Serializable {
 	private String album;
 	private String genre;
 	private double size;
-	private Media song;
+	private String songPath;
 	private byte[] image;
 
 	public Song(File song) throws IOException {
-		this.song = new Media(song.toURI().toString());
+		this.songPath = song.toURI().toString();
 		MP3 mp3 = new MP3(song);
 		
 		album = mp3.getAlbum()!=null?mp3.getAlbum():"unknown";
@@ -26,6 +25,7 @@ public class Song implements Serializable {
 		title = mp3.getTitle()!=null?mp3.getTitle():"unknown";
 		size = mp3.getAudioSize() / 1000000.0;
 		genre = mp3.getMusicType()!=null?mp3.getMusicType():"unknown";
+		image = mp3.getPicture(PictureType.FRONT_COVER).getImage();
 	}
 
 	public String getTitle() {
@@ -52,8 +52,8 @@ public class Song implements Serializable {
 		//TODO complete this
 	}
 
-	public Media getSong() {
-		return song;
+	public String getSongPath() {
+		return songPath;
 	}
 	
 	public double getSize() {

@@ -229,8 +229,8 @@
                               </Button>
                               <TableView fx:id="musicInfoTableView" prefHeight="357.0" prefWidth="546.0">
                                 <columns>
-                                  <TableColumn fx:id="fileTableColumn" prefWidth="124.0" text="File" />
                                   <TableColumn fx:id="titleTableColumn" prefWidth="101.0" text="Title" />
+                                  <TableColumn fx:id="genreTableColumn" prefWidth="124.0" text="Genre" />
                                     <TableColumn fx:id="albumTableColumn" prefWidth="106.0" text="Album" />
                                     <TableColumn fx:id="artistTableColumn" prefWidth="104.0" text="Artist" />
                                     <TableColumn fx:id="sizeTableColumn" prefWidth="73.0" text="Size(MB)" />

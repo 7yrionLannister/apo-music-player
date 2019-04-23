@@ -6,9 +6,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.beaglebuddy.id3.enums.PictureType;
-import com.beaglebuddy.id3.pojo.AttachedPicture;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -21,6 +18,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.MediaPlayer;
@@ -63,10 +61,10 @@ public class PrimaryStageController {
 	@FXML private Button aboutButton;
 	@FXML private TableView<MusicFolder> librariesTableView;
 	@FXML private TableColumn<MusicFolder, String> libraryTableColumn;
-	@FXML private TableColumn<MusicFolder, String> songsTableColumn;
+	@FXML private TableColumn<MusicFolder, Integer> songsTableColumn;
 	@FXML private Button deleteListButton;
 	@FXML private TableView<Song> musicInfoTableView;
-	@FXML private TableColumn<Song, String> fileTableColumn;
+	@FXML private TableColumn<Song, String> genreTableColumn;
 	@FXML private TableColumn<Song, String> titleTableColumn;
 	@FXML private TableColumn<Song, String> albumTableColumn;
 	@FXML private TableColumn<Song, String> artistTableColumn;
@@ -93,11 +91,24 @@ public class PrimaryStageController {
 			public void changed(ObservableValue<? extends Number> ov,
 					Number old_val, Number new_val) {
 				trackTimeProgressBar.setProgress(new_val.doubleValue()/100.0);
+				if(musicPlayer.getMediaPlayer() != null) {
+					//TODO sincronizar el progreso de la cancion con el progressbar y el slider
+				}
 			}
 		});
 		librariesTableView.setItems(musicPlayer.getMusicFolders());
 		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 		volumeSwitchButton.setUserData(false);
+		
+		libraryTableColumn.setCellValueFactory(new PropertyValueFactory<MusicFolder, String>("folderName"));
+		songsTableColumn.setCellValueFactory(new PropertyValueFactory<MusicFolder, Integer>("numberOfSongs"));
+		
+		genreTableColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("genre"));
+		titleTableColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("title"));
+		albumTableColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("album"));
+		artistTableColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("artist"));
+		sizeTableColumn.setCellValueFactory(new PropertyValueFactory<Song, Double>("size"));
+		
 		refreshIcons();
 	}
 
@@ -119,9 +130,9 @@ public class PrimaryStageController {
 		try {
 			musicPlayer.addMusicFolder(directory);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		librariesTableView.setItems(musicPlayer.getMusicFolders());
 	}
 
 	@FXML

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 public class MusicFolder implements Serializable {
 	private File folder;
 	private MusicFolder nextMusicFolder;
+	private String folderName;
+	private int numberOfSongs;
 	private ArrayList<Song> songs;
 	
 	public MusicFolder(File folder) throws IOException {
@@ -18,6 +20,8 @@ public class MusicFolder implements Serializable {
 				songs.add(new Song(content[i]));
 			}
 		}
+		folderName = folder.getName();
+		numberOfSongs = songs.size();
 	}
 	
 	public MusicFolder getNextMusicFolder() {
@@ -30,6 +34,14 @@ public class MusicFolder implements Serializable {
 	
 	public File getFolder() {
 		return folder;
+	}
+	
+	public String getFolderName() {
+		return folderName;
+	}
+	
+	public int getNumberOfSongs() {
+		return numberOfSongs;
 	}
 	
 	public boolean equals(MusicFolder another) {
