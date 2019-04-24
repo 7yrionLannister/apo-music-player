@@ -1,5 +1,6 @@
 package threads;
 
+import javafx.application.Platform;
 import javafx.scene.shape.Circle;
 
 public class CoverArtAnimationThread extends Thread {
@@ -14,7 +15,12 @@ public class CoverArtAnimationThread extends Thread {
 	@Override
 	public void run() {
 		while(!onPause) {
-			coverArt.setRotate(coverArt.getRotate()+5);
+			Platform.runLater(new Runnable() {
+				public void run() {
+					coverArt.setRotate(coverArt.getRotate()+1);
+				}
+			});
+			
 			try {
 				sleep(60);
 			} catch (InterruptedException e) {

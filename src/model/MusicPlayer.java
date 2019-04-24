@@ -62,6 +62,12 @@ public class MusicPlayer {
 		currentSongTitle.setValue(currentSong.getTitle());
 		
 		mediaPlayer.currentTimeProperty().addListener(this::updateCurrentTime);
+		
+		Platform.runLater(new Runnable() {
+			public void run() {
+				psc.refreshIcons();
+			}
+		});
 	}
 
 	private void loadMusicFolders(File mf) throws IOException, ClassNotFoundException {

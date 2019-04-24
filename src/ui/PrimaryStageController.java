@@ -110,7 +110,9 @@ public class PrimaryStageController {
 		artistTableColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("artist"));
 		sizeTableColumn.setCellValueFactory(new PropertyValueFactory<Song, Double>("size"));
 		librariesTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-			musicInfoTableView.setItems(FXCollections.observableArrayList(newSelection.getSongs()));
+			if(newSelection != null) {
+				musicInfoTableView.setItems(FXCollections.observableArrayList(newSelection.getSongs()));
+			}
 		});
 		musicInfoTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 			if(newSelection != null) {
@@ -147,12 +149,20 @@ public class PrimaryStageController {
 	@FXML
 	public void nextTrackButtonPressed(ActionEvent event) {
 		try {
+			if(caat != null) {
+				caat.pause();
+			}
 			ArrayList<Song> songs = musicPlayer.getCurrentSong().getContainer().getSongs();
 			int currentIndex = musicPlayer.getCurrentSong().getIndexInContainer();
 			int newIndex = currentIndex+1;
 			musicPlayer.setMedia(songs.get(newIndex));
 		} catch(IndexOutOfBoundsException aioobe) {
-
+			if(caat != null) {
+				caat.pause();
+			}
+			caat = new CoverArtAnimationThread(coverImageCircle);
+			caat.setDaemon(true);
+			caat.start();
 		}
 	}
 
@@ -178,12 +188,20 @@ public class PrimaryStageController {
 	@FXML
 	public void prevTrackButtonPressed(ActionEvent event) {
 		try {
+			if(caat != null) {
+				caat.pause();
+			}
 			ArrayList<Song> songs = musicPlayer.getCurrentSong().getContainer().getSongs();
 			int currentIndex = musicPlayer.getCurrentSong().getIndexInContainer();
 			int newIndex = currentIndex-1;
 			musicPlayer.setMedia(songs.get(newIndex));
 		} catch(IndexOutOfBoundsException aioobe) {
-
+			if(caat != null) {
+				caat.pause();
+			}
+			caat = new CoverArtAnimationThread(coverImageCircle);
+			caat.setDaemon(true);
+			caat.start();
 		}
 	}
 
