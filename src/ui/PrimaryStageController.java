@@ -117,6 +117,7 @@ public class PrimaryStageController {
 		musicInfoTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 			if(newSelection != null) {
 				musicPlayer.setMedia(newSelection);
+				restartThreads();
 			}
 		});
 
@@ -157,12 +158,7 @@ public class PrimaryStageController {
 			int newIndex = currentIndex+1;
 			musicPlayer.setMedia(songs.get(newIndex));
 		} catch(IndexOutOfBoundsException aioobe) {
-			if(caat != null) {
-				caat.pause();
-			}
-			caat = new CoverArtAnimationThread(coverImageCircle);
-			caat.setDaemon(true);
-			caat.start();
+			restartThreads();
 		}
 	}
 
@@ -179,9 +175,7 @@ public class PrimaryStageController {
 		} else {
 			musicPlayer.getMediaPlayer().play();
 			playPauseButton.setGraphic(new ImageView(PAUSE_ICON));
-			caat = new CoverArtAnimationThread(coverImageCircle);
-			caat.setDaemon(true);
-			caat.start();
+			restartThreads();
 		}
 	}
 
@@ -196,12 +190,7 @@ public class PrimaryStageController {
 			int newIndex = currentIndex-1;
 			musicPlayer.setMedia(songs.get(newIndex));
 		} catch(IndexOutOfBoundsException aioobe) {
-			if(caat != null) {
-				caat.pause();
-			}
-			caat = new CoverArtAnimationThread(coverImageCircle);
-			caat.setDaemon(true);
-			caat.start();
+			restartThreads();
 		}
 	}
 
@@ -301,5 +290,14 @@ public class PrimaryStageController {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void restartThreads() {
+		if(caat != null) {
+			caat.pause();
+		}
+		caat = new CoverArtAnimationThread(coverImageCircle);
+		caat.setDaemon(true);
+		caat.start();
 	}
 }
