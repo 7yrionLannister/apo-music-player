@@ -22,7 +22,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.DirectoryChooser;
@@ -120,7 +125,7 @@ public class PrimaryStageController {
 			}
 		});
 		musicInfoTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-			if(newSelection != null) {
+			if(newSelection != null && !musicPlayer.getCurrentSongTitle().get().equals(newSelection.getTitle())) {
 				musicPlayer.setMedia(newSelection);
 				restartThreads();
 			}
@@ -265,6 +270,23 @@ public class PrimaryStageController {
 				e.printStackTrace();
 			}
 		}
+		refreshPlayerBackground();
+	}
+	
+	public void refreshPlayerBackground() {
+		Color color1 = songThumbnail.getImage().getPixelReader().getColor((int)songThumbnail.getImage().getWidth()/2, (int)songThumbnail.getImage().getHeight()/2).brighter().brighter();
+		Color color2 = color1.brighter().darker().darker().darker().darker();
+		Pane background = (Pane)coverImageCircle.getParent();
+		int red = (int)(color1.getRed()*255);
+		int green = (int)(color1.getGreen()*255);
+		int blue = (int)(color1.getBlue()*255);
+		String rgba1 = "rgba("+red+","+green+","+blue+")";
+		red = (int)(color2.getRed()*255);
+		green = (int)(color2.getGreen()*255);
+		blue = (int)(color2.getBlue()*255);
+		String rgba2 = "rgba("+(red)+","+(green)+","+(blue)+")";
+		background.setStyle("-fx-background-color: linear-gradient(to bottom, "+rgba1+", "+rgba2+")");
+		System.out.println(background.getStyle());
 	}
 	
 	public void restartThreads() {
