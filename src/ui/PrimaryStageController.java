@@ -31,6 +31,7 @@ import model.MusicFolder;
 import model.MusicPlayer;
 import model.Song;
 import threads.CoverArtAnimationThread;
+import threads.CurrentTrackTimeUpdaterThread;
 
 public class PrimaryStageController {
 	public final static Image DEFAULT_THUMBNAIL = new Image(new File("imgs/music-player.png").toURI().toString());
@@ -40,6 +41,10 @@ public class PrimaryStageController {
 	public final static Image MUTE_DISABLED_ICON = new Image(new File("imgs/volume-1.png").toURI().toString(), 40, 40, false, false);
 
 	private MusicPlayer musicPlayer;
+	public MusicPlayer getMusicPlayer() {
+		return musicPlayer;
+	}
+
 	private CoverArtAnimationThread caat;
 
 	@FXML private Circle coverImageCircle;
@@ -120,7 +125,9 @@ public class PrimaryStageController {
 				restartThreads();
 			}
 		});
-
+		CurrentTrackTimeUpdaterThread cttu = new CurrentTrackTimeUpdaterThread(this);
+		cttu.setDaemon(true);
+		cttu.start();
 		refreshIcons();
 	}
 
@@ -228,34 +235,6 @@ public class PrimaryStageController {
 		}
 	}
 
-	public Circle getCoverImageCircle() {
-		return coverImageCircle;
-	}
-
-	public ImageView getSongThumbnail() {
-		return songThumbnail;
-	}
-
-	public Label getSongTitleLabel() {
-		return songTitleLabel;
-	}
-
-	public Label getSongAlbumLabel() {
-		return songAlbumLabel;
-	}
-
-	public Label getSongArtistLabel() {
-		return songArtistLabel;
-	}
-
-	public Button getPrevTrackButton() {
-		return prevTrackButton;
-	}
-
-	public Button getNextTrackButton() {
-		return nextTrackButton;
-	}
-
 	public Label getCurrentTimeLabel() {
 		return currentTimeLabel;
 	}
@@ -266,10 +245,6 @@ public class PrimaryStageController {
 
 	public Label getDurationLabel() {
 		return durationLabel;
-	}
-
-	public Slider getVolumeSlider() {
-		return volumeSlider;
 	}
 
 	public Button getShuffleSwitchButton() {

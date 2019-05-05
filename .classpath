@@ -6,6 +6,6 @@
 		</accessrules>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="/media/daniel/SHARED/final/apo-music-player/beaglebuddy_mp3.jar"/>
+	<classpathentry kind="lib" path="E:/final/apo-music-player/beaglebuddy_mp3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

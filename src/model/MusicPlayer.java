@@ -8,7 +8,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import javafx.application.Platform;
-import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,14 +19,18 @@ public class MusicPlayer {
 	public final static String MUSIC_FOLDERS_PATH = "resources/mscfldrs.got";
 
 	private Media currentAudio;
+	public Media getCurrentAudio() {
+		return currentAudio;
+	}
+
 	private MediaPlayer mediaPlayer;
 	private MusicFolder firstMusicFolder;
 	private PrimaryStageController psc;
 	private SimpleStringProperty currentSongTitle;
 	private SimpleStringProperty currentSongArtist;
 	private SimpleStringProperty currentSongAlbum;
-	private byte[] currentCoverArt; 
-
+	private byte[] currentCoverArt;
+	
 	private Song currentSong;
 	
 	public MusicPlayer(PrimaryStageController psc) throws ClassNotFoundException, IOException {
@@ -47,7 +50,7 @@ public class MusicPlayer {
 		chargeMedia();
 	}
 
-	public void chargeMedia() {
+	private void chargeMedia() {
 		if(mediaPlayer != null) {
 			mediaPlayer.stop();
 		}
@@ -61,10 +64,10 @@ public class MusicPlayer {
 		currentSongArtist.setValue(currentSong.getArtist());
 		currentSongTitle.setValue(currentSong.getTitle());
 		
-		mediaPlayer.currentTimeProperty().addListener(this::updateCurrentTime);
-		
 		Platform.runLater(new Runnable() {
+			@Override
 			public void run() {
+				psc.applyChangesToPlayPauseButton();
 				psc.refreshIcons();
 			}
 		});
@@ -88,7 +91,6 @@ public class MusicPlayer {
 		this.currentSong = media;
 		mediaPlayer.stop();
 		chargeMedia();
-		psc.applyChangesToPlayPauseButton();
 	}
 
 	public MediaPlayer getMediaPlayer() {
@@ -159,21 +161,4 @@ public class MusicPlayer {
 		oos.close();
 		fos.close();
 	}
-	
-	public void updateCurrentTime(Observable value) {
-		double totalMillis = currentAudio.getDuration().toMillis();
-	    int totalSeconds = (int) (totalMillis / 1000) % 60;
-	    int totalMinutes = (int) (totalMillis / (1000 * 60));
-	    
-	    double millis = mediaPlayer.getCurrentTime().toMillis();
-	    int seconds = (int) (millis / 1000) % 60;
-	    int minutes = (int) (millis / (1000 * 60));
-	    
-	    Platform.runLater(() -> {
-	    	psc.getDurationLabel().setText(String.format("%02d:%02d", totalMinutes, totalSeconds));
-	        psc.getCurrentTimeLabel().setText(String.format("%02d:%02d", minutes, seconds));
-	        
-	        psc.getTrackTimeSlider().setValue(millis/totalMillis*psc.getTrackTimeSlider().getMax());
-	    });
-	  }
 }
