@@ -7,7 +7,7 @@ import java.io.Serializable;
 import com.beaglebuddy.id3.enums.PictureType;
 import com.beaglebuddy.mp3.MP3;
 
-public class Song implements Serializable {
+public class Song implements Serializable, Comparable<Song>{
 	private String title;
 	private String artist;
 	private String album;
@@ -73,5 +73,10 @@ public class Song implements Serializable {
 	
 	public int getPlayListSize() {
 		return container.getSongs().size();
+	}
+
+	@Override
+	public int compareTo(Song s) {
+		return this.artist.compareTo(s.artist);
 	}
 }
