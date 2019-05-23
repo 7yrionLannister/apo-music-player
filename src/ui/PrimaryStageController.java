@@ -286,7 +286,6 @@ public class PrimaryStageController {
 		blue = (int)(color2.getBlue()*255);
 		String rgba2 = "rgba("+(red)+","+(green)+","+(blue)+")";
 		background.setStyle("-fx-background-color: linear-gradient(to bottom, "+rgba1+", "+rgba2+")");
-		System.out.println(background.getStyle());
 	}
 	
 	public void restartThreads() {
