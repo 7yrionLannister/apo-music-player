@@ -19,6 +19,6 @@
   <li><div>Built using the <a href="http://www.beaglebuddy.com" title="beaglebuddy_mp3">beaglebuddy_mp3</a> library</div></li>
   </ul>
 
-  apo-music-player is a music player presented as a final project of the algorithms and programming 2 course.
+  <b>apo-music-player</b> is a music player presented as a final project of the algorithms and programming 2 course.
 	It was meant to apply the knowledge learned in the first two algorithm courses.
   To work, you must modify the beaglebuddy_mp3 library path, after that you can run the application and enjoy the music.
