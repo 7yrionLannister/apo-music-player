@@ -36,11 +36,11 @@ import threads.CoverArtAnimationThread;
 import threads.CurrentTrackTimeUpdaterThread;
 
 public class PrimaryStageController {
-	public final static Image DEFAULT_THUMBNAIL = new Image(new File("imgs/music-player.png").toURI().toString());
-	public final static Image PAUSE_ICON = new Image(new File("imgs/pause.png").toURI().toString(), 50, 50, false, false);
-	public final static Image PLAY_ICON = new Image(new File("imgs/play-button.png").toURI().toString(), 50, 50, false, false);
-	public final static Image MUTE_ENABLED_ICON = new Image(new File("imgs/mute.png").toURI().toString(), 40, 40, false, false);
-	public final static Image MUTE_DISABLED_ICON = new Image(new File("imgs/volume-1.png").toURI().toString(), 40, 40, false, false);
+	public final static Image DEFAULT_THUMBNAIL = new Image(new File("imgs"+File.separator+"music-player.png").toURI().toString());
+	public final static Image PAUSE_ICON = new Image(new File("imgs"+File.separator+"pause.png").toURI().toString(), 50, 50, false, false);
+	public final static Image PLAY_ICON = new Image(new File("imgs"+File.separator+"play-button.png").toURI().toString(), 50, 50, false, false);
+	public final static Image MUTE_ENABLED_ICON = new Image(new File("imgs"+File.separator+"mute.png").toURI().toString(), 40, 40, false, false);
+	public final static Image MUTE_DISABLED_ICON = new Image(new File("imgs"+File.separator+"volume-1.png").toURI().toString(), 40, 40, false, false);
 
 	private MusicPlayer musicPlayer;
 	public MusicPlayer getMusicPlayer() {

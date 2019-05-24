@@ -16,7 +16,7 @@ import javafx.scene.media.MediaPlayer;
 import ui.PrimaryStageController;
 
 public class MusicPlayer {
-	public final static String MUSIC_FOLDERS_PATH = "resources/mscfldrs.got";
+	public final static String MUSIC_FOLDERS_PATH = "resources"+File.separator+"mscfldrs.got";
 
 	private Media currentAudio;
 	public Media getCurrentAudio() {

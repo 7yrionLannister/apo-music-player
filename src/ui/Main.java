@@ -1,9 +1,12 @@
 package ui;
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**<b>Critical note:</b><br>
@@ -41,6 +44,7 @@ public class Main extends Application {
 		primaryStage.setTitle("APO Music Player");
 		primaryStage.setResizable(false);
 		primaryStage.setOnCloseRequest(psc::save);
+		primaryStage.getIcons().add(new Image(new File("imgs"+File.separator+"cd.png").toURI().toString()));
 		primaryStage.show();
 	}
 
