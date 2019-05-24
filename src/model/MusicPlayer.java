@@ -6,8 +6,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import javafx.application.Platform;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +31,13 @@ public class MusicPlayer {
 	private SimpleStringProperty currentSongTitle;
 	private SimpleStringProperty currentSongArtist;
 	private SimpleStringProperty currentSongAlbum;
+	private ArrayList<Song> currentPlaylist; //TODO usar esto cuando ya se hayan puesto las canciones en el BST
+	                                         //     para almacenar las canciones en ArrayList y asi poder realizar los
+	                                         //     ordenamientos :)
+	                                         //     ademas te ahorra hacer musicPlayer.getCurrentSong().getContainer().getSongs() en la controladora
+	                                         //     solo para saber la playlist actual, y le quitarias la responsabilidad a la cancion de saber su container
+	private SimpleIntegerProperty songLoaded;//TODO en orden de quitar el Platform.runLater de aqui para actualizar los iconos en la controladora
+	                                         //     hacer un binding desde alla con esta propiedad para que se actualicen los iconos
 	private byte[] currentCoverArt;
 	
 	private Song currentSong;
