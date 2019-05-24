@@ -65,6 +65,8 @@ public class MusicPlayer {
 		currentSongTitle.setValue(currentSong.getTitle());
 		
 		Platform.runLater(new Runnable() {
+			//TODO se puede quitar esto solo si se pone un objeto Property al que se le haga binding desde
+			//      la interfaz para saber cuando se ha cargado una cancion y asi mismo actualizar la interfaz	
 			@Override
 			public void run() {
 				psc.applyChangesToPlayPauseButton();
