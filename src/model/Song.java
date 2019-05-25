@@ -7,6 +7,8 @@ import java.io.Serializable;
 import com.beaglebuddy.id3.enums.PictureType;
 import com.beaglebuddy.mp3.MP3;
 
+import customExceptions.NotMP3FileException;
+
 public class Song implements Serializable, Comparable<Song>{
 	private String title;
 	private String artist;
@@ -19,7 +21,12 @@ public class Song implements Serializable, Comparable<Song>{
 	private Song right;
 	private Song left;
 
-	public Song(File song) throws IOException {
+	public Song(File song) throws IOException, NotMP3FileException {
+		String path = song.toURI().toString();
+		if(!path.endsWith(".mp3")) {
+			String[] parts = path.split("[.]");
+			throw new NotMP3FileException(parts[parts.length-1]);
+		}
 		this.songPath = song.toURI().toString();
 		MP3 mp3 = new MP3(song);
 		
