@@ -27,7 +27,6 @@ public class MusicPlayer {
 
 	private MediaPlayer mediaPlayer;
 	private MusicFolder firstMusicFolder;
-	private PrimaryStageController psc;
 	private SimpleStringProperty currentSongTitle;
 	private SimpleStringProperty currentSongArtist;
 	private SimpleStringProperty currentSongAlbum;
@@ -36,14 +35,13 @@ public class MusicPlayer {
 	                                         //     ordenamientos :)
 	                                         //     ademas te ahorra hacer musicPlayer.getCurrentSong().getContainer().getSongs() en la controladora
 	                                         //     solo para saber la playlist actual, y le quitarias la responsabilidad a la cancion de saber su container
-	private SimpleIntegerProperty songLoaded;//TODO en orden de quitar el Platform.runLater de aqui para actualizar los iconos en la controladora
-	                                         //     hacer un binding desde alla con esta propiedad para que se actualicen los iconos
+	private SimpleIntegerProperty songLoaded;
 	private byte[] currentCoverArt;
 	
 	private Song currentSong;
 	
-	public MusicPlayer(PrimaryStageController psc) throws ClassNotFoundException, IOException {
-		this.psc = psc;
+	public MusicPlayer() throws ClassNotFoundException, IOException {
+		songLoaded = new SimpleIntegerProperty(Integer.MIN_VALUE);
 
 		currentSongAlbum = new SimpleStringProperty();
 		currentSongArtist = new SimpleStringProperty();
@@ -73,15 +71,7 @@ public class MusicPlayer {
 		currentSongArtist.setValue(currentSong.getArtist());
 		currentSongTitle.setValue(currentSong.getTitle());
 		
-		Platform.runLater(new Runnable() {
-			//TODO se puede quitar esto solo si se pone un objeto Property al que se le haga binding desde
-			//      la interfaz para saber cuando se ha cargado una cancion y asi mismo actualizar la interfaz	
-			@Override
-			public void run() {
-				psc.applyChangesToPlayPauseButton();
-				psc.refreshIcons();
-			}
-		});
+		songLoaded.set(songLoaded.get()+1);
 	}
 
 	private void loadMusicFolders(File mf) throws IOException, ClassNotFoundException {
@@ -171,5 +161,9 @@ public class MusicPlayer {
 		
 		oos.close();
 		fos.close();
+	}
+	
+	public SimpleIntegerProperty getSongLoaded() {
+		return songLoaded;
 	}
 }

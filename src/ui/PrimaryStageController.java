@@ -83,7 +83,15 @@ public class PrimaryStageController {
 	@FXML
 	public void initialize() {
 		try {
-			musicPlayer = new MusicPlayer(this);
+			musicPlayer = new MusicPlayer();
+			musicPlayer.getSongLoaded().addListener(new ChangeListener<Number>() {
+				@Override
+				public void changed(ObservableValue<? extends Number> ov, 
+						Number old_val, Number new_val) {
+					applyChangesToPlayPauseButton();
+					refreshIcons();
+				}
+			});
 			songTitleLabel.textProperty().bind(musicPlayer.getCurrentSongTitle());
 			songAlbumLabel.textProperty().bind(musicPlayer.getCurrentSongAlbum());
 			songArtistLabel.textProperty().bind(musicPlayer.getCurrentSongArtist());
@@ -269,7 +277,7 @@ public class PrimaryStageController {
 		}
 		refreshPlayerBackground();
 	}
-	
+
 	public void refreshPlayerBackground() {
 		Color color1 = songThumbnail.getImage().getPixelReader().getColor((int)songThumbnail.getImage().getWidth()/2, (int)songThumbnail.getImage().getHeight()/2).brighter().brighter();
 		Color color2 = color1.brighter().darker().darker().darker().darker();
@@ -284,7 +292,7 @@ public class PrimaryStageController {
 		String rgba2 = "rgba("+(red)+","+(green)+","+(blue)+")";
 		background.setStyle("-fx-background-color: linear-gradient(to bottom, "+rgba1+", "+rgba2+")");
 	}
-	
+
 	public void restartThreads() {
 		if(caat != null) {
 			caat.pause();
