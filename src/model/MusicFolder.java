@@ -7,12 +7,14 @@ import java.util.Collections;
 
 public class MusicFolder implements Serializable {
 	private File folder;
-	private MusicFolder nextMusicFolder;
 	private String folderName;
 	private int numberOfSongs;
 	
 	private Song root;
 	private ArrayList<Song> songs;
+	
+	private MusicFolder nextMusicFolder;
+	private MusicFolder prevMusicFolder;
 	
 	public MusicFolder(File folder) throws IOException {
 		this.folder = folder;
@@ -71,6 +73,14 @@ public class MusicFolder implements Serializable {
 	
 	public void setNextMusicFolder(MusicFolder next) {
 		nextMusicFolder = next;
+	}
+
+	public MusicFolder getPrevMusicFolder() {
+		return prevMusicFolder;
+	}
+
+	public void setPrevMusicFolder(MusicFolder prevMusicFolder) {
+		this.prevMusicFolder = prevMusicFolder;
 	}
 	
 	public File getFolder() {

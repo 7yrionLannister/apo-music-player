@@ -8,14 +8,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import ui.PrimaryStageController;
 
 public class MusicPlayer {
 	public final static String MUSIC_FOLDERS_PATH = "resources"+File.separator+"mscfldrs.got";
@@ -30,27 +28,23 @@ public class MusicPlayer {
 	private SimpleStringProperty currentSongTitle;
 	private SimpleStringProperty currentSongArtist;
 	private SimpleStringProperty currentSongAlbum;
-	private ArrayList<Song> currentPlaylist; //TODO usar esto cuando ya se hayan puesto las canciones en el BST
-	                                         //     para almacenar las canciones en ArrayList y asi poder realizar los
-	                                         //     ordenamientos :)
-	                                         //     ademas te ahorra hacer musicPlayer.getCurrentSong().getContainer().getSongs() en la controladora
-	                                         //     solo para saber la playlist actual, y le quitarias la responsabilidad a la cancion de saber su container
+	private ArrayList<Song> currentPlaylist;
 	private SimpleIntegerProperty songLoaded;
 	private byte[] currentCoverArt;
-	
+
 	private Song currentSong;
-	
+
 	public MusicPlayer() throws ClassNotFoundException, IOException {
 		songLoaded = new SimpleIntegerProperty(Integer.MIN_VALUE);
 
 		currentSongAlbum = new SimpleStringProperty();
 		currentSongArtist = new SimpleStringProperty();
 		currentSongTitle = new SimpleStringProperty();
-		
+
 		firstMusicFolder = new MusicFolder(new File("resources"));
 		currentPlaylist = firstMusicFolder.getSongs();
 		currentSong = currentPlaylist.get(0);
-		
+
 		File file = new File(MUSIC_FOLDERS_PATH);
 		if(file.exists()) {
 			loadMusicFolders(file);
@@ -67,11 +61,11 @@ public class MusicPlayer {
 		mediaPlayer.stop();
 
 		currentCoverArt = currentSong.getImage();
-		
+
 		currentSongAlbum.setValue(currentSong.getAlbum());
 		currentSongArtist.setValue(currentSong.getArtist());
 		currentSongTitle.setValue(currentSong.getTitle());
-		
+
 		songLoaded.set(songLoaded.get()+1);
 	}
 
@@ -126,23 +120,24 @@ public class MusicPlayer {
 	public byte[] getCurrentCoverArt() {
 		return currentCoverArt;
 	}
-	
+
 	public void addMusicFolder(File dir) throws IOException {
 		if(dir != null) {
 			MusicFolder toAdd = new MusicFolder(dir);
 			MusicFolder current = firstMusicFolder;
-			boolean done = false;
-			while(current != null && !done) {
+			boolean duplicated = false;
+			while(current != null && !duplicated) {
 				if(current.equals(toAdd)) {
-					done = true;
+					duplicated = true;
 				} else if(current.getNextMusicFolder() == null) {
 					current.setNextMusicFolder(toAdd);
+					toAdd.setPrevMusicFolder(current);
 				}
 				current = current.getNextMusicFolder();
 			}
 		}
 	}
-	
+
 	public ObservableList<MusicFolder> getMusicFolders() {
 		ObservableList<MusicFolder> folders = FXCollections.observableArrayList();
 		MusicFolder current = firstMusicFolder;
@@ -152,27 +147,45 @@ public class MusicPlayer {
 		}
 		return folders;
 	}
-	
+
 	public void save() throws IOException {
 		File file = new File(MUSIC_FOLDERS_PATH);
 		FileOutputStream fos = new FileOutputStream(file);
 		ObjectOutputStream oos = new ObjectOutputStream(fos);
-		
+
 		oos.writeObject(firstMusicFolder);
-		
+
 		oos.close();
 		fos.close();
 	}
-	
+
 	public SimpleIntegerProperty getSongLoaded() {
 		return songLoaded;
 	}
-	
+
 	public void setCurrentPlayList(MusicFolder current) {
 		currentPlaylist = current.getSongs();
 	}
-	
+
 	public ArrayList<Song> getCurrentPlayList() {
 		return currentPlaylist;
+	}
+
+	public boolean removeMusicFolderFromLibraries(MusicFolder toremove) {
+		boolean removed = false;
+		
+		if(toremove.getSongs() != currentPlaylist) {
+			MusicFolder prev = toremove.getPrevMusicFolder();
+			MusicFolder next = toremove.getNextMusicFolder();
+			if(prev != null) {
+				prev.setNextMusicFolder(next);
+			} else {
+				firstMusicFolder = next;
+			}
+			if(next != null) {
+				next.setPrevMusicFolder(prev);
+			} removed = true;
+		}
+		return removed;
 	}
 }
