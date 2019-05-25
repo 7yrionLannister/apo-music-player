@@ -3,8 +3,6 @@ package ui;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 
 import javafx.beans.value.ChangeListener;
@@ -127,11 +125,13 @@ public class PrimaryStageController {
 		librariesTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 			if(newSelection != null) {
 				musicInfoTableView.setItems(FXCollections.observableArrayList(newSelection.getSongs()));
+				musicPlayer.setCurrentPlayList(newSelection);
 			}
 		});
 		musicInfoTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 			if(newSelection != null && !musicPlayer.getCurrentSongTitle().get().equals(newSelection.getTitle())) {
-				musicPlayer.setMedia(newSelection);
+				int cI = musicPlayer.getCurrentPlayList().indexOf(newSelection);
+				musicPlayer.setMedia(cI);
 				restartThreads();
 			}
 		});
@@ -170,10 +170,12 @@ public class PrimaryStageController {
 			if(caat != null) {
 				caat.pause();
 			}
-			ArrayList<Song> songs = musicPlayer.getCurrentSong().getContainer().getSongs();
+			int cI = musicPlayer.getCurrentPlayList().indexOf(musicPlayer.getCurrentSong());
+			int nI = cI+1;
+			/*ArrayList<Song> songs = musicPlayer.getCurrentSong().getContainer().getSongs();
 			int currentIndex = musicPlayer.getCurrentSong().getIndexInContainer();
-			int newIndex = currentIndex+1;
-			musicPlayer.setMedia(songs.get(newIndex));
+			int newIndex = currentIndex+1;*/
+			musicPlayer.setMedia(/*songs.get(newIndex)*/nI);
 		} catch(IndexOutOfBoundsException aioobe) {
 			restartThreads();
 		}
@@ -202,10 +204,9 @@ public class PrimaryStageController {
 			if(caat != null) {
 				caat.pause();
 			}
-			ArrayList<Song> songs = musicPlayer.getCurrentSong().getContainer().getSongs();
-			int currentIndex = musicPlayer.getCurrentSong().getIndexInContainer();
-			int newIndex = currentIndex-1;
-			musicPlayer.setMedia(songs.get(newIndex));
+			int cI = musicPlayer.getCurrentPlayList().indexOf(musicPlayer.getCurrentSong());
+			int nI = cI-1;
+			musicPlayer.setMedia(nI);
 		} catch(IndexOutOfBoundsException aioobe) {
 			restartThreads();
 		}

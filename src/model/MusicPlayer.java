@@ -48,7 +48,8 @@ public class MusicPlayer {
 		currentSongTitle = new SimpleStringProperty();
 		
 		firstMusicFolder = new MusicFolder(new File("resources"));
-		currentSong = firstMusicFolder.getSongs().get(0);
+		currentPlaylist = firstMusicFolder.getSongs();
+		currentSong = currentPlaylist.get(0);
 		
 		File file = new File(MUSIC_FOLDERS_PATH);
 		if(file.exists()) {
@@ -88,8 +89,8 @@ public class MusicPlayer {
 		return currentSong;
 	}
 
-	public void setMedia(Song media) {
-		this.currentSong = media;
+	public void setMedia(int index) {
+		this.currentSong = currentPlaylist.get(index);
 		mediaPlayer.stop();
 		chargeMedia();
 	}
@@ -165,5 +166,13 @@ public class MusicPlayer {
 	
 	public SimpleIntegerProperty getSongLoaded() {
 		return songLoaded;
+	}
+	
+	public void setCurrentPlayList(MusicFolder current) {
+		currentPlaylist = current.getSongs();
+	}
+	
+	public ArrayList<Song> getCurrentPlayList() {
+		return currentPlaylist;
 	}
 }
