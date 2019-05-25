@@ -222,7 +222,7 @@
                      <center>
                         <VBox BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="deleteListButton" mnemonicParsing="false" onAction="#deleteListButtonPressed" text="X">
+                              <Button fx:id="deleteListButton" mnemonicParsing="false" onAction="#deleteListButtonPressed" text="X remove library">
                                  <VBox.margin>
                                     <Insets left="250.0" />
                                  </VBox.margin>

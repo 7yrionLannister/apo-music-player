@@ -159,7 +159,7 @@ public class PrimaryStageController {
 		try {
 			musicPlayer.addMusicFolder(directory);
 		} catch (IOException e) {
-			e.printStackTrace();
+			//TODO mostrar ventana emergente que diga que no se pudo añadir la carpeta de musica
 		}
 		librariesTableView.setItems(musicPlayer.getMusicFolders());
 	}
@@ -172,10 +172,7 @@ public class PrimaryStageController {
 			}
 			int cI = musicPlayer.getCurrentPlayList().indexOf(musicPlayer.getCurrentSong());
 			int nI = cI+1;
-			/*ArrayList<Song> songs = musicPlayer.getCurrentSong().getContainer().getSongs();
-			int currentIndex = musicPlayer.getCurrentSong().getIndexInContainer();
-			int newIndex = currentIndex+1;*/
-			musicPlayer.setMedia(/*songs.get(newIndex)*/nI);
+			musicPlayer.setMedia(nI);
 		} catch(IndexOutOfBoundsException aioobe) {
 			restartThreads();
 		}
@@ -235,7 +232,15 @@ public class PrimaryStageController {
 
 	@FXML
 	public void deleteListButtonPressed(ActionEvent event) {
-
+		try {
+			boolean removed = musicPlayer.removeMusicFolderFromLibraries(librariesTableView.getSelectionModel().getSelectedItem());
+			if(!removed) {
+				//TODO mostrar ventana emergente que diga que no se pudo eliminar la playlist porque estaba siendo reproducida
+			}
+		} catch(NullPointerException npe) {
+			//TODO mostrar ventana emergente que diga que no ha seleccionado ninguna carpeta para quitar de las librerias
+		}
+		librariesTableView.setItems(musicPlayer.getMusicFolders());
 	}
 
 	public void save(WindowEvent event) {

@@ -16,6 +16,7 @@ public class Song implements Serializable, Comparable<Song>{
 	private String genre;
 	private double size;
 	private String songPath;
+	private String fileName;
 	private byte[] image;
 	
 	private Song right;
@@ -23,6 +24,7 @@ public class Song implements Serializable, Comparable<Song>{
 
 	public Song(File song) throws IOException, NotMP3FileException {
 		String path = song.toURI().toString();
+		fileName = song.getName();
 		if(!path.endsWith(".mp3")) {
 			String[] parts = path.split("[.]");
 			throw new NotMP3FileException(parts[parts.length-1]);
@@ -69,6 +71,14 @@ public class Song implements Serializable, Comparable<Song>{
 	public double getSize() {
 		return size;
 	}
+	
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 
 	public Song getRight() {
 		return right;
@@ -88,8 +98,6 @@ public class Song implements Serializable, Comparable<Song>{
 
 	@Override
 	public int compareTo(Song s) {
-		String [] paths = this.songPath.split(File.separator);
-		String [] paths2 = s.songPath.split(File.separator);
-		return paths[paths.length-1].compareTo(paths2[paths2.length-1]);
+		return fileName.compareTo(s.fileName);
 	}
 }

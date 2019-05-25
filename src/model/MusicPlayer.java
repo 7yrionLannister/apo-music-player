@@ -173,8 +173,8 @@ public class MusicPlayer {
 
 	public boolean removeMusicFolderFromLibraries(MusicFolder toremove) {
 		boolean removed = false;
-		
-		if(toremove.getSongs() != currentPlaylist) {
+		System.out.println("hola");
+		if(!toremove.getSongs().contains(currentSong) && !(toremove == firstMusicFolder)) {
 			MusicFolder prev = toremove.getPrevMusicFolder();
 			MusicFolder next = toremove.getNextMusicFolder();
 			if(prev != null) {

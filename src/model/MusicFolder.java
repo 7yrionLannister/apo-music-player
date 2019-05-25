@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import customExceptions.NotMP3FileException;
+
 public class MusicFolder implements Serializable {
 	private File folder;
 	private String folderName;
@@ -21,7 +23,11 @@ public class MusicFolder implements Serializable {
 		File[] content = folder.listFiles();
 		songs = new ArrayList<Song>();
 		if(content.length != 0) {
-			root = new Song(content[0]);
+			try {
+				root = new Song(content[0]);
+			} catch(NotMP3FileException nmp3fe) {
+				root = new Song(content[1]);
+			}
 		}
 		for(int i = 1; i < content.length; i++) {
 			if(content[i].isFile() && content[i].getPath().endsWith(".mp3")) {
