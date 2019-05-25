@@ -16,11 +16,11 @@ public class Song implements Serializable, Comparable<Song>{
 	private String songPath;
 	private byte[] image;
 	
-	private MusicFolder container;
+	private Song right;
+	private Song left;
 
-	public Song(File song, MusicFolder container) throws IOException {
+	public Song(File song) throws IOException {
 		this.songPath = song.toURI().toString();
-		this.container = container;
 		MP3 mp3 = new MP3(song);
 		
 		album = mp3.getAlbum()!=null?mp3.getAlbum():"unknown";
@@ -62,17 +62,21 @@ public class Song implements Serializable, Comparable<Song>{
 	public double getSize() {
 		return size;
 	}
-	
-	public MusicFolder getContainer() {
-		return container;
+
+	public Song getRight() {
+		return right;
 	}
-	
-	public int getIndexInContainer() {
-		return container.getSongs().indexOf(this);
+
+	public void setRight(Song right) {
+		this.right = right;
 	}
-	
-	public int getPlayListSize() {
-		return container.getSongs().size();
+
+	public Song getLeft() {
+		return left;
+	}
+
+	public void setLeft(Song left) {
+		this.left = left;
 	}
 
 	@Override

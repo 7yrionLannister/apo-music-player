@@ -9,19 +9,59 @@ public class MusicFolder implements Serializable {
 	private MusicFolder nextMusicFolder;
 	private String folderName;
 	private int numberOfSongs;
+	
+	private Song root;
 	private ArrayList<Song> songs;
 	
 	public MusicFolder(File folder) throws IOException {
 		this.folder = folder;
 		File[] content = folder.listFiles();
 		songs = new ArrayList<Song>();
-		for(int i = 0; i < content.length; i++) {
+		if(content.length != 0) {
+			root = new Song(content[0]);
+		}
+		for(int i = 1; i < content.length; i++) {
 			if(content[i].isFile() && content[i].getPath().endsWith(".mp3")) {
-				songs.add(new Song(content[i], this));
+				addSongToBST(root, new Song(content[i]));
 			}
 		}
+		songs = inorder();
 		folderName = folder.getName();
 		numberOfSongs = songs.size();
+	}
+	
+	private void addSongToBST(Song current, Song addme) {
+		if(current.compareTo(addme) > 0) {
+			if(current.getLeft() != null) {
+				addSongToBST(current.getLeft(), addme);
+			} else {
+				current.setLeft(addme);
+			}
+		} else {
+			if(current.getRight() != null) {
+				addSongToBST(current.getRight(), addme);
+			} else {
+				current.setRight(addme);
+			}
+		}
+	}
+	
+	public ArrayList<Song> inorder() {
+		ArrayList<Song> inorderSongs = new ArrayList<Song>();
+		if(root != null) {
+			inorder(root, inorderSongs);
+		}
+		return inorderSongs;
+	}
+	
+	private void inorder(Song current, ArrayList<Song> tofill) {
+		if(current.getLeft() != null) {
+			inorder(current.getLeft(), tofill);
+		}
+		tofill.add(current);
+		if(current.getRight() != null) {
+			inorder(current.getRight(), tofill);
+		}
 	}
 	
 	public MusicFolder getNextMusicFolder() {
