@@ -77,6 +77,8 @@ public class Song implements Serializable, Comparable<Song>{
 
 	@Override
 	public int compareTo(Song s) {
-		return this.artist.compareTo(s.artist);
+		String [] paths = this.songPath.split(File.separator);
+		String [] paths2 = s.songPath.split(File.separator);
+		return paths[paths.length-1].compareTo(paths2[paths2.length-1]);
 	}
 }
