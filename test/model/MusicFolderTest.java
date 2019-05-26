@@ -1,5 +1,6 @@
 package model;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
@@ -29,6 +30,13 @@ class MusicFolderTest {
 
 	@Test
 	public void createMusicFolderWithValidPathTest() {
-		
+		setupScenario1();
+		try {
+			String dir = "resources";
+			mf = new MusicFolder(new File(dir));
+			assertTrue("The new folder is not the requested one", dir.equals(mf.getFolderName()));
+		} catch (IOException | FolderWithoutMP3ContentException e) {
+			fail("The music folder should have been created as the resources folder is the demo library that comes in the repository");
+		}
 	}
 }
