@@ -1,32 +1,45 @@
 package model;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import customExceptions.FolderWithoutMP3ContentException;
 import customExceptions.NotMP3FileException;
 
 public class MusicFolder implements Serializable {
 	private File folder;
 	private String folderName;
 	private int numberOfSongs;
-	
+
 	private Song root;
 	private ArrayList<Song> songs;
-	
+
 	private MusicFolder nextMusicFolder;
 	private MusicFolder prevMusicFolder;
-	
-	public MusicFolder(File folder) throws IOException {
+
+	public MusicFolder(File folder) throws IOException, FolderWithoutMP3ContentException {
 		this.folder = folder;
+		if(!folder.exists()) {
+			throw new FileNotFoundException();
+		}
 		File[] content = folder.listFiles();
 		songs = new ArrayList<Song>();
 		if(content.length != 0) {
-			try {
-				root = new Song(content[0]);
-			} catch(NotMP3FileException nmp3fe) {
-				root = new Song(content[1]);
+			int index = 0;
+			boolean added = false;
+			while(!added) {
+				try {
+					root = new Song(content[index]);
+					added = true;
+				} catch(NotMP3FileException nmp3fe) {
+					index++;
+					if(index == content.length) {
+						throw new FolderWithoutMP3ContentException();
+					}
+				}
 			}
 		}
 		for(int i = 1; i < content.length; i++) {
@@ -38,7 +51,7 @@ public class MusicFolder implements Serializable {
 		folderName = folder.getName();
 		numberOfSongs = songs.size();
 	}
-	
+
 	private void addSongToBST(Song current, Song addme) {
 		if(current.compareTo(addme) > 0) {
 			if(current.getLeft() != null) {
@@ -54,7 +67,7 @@ public class MusicFolder implements Serializable {
 			}
 		}
 	}
-	
+
 	public ArrayList<Song> inorder() {
 		ArrayList<Song> inorderSongs = new ArrayList<Song>();
 		if(root != null) {
@@ -62,7 +75,7 @@ public class MusicFolder implements Serializable {
 		}
 		return inorderSongs;
 	}
-	
+
 	private void inorder(Song current, ArrayList<Song> tofill) {
 		if(current.getLeft() != null) {
 			inorder(current.getLeft(), tofill);
@@ -72,11 +85,11 @@ public class MusicFolder implements Serializable {
 			inorder(current.getRight(), tofill);
 		}
 	}
-	
+
 	public MusicFolder getNextMusicFolder() {
 		return nextMusicFolder;
 	}
-	
+
 	public void setNextMusicFolder(MusicFolder next) {
 		nextMusicFolder = next;
 	}
@@ -88,19 +101,19 @@ public class MusicFolder implements Serializable {
 	public void setPrevMusicFolder(MusicFolder prevMusicFolder) {
 		this.prevMusicFolder = prevMusicFolder;
 	}
-	
+
 	public File getFolder() {
 		return folder;
 	}
-	
+
 	public String getFolderName() {
 		return folderName;
 	}
-	
+
 	public int getNumberOfSongs() {
 		return numberOfSongs;
 	}
-	
+
 	public boolean equals(MusicFolder another) {
 		boolean equal = false;
 		if(folder.getPath().equals(another.getFolder().getPath())) {
@@ -108,11 +121,11 @@ public class MusicFolder implements Serializable {
 		}
 		return equal;
 	}
-	
+
 	public void sortSongsByTitle() {
 		Collections.sort(songs);
 	}
-	
+
 	//it uses bubble sort
 	public void sortSongsByArtist() {
 		ArtistComparator ac = new ArtistComparator();
@@ -126,7 +139,7 @@ public class MusicFolder implements Serializable {
 			}
 		}
 	}
-	
+
 	//it uses insertion sort
 	public void sortSongsByAlbum() {
 		AlbumComparator ac = new AlbumComparator();
@@ -140,7 +153,7 @@ public class MusicFolder implements Serializable {
 			songs.set(j+1, current);
 		}
 	}
-	
+
 	//it uses selection sort
 	public void sortSongsBySize() {
 		SizeComparator sc = new SizeComparator();
@@ -156,11 +169,11 @@ public class MusicFolder implements Serializable {
 			songs.set(i, temp);
 		}
 	}
-	
+
 	public void sortSongsByGenre() {
 		Collections.sort(songs, new GenreComparator());
 	}
-	
+
 	public ArrayList<Song> getSongs(){
 		return songs;
 	}

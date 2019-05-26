@@ -7,10 +7,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
-
 import customExceptions.AttemptedToRemoveCurrentPlayListException;
 import customExceptions.AttemptedToRemoveDemoLibraryException;
+import customExceptions.FolderWithoutMP3ContentException;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -37,7 +36,7 @@ public class MusicPlayer {
 
 	private Song currentSong;
 
-	public MusicPlayer() throws ClassNotFoundException, IOException {
+	public MusicPlayer() throws ClassNotFoundException, IOException, FolderWithoutMP3ContentException {
 		songLoaded = new SimpleIntegerProperty(Integer.MIN_VALUE);
 
 		currentSongAlbum = new SimpleStringProperty();
@@ -124,7 +123,7 @@ public class MusicPlayer {
 		return currentCoverArt;
 	}
 
-	public void addMusicFolder(File dir) throws IOException {
+	public void addMusicFolder(File dir) throws IOException, FolderWithoutMP3ContentException {
 		if(dir != null) {
 			MusicFolder toAdd = new MusicFolder(dir);
 			MusicFolder current = firstMusicFolder;
@@ -175,7 +174,6 @@ public class MusicPlayer {
 	}
 
 	public void removeMusicFolderFromLibraries(MusicFolder toremove) throws AttemptedToRemoveDemoLibraryException {
-		boolean removed = false;
 		if(toremove == firstMusicFolder) {
 			throw new AttemptedToRemoveDemoLibraryException();
 		}

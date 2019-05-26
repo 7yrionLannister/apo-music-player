@@ -1,5 +1,6 @@
 package model;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
@@ -20,7 +21,10 @@ public class SongTest {
 	public void createSongWithValidPathAndValidAudioFormatTest() {
 		setupScenario1();
 		try {
-			s = new Song(new File("resources"+File.separator+"Spectre.mp3"));
+			String fileName = "Spectre.mp3";
+			String songPath = "resources"+File.separator+fileName;
+			s = new Song(new File(songPath));
+			assertTrue("The", fileName.equals(s.getFileName()));
 		} catch (IOException e) {
 			fail("The song should have been created as the file is the one that comes in the repository as a demo audio with MP3 format");
 		}

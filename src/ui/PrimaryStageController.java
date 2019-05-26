@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 
 import customExceptions.AttemptedToRemoveCurrentPlayListException;
 import customExceptions.AttemptedToRemoveDemoLibraryException;
+import customExceptions.FolderWithoutMP3ContentException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -97,8 +98,8 @@ public class PrimaryStageController {
 			songTitleLabel.textProperty().bind(musicPlayer.getCurrentSongTitle());
 			songAlbumLabel.textProperty().bind(musicPlayer.getCurrentSongAlbum());
 			songArtistLabel.textProperty().bind(musicPlayer.getCurrentSongArtist());
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
+		} catch (FolderWithoutMP3ContentException | ClassNotFoundException | IOException e) {
+			e.printStackTrace();;
 		}
 		volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
 			public void changed(ObservableValue<? extends Number> ov,
@@ -163,8 +164,9 @@ public class PrimaryStageController {
 		try {
 			musicPlayer.addMusicFolder(directory);
 		} catch (IOException e) {
-			//TODO mostrar ventana emergente que diga que no se pudo añadir la carpeta de musica
 			showErrorAlert("Error loading the library", "The music folder could not be loaded");
+		} catch (FolderWithoutMP3ContentException e) {
+			showErrorAlert("No MP3 files found", "The chosen directory does not contain MP3 files to add to a new library");
 		}
 		librariesTableView.setItems(musicPlayer.getMusicFolders());
 	}
@@ -240,7 +242,6 @@ public class PrimaryStageController {
 		try {
 			musicPlayer.removeMusicFolderFromLibraries(librariesTableView.getSelectionModel().getSelectedItem());
 		} catch(NullPointerException npe) {
-			//TODO mostrar ventana emergente que diga que no ha seleccionado ninguna carpeta para quitar de las librerias
 			showErrorAlert("No target selected", "You must select a music folder before performing this action");
 		} catch (AttemptedToRemoveDemoLibraryException e) {
 			showErrorAlert(e.getMessage(), "The music folder could not be removed from libraries due it is the demo library");

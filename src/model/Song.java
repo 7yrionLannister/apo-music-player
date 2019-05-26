@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -25,6 +26,9 @@ public class Song implements Serializable, Comparable<Song>{
 
 	public Song(File song) throws IOException, NotMP3FileException {
 		String path = song.toURI().toString();
+		if(!song.exists()) {
+			throw new FileNotFoundException();
+		}
 		parentFolderPath = song.getParentFile().toURI().toString();
 		fileName = song.getName();
 		if(!path.endsWith(".mp3")) {
