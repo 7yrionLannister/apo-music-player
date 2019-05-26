@@ -174,7 +174,7 @@ public class MusicFolder implements Serializable {
 		Collections.sort(songs, new GenreComparator());
 	}
 
-	public ArrayList<Song> getSongs(){
+	public ArrayList<Song> getSongs() {
 		return songs;
 	}
 }

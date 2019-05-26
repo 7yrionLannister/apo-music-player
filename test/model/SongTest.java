@@ -24,7 +24,7 @@ public class SongTest {
 			String fileName = "Spectre.mp3";
 			String songPath = "resources"+File.separator+fileName;
 			s = new Song(new File(songPath));
-			assertTrue("The", fileName.equals(s.getFileName()));
+			assertTrue("The name of the file does not correspond to the requested one", fileName.equals(s.getFileName()));
 		} catch (IOException e) {
 			fail("The song should have been created as the file is the one that comes in the repository as a demo audio with MP3 format");
 		}
