@@ -93,33 +93,52 @@ public class MusicPlayer {
 		ois.close();
 		fis.close();
 	}
-
+	/**
+	 * Method to get the current Song sounding in the media player.
+	 * @return A Song that represents the current Song sounding in the media player.
+	 */
 	public Song getCurrentSong() {
 		return currentSong;
 	}
-
+	/**
+	 * This method allows to set the Media through an index that represents the song position inside
+	 * its respective music folder and charges its media.
+	 * @param index the song position inside its respective music folder.
+	 */
 	public void setMedia(int index) {
 		this.currentSong = currentPlaylist.get(index);
 		mediaPlayer.stop();
 		chargeMedia();
 	}
-
+	/**
+	 * This method allows to get the actual media player used to play the music.
+	 * @return A MediaPlayer that represents the actual media player used to play the music.
+	 */
 	public MediaPlayer getMediaPlayer() {
 		return mediaPlayer;
 	}
-
+	/**
+	 * This method allows to set the actual media player used to play the music.
+	 * @param mediaPlayer A MediaPlayer that represents the actual media player used to play the music.
+	 */
 	public void setMediaPlayer(MediaPlayer mediaPlayer) {
 		this.mediaPlayer = mediaPlayer;
 	}
-
+	/**
+	 * This method allows to obtain the first music folder in the list.
+	 * @return A MusicFolder that represents the first music folder in the list.
+	 */
 	public MusicFolder getFirstMusicFolder() {
 		return firstMusicFolder;
 	}
-
+	/**
+	 * This method allows to set the first music folder in the list.
+	 * @param firstMusicFolder A MusicFolder that represents the first music folder in the list.
+	 */
 	public void setFirstMusicFolder(MusicFolder firstMusicFolder) {
 		this.firstMusicFolder = firstMusicFolder;
 	}
-
+	
 	public SimpleStringProperty getCurrentSongTitle() {
 		return currentSongTitle;
 	}
