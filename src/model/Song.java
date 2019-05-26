@@ -11,17 +11,49 @@ import com.beaglebuddy.mp3.MP3;
 import customExceptions.NotMP3FileException;
 
 public class Song implements Serializable, Comparable<Song>{
+	/**
+	 * It represents the song title.
+	 */
 	private String title;
+	/**
+	 * It represents the song artist.
+	 */
 	private String artist;
+	/**
+	 * It represents the song album.
+	 */
 	private String album;
+	/**
+	 * It represents the song genre.
+	 */
 	private String genre;
+	/**
+	 * It represents the song size as double value.
+	 */
 	private double size;
+	/**
+	 * It represents the song path as String.
+	 */
 	private String songPath;
+	/**
+	 * It represents the song file name.
+	 */
 	private String fileName;
+	/**
+	 * It represents the song parent folder path as String.
+	 */
 	private String parentFolderPath;
+	/**
+	 * It represents the song image as a byte array.
+	 */
 	private byte[] image;
-	
+	/**
+	 * It represents the right Song of this Song in the binary sorted three.
+	 */
 	private Song right;
+	/**
+	 * It represents the left Song of this Song in the binary sorted three.
+	 */
 	private Song left;
 	
 	/**
