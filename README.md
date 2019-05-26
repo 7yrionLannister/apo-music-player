@@ -17,6 +17,7 @@
   title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    
   title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div></li>
   <li><div>Built using the <a href="http://www.beaglebuddy.com" title="beaglebuddy_mp3">beaglebuddy_mp3</a> library</div></li>
+  <li><div>Royalty Free Music from <a href="https://www.bensound.com" title="Bensound">Bensound</a></div></li>
   </ul>
 
   <b>apo-music-player</b> is a music player presented as a final project of the algorithms and programming 2 course.

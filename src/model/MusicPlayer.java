@@ -18,7 +18,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class MusicPlayer {
-	public final static String MUSIC_FOLDERS_PATH = "resources"+File.separator+"mscfldrs.got";
+	public final static String MUSIC_FOLDERS_PATH = "data"+File.separator+"mscfldrs.got";
 
 	private Media currentAudio;
 	public Media getCurrentAudio() {
@@ -49,7 +49,7 @@ public class MusicPlayer {
 		currentSongArtist = new SimpleStringProperty();
 		currentSongTitle = new SimpleStringProperty();
 
-		firstMusicFolder = new MusicFolder(new File("resources"));
+		firstMusicFolder = new MusicFolder(new File("music"));
 		currentPlaylist = firstMusicFolder.getSongs();
 		currentSong = currentPlaylist.get(0);
 
