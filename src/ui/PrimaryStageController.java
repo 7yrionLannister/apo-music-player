@@ -5,12 +5,16 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+import customExceptions.AttemptedToRemoveCurrentPlayListException;
+import customExceptions.AttemptedToRemoveDemoLibraryException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -160,6 +164,7 @@ public class PrimaryStageController {
 			musicPlayer.addMusicFolder(directory);
 		} catch (IOException e) {
 			//TODO mostrar ventana emergente que diga que no se pudo añadir la carpeta de musica
+			showErrorAlert("Error loading the library", "The music folder could not be loaded");
 		}
 		librariesTableView.setItems(musicPlayer.getMusicFolders());
 	}
@@ -233,12 +238,14 @@ public class PrimaryStageController {
 	@FXML
 	public void deleteListButtonPressed(ActionEvent event) {
 		try {
-			boolean removed = musicPlayer.removeMusicFolderFromLibraries(librariesTableView.getSelectionModel().getSelectedItem());
-			if(!removed) {
-				//TODO mostrar ventana emergente que diga que no se pudo eliminar la playlist porque estaba siendo reproducida
-			}
+			musicPlayer.removeMusicFolderFromLibraries(librariesTableView.getSelectionModel().getSelectedItem());
 		} catch(NullPointerException npe) {
 			//TODO mostrar ventana emergente que diga que no ha seleccionado ninguna carpeta para quitar de las librerias
+			showErrorAlert("No target selected", "You must select a music folder before performing this action");
+		} catch (AttemptedToRemoveDemoLibraryException e) {
+			showErrorAlert(e.getMessage(), "The music folder could not be removed from libraries due it is the demo library");
+		} catch (AttemptedToRemoveCurrentPlayListException e) {
+			showErrorAlert(e.getMessage(), "The music folder could not be removed from libraries due it is being played right now");
 		}
 		librariesTableView.setItems(musicPlayer.getMusicFolders());
 	}
@@ -306,5 +313,12 @@ public class PrimaryStageController {
 		caat = new CoverArtAnimationThread(coverImageCircle);
 		caat.setDaemon(true);
 		caat.start();
+	}
+	
+	public void showErrorAlert(String header, String message) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setContentText(message);
+		alert.setHeaderText(header);
+		alert.showAndWait();
 	}
 }

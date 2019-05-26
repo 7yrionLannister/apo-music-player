@@ -7,7 +7,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
+import customExceptions.AttemptedToRemoveCurrentPlayListException;
+import customExceptions.AttemptedToRemoveDemoLibraryException;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -171,21 +174,24 @@ public class MusicPlayer {
 		return currentPlaylist;
 	}
 
-	public boolean removeMusicFolderFromLibraries(MusicFolder toremove) {
+	public void removeMusicFolderFromLibraries(MusicFolder toremove) throws AttemptedToRemoveDemoLibraryException {
 		boolean removed = false;
-		System.out.println("hola");
-		if(!toremove.getSongs().contains(currentSong) && !(toremove == firstMusicFolder)) {
-			MusicFolder prev = toremove.getPrevMusicFolder();
-			MusicFolder next = toremove.getNextMusicFolder();
-			if(prev != null) {
-				prev.setNextMusicFolder(next);
-			} else {
-				firstMusicFolder = next;
-			}
-			if(next != null) {
-				next.setPrevMusicFolder(prev);
-			} removed = true;
+		if(toremove == firstMusicFolder) {
+			throw new AttemptedToRemoveDemoLibraryException();
 		}
-		return removed;
+		if(toremove.getSongs().contains(currentSong)) {
+			throw new AttemptedToRemoveCurrentPlayListException(currentSong.getParentFolderPath());
+		}
+
+		MusicFolder prev = toremove.getPrevMusicFolder();
+		MusicFolder next = toremove.getNextMusicFolder();
+		if(prev != null) {
+			prev.setNextMusicFolder(next);
+		} else {
+			firstMusicFolder = next;
+		}
+		if(next != null) {
+			next.setPrevMusicFolder(prev);
+		}
 	}
 }

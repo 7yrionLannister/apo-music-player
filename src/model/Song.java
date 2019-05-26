@@ -17,6 +17,7 @@ public class Song implements Serializable, Comparable<Song>{
 	private double size;
 	private String songPath;
 	private String fileName;
+	private String parentFolderPath;
 	private byte[] image;
 	
 	private Song right;
@@ -24,6 +25,7 @@ public class Song implements Serializable, Comparable<Song>{
 
 	public Song(File song) throws IOException, NotMP3FileException {
 		String path = song.toURI().toString();
+		parentFolderPath = song.getParentFile().toURI().toString();
 		fileName = song.getName();
 		if(!path.endsWith(".mp3")) {
 			String[] parts = path.split("[.]");
@@ -78,6 +80,10 @@ public class Song implements Serializable, Comparable<Song>{
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+	
+	public String getParentFolderPath() {
+		return parentFolderPath;
 	}
 
 	public Song getRight() {
