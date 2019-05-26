@@ -27,19 +27,41 @@ public class MusicPlayer {
 	 */
 	private Media currentAudio;
 	/**
-	 * It represents 
+	 * It represents the media player to reproduce the songs.
 	 */
 	private MediaPlayer mediaPlayer;
+	/**
+	 * It represents the first music folder in the linked list.
+	 */
 	private MusicFolder firstMusicFolder;
+	/**
+	 * It represents the actual song title sounding in the media player.
+	 */
 	private SimpleStringProperty currentSongTitle;
+	/**
+	 * It represents the actual song artist sounding in the media player.
+	 */
 	private SimpleStringProperty currentSongArtist;
+	/**
+	 * It represents the actual song album sounding in the media player.
+	 */
 	private SimpleStringProperty currentSongAlbum;
+	/**
+	 * It represents the actual music folder songs as a Song ArrayList.
+	 */
 	private ArrayList<Song> currentPlaylist;
+	/**
+	 * It represents the song loaded position as an integer simple property.
+	 */
 	private SimpleIntegerProperty songLoaded;
+	/**
+	 * It represents the current song cover art to use it in the interface as a byte array.
+	 */
 	private byte[] currentCoverArt;
-
+	/**
+	 * It represents the actual song playing in the media player.
+	 */
 	private Song currentSong;
-	
 	/**
 	 * Constructor MusicPlayer method that starts the entire current song metadata and the media player. 
 	 * @throws ClassNotFoundException if the class definition is not there due to the library witch contains it 
