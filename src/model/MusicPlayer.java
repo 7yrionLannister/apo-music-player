@@ -93,7 +93,10 @@ public class MusicPlayer {
 		ois.close();
 		fis.close();
 	}
-
+	/**
+	 * Method to get the current Song sounding in the media player.
+	 * @return A Song that represents the current Song sounding in the media player.
+	 */
 	public Song getCurrentSong() {
 		return currentSong;
 	}
