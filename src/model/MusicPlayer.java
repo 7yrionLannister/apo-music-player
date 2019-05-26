@@ -65,13 +65,14 @@ public class MusicPlayer {
 		}
 		chargeMedia();
 	}
+	
 	/**
 	 * This method charges the entire metadata to the Media and the Media to the MediaPlayer.
 	 */
 	private void chargeMedia() {
 		if(mediaPlayer != null) {
 			mediaPlayer.stop();
-		}
+		}System.out.println(currentSong.getSongPath());
 		currentAudio = new Media(currentSong.getSongPath());
 		mediaPlayer = new MediaPlayer(currentAudio);
 		mediaPlayer.stop();
