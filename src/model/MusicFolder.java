@@ -37,7 +37,7 @@ public class MusicFolder implements Serializable {
 				} catch(NotMP3FileException nmp3fe) {
 					index++;
 					if(index == content.length) {
-						throw new FolderWithoutMP3ContentException();
+						throw new FolderWithoutMP3ContentException(folder.getPath());
 					}
 				}
 			}
