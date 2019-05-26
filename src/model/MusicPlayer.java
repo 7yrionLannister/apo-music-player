@@ -100,17 +100,27 @@ public class MusicPlayer {
 	public Song getCurrentSong() {
 		return currentSong;
 	}
-
+	/**
+	 * This method allows to set the Media through an index that represents the song position inside
+	 * its respective music folder and charges its media.
+	 * @param index the song position inside its respective music folder.
+	 */
 	public void setMedia(int index) {
 		this.currentSong = currentPlaylist.get(index);
 		mediaPlayer.stop();
 		chargeMedia();
 	}
-
+	/**
+	 * This method allows to get the actual media player used to play the music.
+	 * @return A MediaPlayer that represents the actual media player used to play the music.
+	 */
 	public MediaPlayer getMediaPlayer() {
 		return mediaPlayer;
 	}
-
+	/**
+	 * This method allows to set the actual media player used to play the music.
+	 * @param mediaPlayer A MediaPlayer that represents the actual media player used to play the music.
+	 */
 	public void setMediaPlayer(MediaPlayer mediaPlayer) {
 		this.mediaPlayer = mediaPlayer;
 	}
@@ -122,7 +132,7 @@ public class MusicPlayer {
 	public void setFirstMusicFolder(MusicFolder firstMusicFolder) {
 		this.firstMusicFolder = firstMusicFolder;
 	}
-
+	
 	public SimpleStringProperty getCurrentSongTitle() {
 		return currentSongTitle;
 	}
