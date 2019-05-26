@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="719.0" stylesheets="@PrimaryStageStyleSheet.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.PrimaryStageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="737.0" stylesheets="@PrimaryStageStyleSheet.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.PrimaryStageController">
    <bottom>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -122,8 +122,8 @@
                               </Button>
                               <StackPane prefWidth="192.0">
                                  <children>
-                                    <ProgressBar fx:id="volumeProgressBar" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" progress="0.0" />
-                                    <Slider fx:id="volumeSlider" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" />
+                                    <ProgressBar fx:id="volumeProgressBar" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="100.0" progress="0.0" />
+                                    <Slider fx:id="volumeSlider" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="100.0" />
                                  </children>
                               </StackPane>
                            </children>
@@ -131,15 +131,6 @@
                         <Separator />
                         <HBox prefWidth="200.0" spacing="4.0">
                            <children>
-                              <Button fx:id="equalizerSwitchButton" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#equalizerSwitchButtonPressed" prefHeight="40.0" prefWidth="40.0">
-                                 <graphic>
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../imgs/equalizer.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
                               <Button fx:id="shuffleSwitchButton" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#shuffleSwitchButtonPressed" prefHeight="40.0" prefWidth="40.0">
                                  <graphic>
                                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
@@ -199,10 +190,6 @@
                         <Circle fx:id="coverImageCircle" fill="#ced4da" layoutX="355.0" layoutY="114.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
                      </children>
                   </Pane>
-               </content></Tab>
-          <Tab text="Equalizer">
-               <content>
-                  <Pane prefHeight="200.0" prefWidth="200.0" />
                </content></Tab>
             <Tab text="Music libraries">
                <content>

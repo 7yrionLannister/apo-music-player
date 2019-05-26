@@ -67,7 +67,6 @@ public class PrimaryStageController {
 	@FXML private Button volumeSwitchButton;
 	@FXML private ProgressBar volumeProgressBar;
 	@FXML private Slider volumeSlider;
-	@FXML private Button equalizerSwitchButton;
 	@FXML private Button shuffleSwitchButton;
 	@FXML private Button addListButton;
 	@FXML private Button settingsButton;
