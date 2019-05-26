@@ -10,7 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import customExceptions.FolderWithoutMP3ContentException;
 
-class MusicFolderTest {
+//TODO si se puede, usar DirectoryChooser para que el que pruebe elija una carpeta con musica para hacer pruebas del arbol y ordenamiento
+public class MusicFolderTest {
 	private MusicFolder mf;
 	
 	public void setupScenario1() {
@@ -38,5 +39,44 @@ class MusicFolderTest {
 		} catch (IOException | FolderWithoutMP3ContentException e) {
 			fail("The music folder should have been created as the resources folder is the demo library that comes in the repository");
 		}
+	}
+	
+	@Test
+	public void createMusicFolderWithValidPathButNoMP3Content() {
+		setupScenario1();
+		try {
+			mf = new MusicFolder(new File("test"+File.separator+"model"));
+		} catch (IOException | FolderWithoutMP3ContentException e) {
+			if(e instanceof FolderWithoutMP3ContentException) {
+				assertTrue(true);
+			} else {
+				fail("The type of the captured exception does not correspond to the suitable");
+			}
+		}
+	}
+	
+	@Test
+	public void inorderTest() {
+		//TODO implement
+	}
+	
+	@Test
+	public void sortSongsByTitleTest() {
+		//TODO implement
+	}
+	
+	@Test
+	public void sortSongsByAlbumTest() {
+		//TODO implement
+	}
+	
+	@Test
+	public void sortSongsBySizeTest() {
+		//TODO implement
+	}
+	
+	@Test
+	public void sortSongsByGenreTest() {
+		//TODO implement
 	}
 }
