@@ -13,7 +13,7 @@ import customExceptions.NotMP3FileException;
 public class SongTest {
 	private Song s;
 	
-	public void setupScenario1() {
+	private void setupScenario1() {
 		s = null;
 	}
 	

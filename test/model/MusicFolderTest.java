@@ -15,11 +15,11 @@ import customExceptions.FolderWithoutMP3ContentException;
 public class MusicFolderTest {
 	private MusicFolder mf;
 	
-	public void setupScenario1() {
+	private void setupScenario1() {
 		mf = null;
 	}
 	
-	public void setupScenario2() {
+	private void setupScenario2() {
 		try {
 			mf = new MusicFolder(new File("music"));
 		} catch (IOException | FolderWithoutMP3ContentException e) {
