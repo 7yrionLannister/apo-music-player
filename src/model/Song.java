@@ -25,7 +25,7 @@ public class Song implements Serializable, Comparable<Song>{
 	private Song left;
 	
 	/**
-	 * Song constructor method that receives a mp3 file as parameter. 
+	 * Song constructor method that receives a mp3 file as parameter and starts the entire song metadata. 
 	 * @param song A mp3 file that represents the song to instance this class.
 	 * @throws IOException
 	 * @throws NotMP3FileException

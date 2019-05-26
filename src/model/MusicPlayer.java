@@ -35,7 +35,13 @@ public class MusicPlayer {
 	private byte[] currentCoverArt;
 
 	private Song currentSong;
-
+	
+	/**
+	 * Constructor MusicPlayer method that starts the entire current song metadata and the media player. 
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 * @throws FolderWithoutMP3ContentException
+	 */
 	public MusicPlayer() throws ClassNotFoundException, IOException, FolderWithoutMP3ContentException {
 		songLoaded = new SimpleIntegerProperty(Integer.MIN_VALUE);
 
