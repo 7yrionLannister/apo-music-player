@@ -68,10 +68,7 @@ public class MusicFolderTest {
 	public void inorderTest() {
 		setupScenario2();
 		ArrayList<Song> songs = mf.inorder();
-		System.out.println("INORDER");
-		for(int i = 0; i < songs.size(); i++) {
-			System.out.println(songs.get(i).getFileName());
-		}
+		
 		for(int i = 1; i < songs.size(); i++) {
 			assertTrue("The returned list of songs is not in order", songs.get(i).compareTo(songs.get(i-1)) >= 0);
 		}
@@ -83,10 +80,7 @@ public class MusicFolderTest {
 		mf.sortSongsByTitle();
 		ArrayList<Song> songs = mf.getSongs();
 		TitleComparator tc = new TitleComparator();
-		System.out.println("TITLE");
-		for(int i = 0; i < songs.size(); i++) {
-			System.out.println(songs.get(i).getTitle());
-		}
+		
 		for(int i = 1; i < songs.size(); i++) {
 			assertTrue("The list is not sorted by title", tc.compare(songs.get(i), songs.get(i-1)) >= 0);
 		}
@@ -98,10 +92,7 @@ public class MusicFolderTest {
 		mf.sortSongsByAlbum();
 		ArrayList<Song> songs = mf.getSongs();
 		AlbumComparator ac = new AlbumComparator();
-		System.out.println("ALBUM");
-		for(int i = 0; i < songs.size(); i++) {
-			System.out.println(songs.get(i).getAlbum());
-		}
+		
 		for(int i = 1; i < songs.size(); i++) {
 			assertTrue("The list is not sorted by album", ac.compare(songs.get(i), songs.get(i-1)) >= 0);
 		}
@@ -113,10 +104,7 @@ public class MusicFolderTest {
 		mf.sortSongsBySize();
 		ArrayList<Song> songs = mf.getSongs();
 		SizeComparator sc = new SizeComparator();
-		System.out.println("SIZE");
-		for(int i = 0; i < songs.size(); i++) {
-			System.out.println(songs.get(i).getSize());
-		}
+		
 		for(int i = 1; i < songs.size(); i++) {
 			assertTrue("The list is not sorted by size", sc.compare(songs.get(i), songs.get(i-1)) >= 0);
 		}
@@ -128,10 +116,7 @@ public class MusicFolderTest {
 		mf.sortSongsByGenre();
 		ArrayList<Song> songs = mf.getSongs();
 		GenreComparator gc = new GenreComparator();
-		System.out.println("GENRE");
-		for(int i = 0; i < songs.size(); i++) {
-			System.out.println(songs.get(i).getGenre());
-		}
+		
 		for(int i = 1; i < songs.size(); i++) {
 			assertTrue("The list is not sorted by genre", gc.compare(songs.get(i), songs.get(i-1)) >= 0);
 		}

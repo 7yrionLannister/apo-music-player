@@ -45,7 +45,7 @@ public class SongTest {
 	public void createSongWithValidPathButInvalidFileFormat() {
 		setupScenario1();
 		try {
-			s = new Song(new File("resources"+File.separator+"testfile.txt"));
+			s = new Song(new File("data"+File.separator+"testfile.txt"));
 			fail("The song shouldn't have been created as the file does not have mp3 format");
 		} catch (NotMP3FileException | IOException e) {
 			assertTrue(true);
