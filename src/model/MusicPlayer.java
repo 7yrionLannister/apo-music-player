@@ -124,11 +124,17 @@ public class MusicPlayer {
 	public void setMediaPlayer(MediaPlayer mediaPlayer) {
 		this.mediaPlayer = mediaPlayer;
 	}
-
+	/**
+	 * This method allows to obtain the first music folder in the list.
+	 * @return A MusicFolder that represents the first music folder in the list.
+	 */
 	public MusicFolder getFirstMusicFolder() {
 		return firstMusicFolder;
 	}
-
+	/**
+	 * This method allows to set the first music folder in the list.
+	 * @param firstMusicFolder A MusicFolder that represents the first music folder in the list.
+	 */
 	public void setFirstMusicFolder(MusicFolder firstMusicFolder) {
 		this.firstMusicFolder = firstMusicFolder;
 	}
