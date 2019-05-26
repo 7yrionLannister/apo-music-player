@@ -44,17 +44,33 @@ import threads.CoverArtAnimationThread;
 import threads.CurrentTrackTimeUpdaterThread;
 
 public class PrimaryStageController {
+	/**
+	 * It represents 
+	 */
 	public final static Image DEFAULT_THUMBNAIL = new Image(new File("imgs"+File.separator+"music-player.png").toURI().toString());
+	/**
+	 * It represents
+	 */
 	public final static Image PAUSE_ICON = new Image(new File("imgs"+File.separator+"pause.png").toURI().toString(), 50, 50, false, false);
+	/**
+	 * It represents
+	 */
 	public final static Image PLAY_ICON = new Image(new File("imgs"+File.separator+"play-button.png").toURI().toString(), 50, 50, false, false);
+	/**
+	 * It represents
+	 */
 	public final static Image MUTE_ENABLED_ICON = new Image(new File("imgs"+File.separator+"mute.png").toURI().toString(), 40, 40, false, false);
+	/**
+	 * It represents
+	 */
 	public final static Image MUTE_DISABLED_ICON = new Image(new File("imgs"+File.separator+"volume-1.png").toURI().toString(), 40, 40, false, false);
-
+	/**
+	 * It represents
+	 */
 	private MusicPlayer musicPlayer;
-	public MusicPlayer getMusicPlayer() {
-		return musicPlayer;
-	}
-
+	/**
+	 * It represents
+	 */
 	private CoverArtAnimationThread caat;
 
 	@FXML private Circle backgroundCircle;
@@ -87,7 +103,9 @@ public class PrimaryStageController {
 	@FXML private TableColumn<Song, String> albumTableColumn;
 	@FXML private TableColumn<Song, String> artistTableColumn;
 	@FXML private TableColumn<Song, Double> sizeTableColumn;
-
+	/**
+	 * This method starts all the necessary components inside the interface when is started.
+	 */
 	@FXML
 	public void initialize() {
 		try {
@@ -150,12 +168,18 @@ public class PrimaryStageController {
 		cttu.start();
 		refreshIcons();
 	}
-
+	/**
+	 * 
+	 * @param event An ActionEvent
+	 */
 	@FXML
 	public void aboutButtonPressed(ActionEvent event) {
 		//TODO esto solo es una prube
 	}
-
+	/**
+	 * 
+	 * @param event An ActionEvent
+	 */
 	@FXML
 	public void addListButtonPressed(ActionEvent event) {
 		DirectoryChooser dc = new DirectoryChooser();
@@ -170,7 +194,10 @@ public class PrimaryStageController {
 		}
 		librariesTableView.setItems(musicPlayer.getMusicFolders());
 	}
-
+	/**
+	 * 
+	 * @param event An ActionEvent
+	 */
 	@FXML
 	public void nextTrackButtonPressed(ActionEvent event) {
 		try {
@@ -184,12 +211,17 @@ public class PrimaryStageController {
 			restartThreads();
 		}
 	}
-
+	/**
+	 * 
+	 * @param event An ActionEvent
+	 */
 	@FXML
 	public void playPauseButtonPressed(ActionEvent event) {
 		applyChangesToPlayPauseButton();
 	}
-
+	/**
+	 * 
+	 */
 	public void applyChangesToPlayPauseButton() {
 		if(musicPlayer.getMediaPlayer().getStatus().compareTo(MediaPlayer.Status.PLAYING) == 0) {
 			musicPlayer.getMediaPlayer().pause();
@@ -201,7 +233,10 @@ public class PrimaryStageController {
 			restartThreads();
 		}
 	}
-
+	/**
+	 * 
+	 * @param event An ActionEvent
+	 */
 	@FXML
 	public void prevTrackButtonPressed(ActionEvent event) {
 		try {
@@ -215,17 +250,26 @@ public class PrimaryStageController {
 			restartThreads();
 		}
 	}
-
+	/**
+	 * 
+	 * @param event An ActionEvent
+	 */
 	@FXML
 	public void settingsButtonPressed(ActionEvent event) {
 
 	}
-
+	/**
+	 * 
+	 * @param event An ActionnEvent
+	 */
 	@FXML
 	public void shuffleSwitchButtonPressed(ActionEvent event) {
 
 	}
-
+	/**
+	 * 
+	 * @param event An ActionEvent
+	 */
 	@FXML
 	public void volumeSwitchButtonPressed(ActionEvent event) {
 		volumeSwitchButton.setUserData(!(boolean)volumeSwitchButton.getUserData());
@@ -236,7 +280,10 @@ public class PrimaryStageController {
 			volumeSwitchButton.setGraphic(new ImageView(MUTE_DISABLED_ICON));
 		}
 	}
-
+	/**
+	 * 
+	 * @param event An ActionEvent
+	 */
 	@FXML
 	public void deleteListButtonPressed(ActionEvent event) {
 		try {
@@ -250,7 +297,10 @@ public class PrimaryStageController {
 		}
 		librariesTableView.setItems(musicPlayer.getMusicFolders());
 	}
-
+	/**
+	 * 
+	 * @param event A WindowEvent
+	 */
 	public void save(WindowEvent event) {
 		try {
 			musicPlayer.save();
@@ -258,23 +308,37 @@ public class PrimaryStageController {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * 
+	 * @return A Label
+	 */
 	public Label getCurrentTimeLabel() {
 		return currentTimeLabel;
 	}
-
+	/**
+	 * 
+	 * @return A Slider
+	 */
 	public Slider getTrackTimeSlider() {
 		return trackTimeSlider;
 	}
-
+	/**
+	 * 
+	 * @return A Label
+	 */
 	public Label getDurationLabel() {
 		return durationLabel;
 	}
-
+	/**
+	 * 
+	 * @return A Button
+	 */
 	public Button getShuffleSwitchButton() {
 		return shuffleSwitchButton;
 	}
-
+	/**
+	 * 
+	 */
 	public void refreshIcons() {
 		songThumbnail.setImage(DEFAULT_THUMBNAIL);
 		coverImageCircle.setFill(new ImagePattern(songThumbnail.getImage()));
@@ -291,7 +355,9 @@ public class PrimaryStageController {
 		}
 		refreshPlayerBackground();
 	}
-
+	/**
+	 * 
+	 */
 	public void refreshPlayerBackground() {
 		Color color1 = songThumbnail.getImage().getPixelReader().getColor((int)songThumbnail.getImage().getWidth()/2, (int)songThumbnail.getImage().getHeight()/2).brighter().brighter();
 		Color color2 = color1.brighter().darker().darker().darker().darker();
@@ -310,7 +376,16 @@ public class PrimaryStageController {
                 new Stop(1.0f, color1.brighter().brighter()));
 		backgroundCircle.setFill(linearGrad);
 	}
-
+	/**
+	 * 
+	 * @return A MusicPlayer
+	 */
+	public MusicPlayer getMusicPlayer() {
+		return musicPlayer;
+	}
+	/**
+	 * 
+	 */
 	public void restartThreads() {
 		if(caat != null) {
 			caat.pause();
@@ -319,7 +394,11 @@ public class PrimaryStageController {
 		caat.setDaemon(true);
 		caat.start();
 	}
-	
+	/**
+	 * 
+	 * @param header
+	 * @param message
+	 */
 	public void showErrorAlert(String header, String message) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setContentText(message);
