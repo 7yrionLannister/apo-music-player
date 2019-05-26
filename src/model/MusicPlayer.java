@@ -18,8 +18,13 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class MusicPlayer {
+	/**
+	 * It represents the path where the music folders are serialized. 
+	 */
 	public final static String MUSIC_FOLDERS_PATH = "data"+File.separator+"mscfldrs.got";
-
+	/**
+	 * 
+	 */
 	private Media currentAudio;
 	public Media getCurrentAudio() {
 		return currentAudio;
@@ -38,9 +43,10 @@ public class MusicPlayer {
 	
 	/**
 	 * Constructor MusicPlayer method that starts the entire current song metadata and the media player. 
-	 * @throws ClassNotFoundException
-	 * @throws IOException
-	 * @throws FolderWithoutMP3ContentException
+	 * @throws ClassNotFoundException if the class definition is not there due to the library witch contains it 
+	 * is not in the application class path.
+	 * @throws IOException if the file has not been found, deleted or moved to another location.
+	 * @throws FolderWithoutMP3ContentException if the selected folder does not have music files with mp3 extension.
 	 */
 	public MusicPlayer() throws ClassNotFoundException, IOException, FolderWithoutMP3ContentException {
 		songLoaded = new SimpleIntegerProperty(Integer.MIN_VALUE);
@@ -81,8 +87,9 @@ public class MusicPlayer {
 	/**
 	 * Method that deserializes the folder with music when the application is started again.
 	 * @param mf A File that represents the folder with music to deserialize when the application is started again.  
-	 * @throws IOException
-	 * @throws ClassNotFoundException
+	 * @throws IOException if the file has not been found, deleted or moved to another location.
+	 * @throws ClassNotFoundException if the class definition is not there due to the library witch contains it is not
+	 * in the application class path.
 	 */
 	private void loadMusicFolders(File mf) throws IOException, ClassNotFoundException {
 		FileInputStream fis = new FileInputStream(mf);
@@ -138,23 +145,40 @@ public class MusicPlayer {
 	public void setFirstMusicFolder(MusicFolder firstMusicFolder) {
 		this.firstMusicFolder = firstMusicFolder;
 	}
-	
+	/**
+	 * This method allows to obtain a simple string representation of the current song title to use it in the interface.
+	 * @return A SimpleStringProperty that represents a simple string representation of the current song title to use it in the interface
+	 */
 	public SimpleStringProperty getCurrentSongTitle() {
 		return currentSongTitle;
 	}
-
+	/**
+	 * This method allows to obtain a simple string representation of the current song artist to use it in the interface.
+	 * @return A SimpleStringProperty that represents a simple string representation of the current song artist to use it in the interface
+	 */
 	public SimpleStringProperty getCurrentSongArtist() {
 		return currentSongArtist;
 	}
-
+	/**
+	 * This method allows to obtain a simple string representation of the current song album to use it in the interface.
+	 * @return A SimpleStringProperty that represents a simple string representation of the current song album to use it in the interface
+	 */
 	public SimpleStringProperty getCurrentSongAlbum() {
 		return currentSongAlbum;
 	}
-
+	/**
+	 * This method allows to obtain the current song cover art to use it in the interface as a byte array.
+	 * @return An byte array that represents the current song cover art to use it in the interface.
+	 */
 	public byte[] getCurrentCoverArt() {
 		return currentCoverArt;
 	}
-
+	/**
+	 * This method allows to add a music folder into the linked list of music folders in the last place. 
+	 * @param dir A File that represents the music folder to be added in the linked list of music folders.
+	 * @throws IOException if the file has not been found, deleted or moved to another location.
+	 * @throws FolderWithoutMP3ContentException if the selected folder does not have music files with mp3 extension.
+	 */
 	public void addMusicFolder(File dir) throws IOException, FolderWithoutMP3ContentException {
 		if(dir != null) {
 			MusicFolder toAdd = new MusicFolder(dir);
@@ -171,7 +195,11 @@ public class MusicPlayer {
 			}
 		}
 	}
-
+	/**
+	 * This method allow to obtain a observable list of music folders adding them as a linked list and thus be able 
+	 * to display them in the in the interface. 
+	 * @return A ObservableList of MusicFolder that represents the linked list to display it in the interface. 
+	 */
 	public ObservableList<MusicFolder> getMusicFolders() {
 		ObservableList<MusicFolder> folders = FXCollections.observableArrayList();
 		MusicFolder current = firstMusicFolder;
@@ -181,7 +209,10 @@ public class MusicPlayer {
 		}
 		return folders;
 	}
-
+	/**
+	 * This method allows to save the music folders added when the application is running.
+	 * @throws IOException if the file has not been found, deleted or moved to another location.
+	 */
 	public void save() throws IOException {
 		File file = new File(MUSIC_FOLDERS_PATH);
 		FileOutputStream fos = new FileOutputStream(file);
@@ -192,19 +223,32 @@ public class MusicPlayer {
 		oos.close();
 		fos.close();
 	}
-
+	/**
+	 * This method allows to obtain the song loaded position as a simple integer property.
+	 * @return A SimpleIntegerProperty that represents the song loaded position.
+	 */
 	public SimpleIntegerProperty getSongLoaded() {
 		return songLoaded;
 	}
-
+	/**
+	 * This method allows to set the actual music folder songs in the current play list. 
+	 * @param current A MusicFolder that represents the actual music folder selected in the interface.
+	 */
 	public void setCurrentPlayList(MusicFolder current) {
 		currentPlaylist = current.getSongs();
 	}
-
+	/**
+	 * This method allows to obtain a Song array list that represents the actual play list.
+	 * @return A Song ArrayList that represents the actual play list.
+	 */
 	public ArrayList<Song> getCurrentPlayList() {
 		return currentPlaylist;
 	}
-
+	/**
+	 * This method allows to remove a music folder from the linked list.
+	 * @param toremove A MusicFolder that represents the music folder that will be removed from the linked list.
+	 * @throws AttemptedToRemoveDemoLibraryException if the user tries to remove the default music folder. 
+	 */
 	public void removeMusicFolderFromLibraries(MusicFolder toremove) throws AttemptedToRemoveDemoLibraryException {
 		if(toremove == firstMusicFolder) {
 			throw new AttemptedToRemoveDemoLibraryException();
