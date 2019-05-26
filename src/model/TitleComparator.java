@@ -10,8 +10,8 @@ public class TitleComparator implements Comparator<Song>{
 	 * @return An integer that represents if the Song s1 title is greater, less or equal to Song s2 title lexicographically.  
 	 */
 	@Override
-	public int compare(Song o1, Song o2) {
-		return o1.getTitle().compareTo(o2.getTitle());
+	public int compare(Song s1, Song s2) {
+		return s1.getTitle().compareTo(s2.getTitle());
 	}
 	
 }

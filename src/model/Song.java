@@ -112,69 +112,7 @@ public class Song implements Serializable, Comparable<Song>{
 	public String getFileName() {
 		return fileName;
 	}
-	/**
-	 * Method that allows to set the song title.
-	 * @param title A string that represents the song title.
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	/**
-	 * Method that allows to set the song artist.
-	 * @param artist A string that represents the song artist.
-	 */
-	public void setArtist(String artist) {
-		this.artist = artist;
-	}
-	/**
-	 * Method that allows to set the song album.
-	 * @param album A string that represents the song album.
-	 */
-	public void setAlbum(String album) {
-		this.album = album;
-	}
-	/**
-	 * Method that allows to set the song genre.
-	 * @param genre A string that represents the song genre.
-	 */
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
-	/** 
-	 * Method that allows to set the song size as a double type number. 
-	 * @param size A double that represents the song size.
-	 */
-	public void setSize(double size) {
-		this.size = size;
-	}
-	/**
-	 * Method that allows to set the song path.
-	 * @param songPath A string that represents the song path.
-	 */
-	public void setSongPath(String songPath) {
-		this.songPath = songPath;
-	}
-	/**
-	 * Method that allows to set the song parent folder path.
-	 * @param parentFolderPath A string that represents the song parent folder path.
-	 */
-	public void setParentFolderPath(String parentFolderPath) {
-		this.parentFolderPath = parentFolderPath;
-	}
-	/**
-	 * Method that allows to set the song image as a byte array.
-	 * @param image A byte array that represents the song image.
-	 */
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
-	/**
-	 * Method that allows to set the song file name.
-	 * @param fileName A string that represents the song file name.
-	 */
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
+	
 	/**
 	 * Method that allows to get the song parent folder path.
 	 * @return A string that represents the song parent folder path.
