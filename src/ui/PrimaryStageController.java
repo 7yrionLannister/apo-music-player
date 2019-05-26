@@ -1,5 +1,7 @@
 package ui;
 
+import java.awt.GradientPaint;
+import java.awt.geom.Point2D;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +30,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.WindowEvent;
@@ -52,6 +57,7 @@ public class PrimaryStageController {
 
 	private CoverArtAnimationThread caat;
 
+	@FXML private Circle backgroundCircle;
 	@FXML private Circle coverImageCircle;
 	@FXML private ImageView songThumbnail;
 	@FXML private Label songTitleLabel;
@@ -147,12 +153,7 @@ public class PrimaryStageController {
 
 	@FXML
 	public void aboutButtonPressed(ActionEvent event) {
-
-	}
-
-	@FXML
-	public void equalizerSwitchButtonPressed(ActionEvent event) {
-
+		//TODO esto solo es una prube
 	}
 
 	@FXML
@@ -304,6 +305,10 @@ public class PrimaryStageController {
 		blue = (int)(color2.getBlue()*255);
 		String rgba2 = "rgba("+(red)+","+(green)+","+(blue)+")";
 		background.setStyle("-fx-background-color: linear-gradient(to bottom, "+rgba1+", "+rgba2+")");
+		LinearGradient linearGrad = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, 
+                new Stop(0.1f, color2.brighter().brighter().brighter()),
+                new Stop(1.0f, color1.brighter().brighter()));
+		backgroundCircle.setFill(linearGrad);
 	}
 
 	public void restartThreads() {
