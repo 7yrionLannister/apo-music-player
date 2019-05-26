@@ -59,7 +59,9 @@ public class MusicPlayer {
 		}
 		chargeMedia();
 	}
-
+	/**
+	 * This method charges the entire metadata to the Media and the Media to the MediaPlayer.
+	 */
 	private void chargeMedia() {
 		if(mediaPlayer != null) {
 			mediaPlayer.stop();
@@ -76,7 +78,12 @@ public class MusicPlayer {
 
 		songLoaded.set(songLoaded.get()+1);
 	}
-
+	/**
+	 * Method that deserializes the folder with music when the application is started again.
+	 * @param mf A File that represents the folder with music to deserialize when the application is started again.  
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	private void loadMusicFolders(File mf) throws IOException, ClassNotFoundException {
 		FileInputStream fis = new FileInputStream(mf);
 		ObjectInputStream ois = new ObjectInputStream(fis);
