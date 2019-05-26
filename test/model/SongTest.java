@@ -21,8 +21,8 @@ public class SongTest {
 	public void createSongWithValidPathAndValidAudioFormatTest() {
 		setupScenario1();
 		try {
-			String fileName = "Spectre.mp3";
-			String songPath = "resources"+File.separator+fileName;
+			String fileName = "bensound-happyrock.mp3";
+			String songPath = "music"+File.separator+fileName;
 			s = new Song(new File(songPath));
 			assertTrue("The name of the file does not correspond to the requested one", fileName.equals(s.getFileName()));
 		} catch (IOException e) {

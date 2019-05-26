@@ -176,7 +176,7 @@ public class MusicFolder implements Serializable {
 	 * It uses Collections.sort
 	 * */
 	public void sortSongsByTitle() {
-		Collections.sort(songs);
+		Collections.sort(songs, new TitleComparator());
 	}
 
 	/**The method allows to sort the songs in the playList according to its artist.

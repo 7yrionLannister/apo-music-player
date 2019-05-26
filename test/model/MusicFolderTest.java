@@ -5,17 +5,26 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
 import customExceptions.FolderWithoutMP3ContentException;
 
-//TODO si se puede, usar DirectoryChooser para que el que pruebe elija una carpeta con musica para hacer pruebas del arbol y ordenamiento
+
 public class MusicFolderTest {
 	private MusicFolder mf;
 	
 	public void setupScenario1() {
 		mf = null;
+	}
+	
+	public void setupScenario2() {
+		try {
+			mf = new MusicFolder(new File("music"));
+		} catch (IOException | FolderWithoutMP3ContentException e) {
+			
+		}
 	}
 	
 	@Test
@@ -33,7 +42,7 @@ public class MusicFolderTest {
 	public void createMusicFolderWithValidPathTest() {
 		setupScenario1();
 		try {
-			String dir = "resources";
+			String dir = "music";
 			mf = new MusicFolder(new File(dir));
 			assertTrue("The new folder is not the requested one", dir.equals(mf.getFolderName()));
 		} catch (IOException | FolderWithoutMP3ContentException e) {
@@ -57,26 +66,74 @@ public class MusicFolderTest {
 	
 	@Test
 	public void inorderTest() {
-		//TODO implement
+		setupScenario2();
+		ArrayList<Song> songs = mf.inorder();
+		System.out.println("INORDER");
+		for(int i = 0; i < songs.size(); i++) {
+			System.out.println(songs.get(i).getFileName());
+		}
+		for(int i = 1; i < songs.size(); i++) {
+			assertTrue("The returned list of songs is not in order", songs.get(i).compareTo(songs.get(i-1)) >= 0);
+		}
 	}
 	
 	@Test
 	public void sortSongsByTitleTest() {
-		//TODO implement
+		setupScenario2();
+		mf.sortSongsByTitle();
+		ArrayList<Song> songs = mf.getSongs();
+		TitleComparator tc = new TitleComparator();
+		System.out.println("TITLE");
+		for(int i = 0; i < songs.size(); i++) {
+			System.out.println(songs.get(i).getTitle());
+		}
+		for(int i = 1; i < songs.size(); i++) {
+			assertTrue("The list is not sorted by title", tc.compare(songs.get(i), songs.get(i-1)) >= 0);
+		}
 	}
 	
 	@Test
 	public void sortSongsByAlbumTest() {
-		//TODO implement
+		setupScenario2();
+		mf.sortSongsByAlbum();
+		ArrayList<Song> songs = mf.getSongs();
+		AlbumComparator ac = new AlbumComparator();
+		System.out.println("ALBUM");
+		for(int i = 0; i < songs.size(); i++) {
+			System.out.println(songs.get(i).getAlbum());
+		}
+		for(int i = 1; i < songs.size(); i++) {
+			assertTrue("The list is not sorted by album", ac.compare(songs.get(i), songs.get(i-1)) >= 0);
+		}
 	}
 	
 	@Test
 	public void sortSongsBySizeTest() {
-		//TODO implement
+		setupScenario2();
+		mf.sortSongsBySize();
+		ArrayList<Song> songs = mf.getSongs();
+		SizeComparator sc = new SizeComparator();
+		System.out.println("SIZE");
+		for(int i = 0; i < songs.size(); i++) {
+			System.out.println(songs.get(i).getSize());
+		}
+		for(int i = 1; i < songs.size(); i++) {
+			assertTrue("The list is not sorted by size", sc.compare(songs.get(i), songs.get(i-1)) >= 0);
+		}
 	}
 	
 	@Test
 	public void sortSongsByGenreTest() {
-		//TODO implement
+		setupScenario2();
+		mf.sortSongsByGenre();
+		ArrayList<Song> songs = mf.getSongs();
+		GenreComparator gc = new GenreComparator();
+		System.out.println("GENRE");
+		for(int i = 0; i < songs.size(); i++) {
+			System.out.println(songs.get(i).getGenre());
+		}
+		for(int i = 1; i < songs.size(); i++) {
+			assertTrue("The list is not sorted by genre", gc.compare(songs.get(i), songs.get(i-1)) >= 0);
+		}
 	}
 }
