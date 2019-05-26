@@ -187,7 +187,8 @@
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Circle fx:id="coverImageCircle" fill="#ced4da" layoutX="355.0" layoutY="114.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="backgroundCircle" fill="#bcc4cd" layoutX="355.0" layoutY="127.0" radius="120.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="coverImageCircle" fill="#ced4da" layoutX="355.0" layoutY="127.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
                      </children>
                   </Pane>
                </content></Tab>
