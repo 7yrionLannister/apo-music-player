@@ -51,23 +51,39 @@ public class Song implements Serializable, Comparable<Song>{
 		genre = mp3.getMusicType()!=null?mp3.getMusicType():"unknown";
 		image = mp3.getPicture(PictureType.FRONT_COVER)!=null?mp3.getPicture(PictureType.FRONT_COVER).getImage():null;
 	}
-
+	
+	/**
+	 * Method that allows to get the song title.
+	 * @return A string that represents the song title.
+	 */
 	public String getTitle() {
 		return title;
 	}
-
+	/**
+	 * Method that allows to get the song artist.
+	 * @return A string that represents the song artist.
+	 */
 	public String getArtist() {
 		return artist;
 	}
-
+	/**
+	 * Method that allows to get the song title.
+	 * @return A string that represents the song title.
+	 */
 	public String getAlbum() {
 		return album;
 	}
-
+	/**
+	 * Method that allows to get the song image as a byte array.
+	 * @return A byte array that represents the song image.
+	 */
 	public byte[] getImage() {
 		return image;
 	}
-	
+	/**
+	 * Method that allows to get the song genre.
+	 * @return A string that represents the song genre.
+	 */
 	public String getGenre() {
 		return genre;
 	}
@@ -75,17 +91,61 @@ public class Song implements Serializable, Comparable<Song>{
 	public void setCoverArt() {
 		//TODO complete this
 	}
-
+	/**
+	 * Method that allows to get the song path.
+	 * @return A string that represents the song path.
+	 */
 	public String getSongPath() {
 		return songPath;
 	}
-	
+	/** 
+	 * Method that allows to get the song size as a double type number. 
+	 * @return A double that represents the song size.
+	 */
 	public double getSize() {
 		return size;
 	}
-	
+	/**
+	 * Method that allows to get the song file name.
+	 * @return A string that represents the song file name.
+	 */
 	public String getFileName() {
 		return fileName;
+	}
+	/**
+	 * Method that allows to set the song title name.
+	 * @param title A string that represents the song title name.
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setArtist(String artist) {
+		this.artist = artist;
+	}
+
+	public void setAlbum(String album) {
+		this.album = album;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public void setSize(double size) {
+		this.size = size;
+	}
+
+	public void setSongPath(String songPath) {
+		this.songPath = songPath;
+	}
+
+	public void setParentFolderPath(String parentFolderPath) {
+		this.parentFolderPath = parentFolderPath;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 	public void setFileName(String fileName) {
