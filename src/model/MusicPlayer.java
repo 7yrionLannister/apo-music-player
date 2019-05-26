@@ -23,13 +23,12 @@ public class MusicPlayer {
 	 */
 	public final static String MUSIC_FOLDERS_PATH = "data"+File.separator+"mscfldrs.got";
 	/**
-	 * 
+	 * It represents the actual song put to be reproduced. 
 	 */
 	private Media currentAudio;
-	public Media getCurrentAudio() {
-		return currentAudio;
-	}
-
+	/**
+	 * It represents 
+	 */
 	private MediaPlayer mediaPlayer;
 	private MusicFolder firstMusicFolder;
 	private SimpleStringProperty currentSongTitle;
@@ -107,6 +106,13 @@ public class MusicPlayer {
 	 */
 	public Song getCurrentSong() {
 		return currentSong;
+	}
+	/**
+	 * This method allows to get the actual song put to be reproduced.
+	 * @return A Media that represents the actual song put to be reproduced.
+	 */
+	public Media getCurrentAudio() {
+		return currentAudio;
 	}
 	/**
 	 * This method allows to set the Media through an index that represents the song position inside
