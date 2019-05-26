@@ -18,8 +18,13 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class MusicPlayer {
+	/**
+	 * It represents the path where the music folders are serialized. 
+	 */
 	public final static String MUSIC_FOLDERS_PATH = "data"+File.separator+"mscfldrs.got";
-
+	/**
+	 * 
+	 */
 	private Media currentAudio;
 	public Media getCurrentAudio() {
 		return currentAudio;
@@ -225,15 +230,25 @@ public class MusicPlayer {
 	public SimpleIntegerProperty getSongLoaded() {
 		return songLoaded;
 	}
-
+	/**
+	 * This method allows to set the actual music folder songs in the current play list. 
+	 * @param current A MusicFolder that represents the actual music folder selected in the interface.
+	 */
 	public void setCurrentPlayList(MusicFolder current) {
 		currentPlaylist = current.getSongs();
 	}
-
+	/**
+	 * This method allows to obtain a Song array list that represents the actual play list.
+	 * @return A Song ArrayList that represents the actual play list.
+	 */
 	public ArrayList<Song> getCurrentPlayList() {
 		return currentPlaylist;
 	}
-
+	/**
+	 * This method allows to remove a music folder from the linked list.
+	 * @param toremove A MusicFolder that represents the music folder that will be removed from the linked list.
+	 * @throws AttemptedToRemoveDemoLibraryException if the user tries to remove the default music folder. 
+	 */
 	public void removeMusicFolderFromLibraries(MusicFolder toremove) throws AttemptedToRemoveDemoLibraryException {
 		if(toremove == firstMusicFolder) {
 			throw new AttemptedToRemoveDemoLibraryException();
