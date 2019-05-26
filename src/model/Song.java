@@ -23,7 +23,13 @@ public class Song implements Serializable, Comparable<Song>{
 	
 	private Song right;
 	private Song left;
-
+	
+	/**
+	 * Song constructor method that receives a mp3 file as parameter. 
+	 * @param song A mp3 file that represents the song to instance this class.
+	 * @throws IOException
+	 * @throws NotMP3FileException
+	 */
 	public Song(File song) throws IOException, NotMP3FileException {
 		String path = song.toURI().toString();
 		if(!song.exists()) {
