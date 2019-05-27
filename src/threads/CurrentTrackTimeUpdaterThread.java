@@ -1,8 +1,12 @@
 package threads;
 
+import java.util.ArrayList;
+
 import javafx.application.Platform;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import model.MusicPlayer;
+import model.Song;
 import ui.PrimaryStageController;
 
 public class CurrentTrackTimeUpdaterThread extends Thread {
@@ -11,6 +15,8 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 	 */
 	private PrimaryStageController psc;
 	
+	/** It represents if the shuffle mode is activated or not.
+	 */
 	public boolean shuffle;
 	
 	/** CurrentTrackTimeUpdaterThread constructor method that receives the music player interface controller as parameter.
@@ -28,13 +34,13 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 		while(true) {
 			if(psc.getMusicPlayer().getMediaPlayer() != null) {
 				try {
-					MediaPlayer mp = psc.getMusicPlayer().getMediaPlayer(); 
+					MediaPlayer mep = psc.getMusicPlayer().getMediaPlayer(); 
 					Media currentAudio = psc.getMusicPlayer().getCurrentAudio();
 					double totalMillis = currentAudio.getDuration().toMillis();
 					int totalSeconds = (int) (totalMillis / 1000) % 60;
 					int totalMinutes = (int) (totalMillis / (1000 * 60));
 
-					double millis = mp.getCurrentTime().toMillis();
+					double millis = mep.getCurrentTime().toMillis();
 					int seconds = (int) (millis / 1000) % 60;
 					int minutes = (int) (millis / (1000 * 60));
 
@@ -53,8 +59,23 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 					 * 	}
 					 * }
 					 */
+					if(totalMillis == millis) {
+						MusicPlayer mp = psc.getMusicPlayer();
+						ArrayList<Song> toShuffle = mp.getCurrentPlayList();
+						if(shuffle) {
+							int song = (int) (Math.random() * toShuffle.size()) + 1;
+							psc.getMusicPlayer().setMedia(song);
+						} else {
+							int song = toShuffle.indexOf(mp.getCurrentSong()) + 1;
+							if(song < toShuffle.size()) {
+								mp.setMedia(song);
+							} else {
+								mp.setMedia(0);
+							}
+						}
+					}
 				} catch(NullPointerException npe) {
-
+					npe.printStackTrace();
 				}
 			}
 			try {
@@ -64,8 +85,13 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 			}
 		}
 	}
-	
+	/** This method allows to set the shuffle value when is needed.
+	 * @param sh A boolean that represents if the shuffle mode is activated or not.
+	 */
 	public void setShuffle(boolean sh) {
 		shuffle = sh;
+	}
+	public boolean getShuffle() {
+		return shuffle;
 	}
 }
