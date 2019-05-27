@@ -45,7 +45,8 @@ import threads.CurrentTrackTimeUpdaterThread;
 
 
 public class PrimaryStageController {
-
+	
+	private CurrentTrackTimeUpdaterThread cttu;
 	/** It represents the default cover art image in the left corner when the current song metadata does not have this property. 
 	 */
 	public final static Image DEFAULT_THUMBNAIL = new Image(new File("imgs"+File.separator+"music-player.png").toURI().toString());
@@ -172,7 +173,8 @@ public class PrimaryStageController {
 				restartThreads();
 			}
 		});
-		CurrentTrackTimeUpdaterThread cttu = new CurrentTrackTimeUpdaterThread(this, false);
+		shuffleSwitchButton.setGraphic(new ImageView(SHUFFLE_DISABLED));
+	    cttu = new CurrentTrackTimeUpdaterThread(this, false);
 		cttu.setDaemon(true);
 		cttu.start();
 		refreshIcons();
@@ -297,7 +299,13 @@ public class PrimaryStageController {
 	 */
 	@FXML
 	public void shuffleSwitchButtonPressed(ActionEvent event) {
-
+		if(cttu.getShuffle() == true) {
+			shuffleSwitchButton.setGraphic(new ImageView(SHUFFLE_DISABLED));
+			cttu.setShuffle(false);
+		} else {
+		shuffleSwitchButton.setGraphic(new ImageView(SHUFFLE_ACTIVATED));
+		cttu.setShuffle(true);
+		}
 	}
 
 	/** This method allows to change the icon in the volume section when the song is muted or not.
