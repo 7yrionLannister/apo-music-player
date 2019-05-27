@@ -1,3 +1,4 @@
+
 package customExceptions;
 
 public class AttemptedToRemoveDemoLibraryException extends Exception {
@@ -10,3 +11,4 @@ public class AttemptedToRemoveDemoLibraryException extends Exception {
 		return "Unable to remove demo library, permission denied";
 	}
 }
+

@@ -1,3 +1,4 @@
+
 package customExceptions;
 
 public class FolderWithoutMP3ContentException extends Exception {
@@ -21,3 +22,4 @@ public class FolderWithoutMP3ContentException extends Exception {
 		return "The requested folder does not contain MP3 files: "+folder;
 	}
 }
+
