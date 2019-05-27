@@ -381,7 +381,7 @@ public class PrimaryStageController {
 		refreshPlayerBackground();
 	}
 	/**
-	 * 
+	 * This method refresh the player background when another song is picked from the music folder.
 	 */
 	public void refreshPlayerBackground() {
 		Color color1 = songThumbnail.getImage().getPixelReader().getColor((int)songThumbnail.getImage().getWidth()/2, (int)songThumbnail.getImage().getHeight()/2).brighter().brighter();
