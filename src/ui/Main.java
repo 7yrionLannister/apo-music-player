@@ -28,12 +28,10 @@ import javafx.stage.Stage;
  * title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div></li>
  * </ul>
  * */
-public class Main extends Application {
-
+public class Main extends Application {	
 	public static void main(String[] args) {
 		launch(args);
 	}
-
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("PrimaryStage.fxml"));
