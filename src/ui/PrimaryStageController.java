@@ -212,7 +212,7 @@ public class PrimaryStageController {
 		}
 	}
 	/**
-	 * 
+	 * This method changes calls the method that modifies the media player and cover art animation state.
 	 * @param event An ActionEvent that represents the event when the associated play pause button is pressed.
 	 */
 	@FXML
@@ -220,7 +220,8 @@ public class PrimaryStageController {
 		applyChangesToPlayPauseButton();
 	}
 	/**
-	 * 
+	 * This method stops the current song and the cover animation when the play button state is paused, else maintain 
+	 * the song and the cover art animation working until the current song finishes.
 	 */
 	public void applyChangesToPlayPauseButton() {
 		if(musicPlayer.getMediaPlayer().getStatus().compareTo(MediaPlayer.Status.PLAYING) == 0) {
@@ -234,7 +235,7 @@ public class PrimaryStageController {
 		}
 	}
 	/**
-	 * 
+	 * This method play the previous track in the music folder when this exist.
 	 * @param event An ActionEvent that represents the event when the associated previous track button is pressed.
 	 */
 	@FXML
@@ -251,7 +252,7 @@ public class PrimaryStageController {
 		}
 	}
 	/**
-	 * 
+	 * This method shows a panel with some visual changes for the interface.
 	 * @param event An ActionEvent that represents the event when the associated settings button is pressed.
 	 */
 	@FXML
@@ -259,7 +260,7 @@ public class PrimaryStageController {
 
 	}
 	/**
-	 * 
+	 * This method allows to set the media player in shuffle mode.
 	 * @param event An ActionnEvent that represents the event when the associated shuffle switch button is pressed.
 	 */
 	@FXML
@@ -267,7 +268,7 @@ public class PrimaryStageController {
 
 	}
 	/**
-	 * 
+	 * This method allows to change the icon in the volume section when the song is muted or not.
 	 * @param event An ActionEvent that represents the event when the associated volume switch button is pressed.
 	 */
 	@FXML
@@ -281,7 +282,7 @@ public class PrimaryStageController {
 		}
 	}
 	/**
-	 * 
+	 * This method allow to delete a existing music folder unlike the default music folder. 
 	 * @param event An ActionEvent that represents the event when the associated delete list button is pressed.
 	 */
 	@FXML
@@ -309,35 +310,35 @@ public class PrimaryStageController {
 		}
 	}
 	/**
-	 * 
-	 * @return A Label
+	 * This method allows to obtain the Label with current time passed.
+	 * @return A Label that represents the current time passed.
 	 */
 	public Label getCurrentTimeLabel() {
 		return currentTimeLabel;
 	}
 	/**
-	 * 
-	 * @return A Slider
+	 * This method allows to obtain the Slider with the current time passed.
+	 * @return A Slider that represents the current time passed.
 	 */
 	public Slider getTrackTimeSlider() {
 		return trackTimeSlider;
 	}
 	/**
-	 * 
-	 * @return A Label
+	 * This method allows to obtain a Label with the current song duration.
+	 * @return A Label with the current song duration.
 	 */
 	public Label getDurationLabel() {
 		return durationLabel;
 	}
 	/**
-	 * 
-	 * @return A Button
+	 * This method allows to obtain the shuffle switch button.
+	 * @return A Button that represents the shuffle switch button.
 	 */
 	public Button getShuffleSwitchButton() {
 		return shuffleSwitchButton;
 	}
 	/**
-	 * 
+	 * This method
 	 */
 	public void refreshIcons() {
 		songThumbnail.setImage(DEFAULT_THUMBNAIL);
@@ -377,14 +378,14 @@ public class PrimaryStageController {
 		backgroundCircle.setFill(linearGrad);
 	}
 	/**
-	 * 
-	 * @return A MusicPlayer
+	 * This method allows to obtain the current music player.
+	 * @return A MusicPlayer that represents the current music player.
 	 */
 	public MusicPlayer getMusicPlayer() {
 		return musicPlayer;
 	}
 	/**
-	 * 
+	 * This method restarts the cover art animation when the song is changed or paused.
 	 */
 	public void restartThreads() {
 		if(caat != null) {
@@ -395,9 +396,9 @@ public class PrimaryStageController {
 		caat.start();
 	}
 	/**
-	 * 
-	 * @param header A String
-	 * @param message A String
+	 * This method shows an AlertType when an exception is thrown.
+	 * @param header A String that represents the header of the thrown exception.
+	 * @param message A String that represents the message of the thrown exception.
 	 */
 	public void showErrorAlert(String header, String message) {
 		Alert alert = new Alert(AlertType.INFORMATION);
