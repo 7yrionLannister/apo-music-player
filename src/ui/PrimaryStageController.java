@@ -45,31 +45,31 @@ import threads.CurrentTrackTimeUpdaterThread;
 
 public class PrimaryStageController {
 	/**
-	 * It represents 
+	 * It represents the default cover art image in the left corner when the current song metadata does not have this property. 
 	 */
 	public final static Image DEFAULT_THUMBNAIL = new Image(new File("imgs"+File.separator+"music-player.png").toURI().toString());
 	/**
-	 * It represents
+	 * It represents the pause icon when the current song is paused.
 	 */
 	public final static Image PAUSE_ICON = new Image(new File("imgs"+File.separator+"pause.png").toURI().toString(), 50, 50, false, false);
 	/**
-	 * It represents
+	 * It represents the play icon when the current song is being played.
 	 */
 	public final static Image PLAY_ICON = new Image(new File("imgs"+File.separator+"play-button.png").toURI().toString(), 50, 50, false, false);
 	/**
-	 * It represents
+	 * It represents the mute enabled icon when the current song has been muted.
 	 */
 	public final static Image MUTE_ENABLED_ICON = new Image(new File("imgs"+File.separator+"mute.png").toURI().toString(), 40, 40, false, false);
 	/**
-	 * It represents
+	 * It represents the mute disabled icon when the current song has not been muted.
 	 */
 	public final static Image MUTE_DISABLED_ICON = new Image(new File("imgs"+File.separator+"volume-1.png").toURI().toString(), 40, 40, false, false);
 	/**
-	 * It represents
+	 * It represents the MusicPlayer that will manage all the mp3 files.
 	 */
 	private MusicPlayer musicPlayer;
 	/**
-	 * It represents
+	 * It represents the thread in charge of moving the cover art in circle form.
 	 */
 	private CoverArtAnimationThread caat;
 
