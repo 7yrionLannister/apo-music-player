@@ -66,7 +66,12 @@ public class PrimaryStageController {
 	 */
 	public final static Image MUTE_DISABLED_ICON = new Image(new File("imgs"+File.separator+"volume-1.png").toURI().toString(), 40, 40, false, false);
 	
-	public final static Image SHUFFLE_ACTIVED = new Image(new File("imgs"+File.separator+"volume-1.png").toURI().toString(), 40, 40, false, false);
+	/** It represents the shuffle activated icon when the shuffle mode is activated. 	
+	 */
+	public final static Image SHUFFLE_ACTIVATED = new Image(new File("imgs"+File.separator+"shuffle.png").toURI().toString(), 40, 40, false, false);
+	/** It represents the shuffle disabled icon when the shuffle mode is disabled..
+	 */
+	public final static Image SHUFFLE_DISABLED = new Image(new File("imgs"+File.separator+"not-shuffle.png").toURI().toString(), 40, 40, false, false);
 	/** It represents the MusicPlayer that will manage all the mp3 files.
 	 */
 	private MusicPlayer musicPlayer;
