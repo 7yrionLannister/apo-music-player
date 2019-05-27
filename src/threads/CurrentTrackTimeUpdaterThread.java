@@ -27,7 +27,8 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 		shuffle = sh;
 	}
 	
-	/** This method allows to run and update the song time duration when a song is selected and played.
+	/** This method allows to run and update the song time duration when a song is selected and played. Besides, it changes
+	 * the reproduction order when shuffle is enabled.
 	 */
 	@Override
 	public void run() {
@@ -50,15 +51,6 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 
 						psc.getTrackTimeSlider().setValue(millis/totalMillis*psc.getTrackTimeSlider().getMax());
 					});
-					/*
-					 * if(llego al final de la cancion) {
-					 * 	if(shuffle) {
-					 * 		elija una cancion aleatroia
-					 * 	} else {
-					 * 		elija la siguiente cancion
-					 * 	}
-					 * }
-					 */
 					if(totalMillis == millis) {
 						MusicPlayer mp = psc.getMusicPlayer();
 						ArrayList<Song> toShuffle = mp.getCurrentPlayList();
@@ -85,12 +77,17 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 			}
 		}
 	}
+	
 	/** This method allows to set the shuffle value when is needed.
 	 * @param sh A boolean that represents if the shuffle mode is activated or not.
 	 */
 	public void setShuffle(boolean sh) {
 		shuffle = sh;
 	}
+	
+	/** This method allows to obtain the shuffle value when is needed.
+	 * @return A boolean that represents if the shuffle mode is activated or not.
+	 */
 	public boolean getShuffle() {
 		return shuffle;
 	}

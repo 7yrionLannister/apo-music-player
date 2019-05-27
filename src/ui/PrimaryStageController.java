@@ -46,7 +46,10 @@ import threads.CurrentTrackTimeUpdaterThread;
 
 public class PrimaryStageController {
 	
+	/** It represents the current thread to modify the song time inside the application and the shuffle mode. 
+	 */
 	private CurrentTrackTimeUpdaterThread cttu;
+	
 	/** It represents the default cover art image in the left corner when the current song metadata does not have this property. 
 	 */
 	public final static Image DEFAULT_THUMBNAIL = new Image(new File("imgs"+File.separator+"music-player.png").toURI().toString());
