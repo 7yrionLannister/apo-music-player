@@ -50,29 +50,23 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 
 						psc.getTrackTimeSlider().setValue(millis/totalMillis*psc.getTrackTimeSlider().getMax());
 					});
-					/*
-					 * if(llego al final de la cancion) {
-					 * 	if(shuffle) {
-					 * 		elija una cancion aleatroia
-					 * 	} else {
-					 * 		elija la siguiente cancion
-					 * 	}
-					 * }
-					 */
+					
 					if(totalMillis == millis) {
-						MusicPlayer mp = psc.getMusicPlayer();
-						ArrayList<Song> toShuffle = mp.getCurrentPlayList();
-						if(shuffle) {
-							int song = (int) (Math.random() * toShuffle.size()) + 1;
-							psc.getMusicPlayer().setMedia(song);
-						} else {
-							int song = toShuffle.indexOf(mp.getCurrentSong()) + 1;
-							if(song < toShuffle.size()) {
-								mp.setMedia(song);
+						Platform.runLater(() -> {
+							MusicPlayer mp = psc.getMusicPlayer();
+							ArrayList<Song> toShuffle = mp.getCurrentPlayList();
+							if(shuffle) {
+								int song = (int) (Math.random() * toShuffle.size()) + 1;
+								psc.getMusicPlayer().setMedia(song);
 							} else {
-								mp.setMedia(0);
+								int song = toShuffle.indexOf(mp.getCurrentSong()) + 1;
+								if(song < toShuffle.size()) {
+									mp.setMedia(song);
+								} else {
+									mp.setMedia(0);
+								}
 							}
-						}
+						});
 					}
 				} catch(NullPointerException npe) {
 					npe.printStackTrace();
