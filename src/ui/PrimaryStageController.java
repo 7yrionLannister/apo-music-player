@@ -45,39 +45,39 @@ import threads.CurrentTrackTimeUpdaterThread;
 
 
 public class PrimaryStageController {
-	
+
 	/** It represents the default cover art image in the left corner when the current song metadata does not have this property. 
 	 */
 	public final static Image DEFAULT_THUMBNAIL = new Image(new File("imgs"+File.separator+"music-player.png").toURI().toString());
-	
+
 	/** It represents the pause icon when the current song is paused.
 	 */
 	public final static Image PAUSE_ICON = new Image(new File("imgs"+File.separator+"pause.png").toURI().toString(), 50, 50, false, false);
-	
+
 	/** It represents the play icon when the current song is being played.
 	 */
 	public final static Image PLAY_ICON = new Image(new File("imgs"+File.separator+"play-button.png").toURI().toString(), 50, 50, false, false);
-	
+
 	/** It represents the mute enabled icon when the current song has been muted.
 	 */
 	public final static Image MUTE_ENABLED_ICON = new Image(new File("imgs"+File.separator+"mute.png").toURI().toString(), 40, 40, false, false);
-	
+
 	/** It represents the mute disabled icon when the current song has not been muted.
 	 */
 	public final static Image MUTE_DISABLED_ICON = new Image(new File("imgs"+File.separator+"volume-1.png").toURI().toString(), 40, 40, false, false);
-	
+
 	/** It represents the shuffle activated icon when the shuffle mode is activated. 	
 	 */
 	public final static Image SHUFFLE_ACTIVATED = new Image(new File("imgs"+File.separator+"shuffle.png").toURI().toString(), 40, 40, false, false);
 	/** It represents the shuffle disabled icon when the shuffle mode is disabled..
 	 */
-	
+
 	public final static Image SHUFFLE_DISABLED = new Image(new File("imgs"+File.separator+"not-shuffle.png").toURI().toString(), 40, 40, false, false);
 	/** It represents the MusicPlayer that will manage all the mp3 files.
 	 */
-	
+
 	private MusicPlayer musicPlayer;
-	
+
 	/** It represents the thread in charge of moving the cover art in circle form.
 	 */
 	private CoverArtAnimationThread caat;
@@ -112,7 +112,7 @@ public class PrimaryStageController {
 	@FXML private TableColumn<Song, String> albumTableColumn;
 	@FXML private TableColumn<Song, String> artistTableColumn;
 	@FXML private TableColumn<Song, Double> sizeTableColumn;
-	
+
 	/** This method starts and setups all the necessary components inside the interface and bind them with the model when is started.
 	 */
 	@FXML
@@ -177,7 +177,7 @@ public class PrimaryStageController {
 		cttu.start();
 		refreshIcons();
 	}
-	
+
 	/** This method shows an emergent window with info about this application.
 	 * @param event An ActionEvent that represents the event when the associated about button is pressed.
 	 */
@@ -208,7 +208,7 @@ public class PrimaryStageController {
 		about.getIcons().add(new Image(new File("imgs"+File.separator+"cd.png").toURI().toString()));
 		about.show();
 	}
-	
+
 	/** This method allows to add a new music library inside the application invoking a DirectoryChooser.
 	 * @param event An ActionEvent that represents the event when the associated add list button is pressed.
 	 */
@@ -226,7 +226,7 @@ public class PrimaryStageController {
 		}
 		librariesTableView.setItems(musicPlayer.getMusicFolders());
 	}
-	
+
 	/** This method play the next track in the music folder when this exist.
 	 * @param event An ActionEvent that represents the event when the associated next track button is pressed.
 	 */
@@ -243,7 +243,7 @@ public class PrimaryStageController {
 			restartThreads();
 		}
 	}
-	
+
 	/** This method calls the method that modifies the media player and cover art animation state.
 	 * @param event An ActionEvent that represents the event when the associated play pause button is pressed.
 	 */
@@ -251,7 +251,7 @@ public class PrimaryStageController {
 	public void playPauseButtonPressed(ActionEvent event) {
 		applyChangesToPlayPauseButton();
 	}
-	
+
 	/** This method stops the current song and the cover animation when the play button state is paused, else maintains 
 	 * the song and the cover art animation working until the current song finishes.
 	 */
@@ -266,7 +266,7 @@ public class PrimaryStageController {
 			restartThreads();
 		}
 	}
-	
+
 	/** This method play the previous track in the music folder when this exist.
 	 * @param event An ActionEvent that represents the event when the associated previous track button is pressed.
 	 */
@@ -283,7 +283,7 @@ public class PrimaryStageController {
 			restartThreads();
 		}
 	}
-	
+
 	/** This method shows a panel with some visual changes for the interface.
 	 * @param event An ActionEvent that represents the event when the associated settings button is pressed.
 	 */
@@ -291,15 +291,15 @@ public class PrimaryStageController {
 	public void settingsButtonPressed(ActionEvent event) {
 		//TODO implement the pane with the options
 	}
-	
+
 	/** This method allows to set the media player in shuffle mode.
 	 * @param event An ActionnEvent that represents the event when the associated shuffle switch button is pressed.
 	 */
 	@FXML
 	public void shuffleSwitchButtonPressed(ActionEvent event) {
-		
+
 	}
-	
+
 	/** This method allows to change the icon in the volume section when the song is muted or not.
 	 * @param event An ActionEvent that represents the event when the associated volume switch button is pressed.
 	 */
@@ -313,7 +313,7 @@ public class PrimaryStageController {
 			volumeSwitchButton.setGraphic(new ImageView(MUTE_DISABLED_ICON));
 		}
 	}
-	
+
 	/** This method allow to delete a existing music folder unlike the default music folder. 
 	 * @param event An ActionEvent that represents the event when the associated delete list button is pressed.
 	 */
@@ -330,7 +330,7 @@ public class PrimaryStageController {
 		}
 		librariesTableView.setItems(musicPlayer.getMusicFolders());
 	}
-	
+
 	/** This method saves the current music folders inside a serializable file.
 	 * @param event A WindowEvent that represents the data is being saved.
 	 */
@@ -341,28 +341,28 @@ public class PrimaryStageController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/** This method allows to obtain the Label with current time passed.
 	 * @return A Label that represents the current time passed.
 	 */
 	public Label getCurrentTimeLabel() {
 		return currentTimeLabel;
 	}
-	
+
 	/** This method allows to obtain the Slider with the current time passed.
 	 * @return A Slider that represents the current time passed.
 	 */
 	public Slider getTrackTimeSlider() {
 		return trackTimeSlider;
 	}
-	
+
 	/** This method allows to obtain a Label with the current song duration.
 	 * @return A Label with the current song duration.
 	 */
 	public Label getDurationLabel() {
 		return durationLabel;
 	}
-	
+
 	/** This method refresh all the icons when another song is picked from the music folder.
 	 */
 	public void refreshIcons() {
@@ -381,7 +381,7 @@ public class PrimaryStageController {
 		}
 		refreshPlayerBackground();
 	}
-	
+
 	/** This method refresh the player background when another song is picked from the music folder.
 	 */
 	public void refreshPlayerBackground() {
@@ -398,18 +398,18 @@ public class PrimaryStageController {
 		String rgba2 = "rgba("+(red)+","+(green)+","+(blue)+")";
 		background.setStyle("-fx-background-color: linear-gradient(to bottom, "+rgba1+", "+rgba2+")");
 		LinearGradient linearGrad = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, 
-                new Stop(0.1f, color2.brighter().brighter().brighter()),
-                new Stop(1.0f, color1.brighter().brighter()));
+				new Stop(0.1f, color2.brighter().brighter().brighter()),
+				new Stop(1.0f, color1.brighter().brighter()));
 		backgroundCircle.setFill(linearGrad);
 	}
-	
+
 	/** This method allows to obtain the current music player.
 	 * @return A MusicPlayer that represents the current music player.
 	 */
 	public MusicPlayer getMusicPlayer() {
 		return musicPlayer;
 	}
-	
+
 	/** This method restarts the cover art animation when the song is changed or the player changes from pause to play.
 	 */
 	public void restartThreads() {
@@ -420,7 +420,7 @@ public class PrimaryStageController {
 		caat.setDaemon(true);
 		caat.start();
 	}
-	
+
 	/** This method shows an AlertType when an exception is thrown.
 	 * @param header A String that represents the header of the thrown exception or error.
 	 * @param message A String that represents the message of the thrown exception or error.
@@ -430,5 +430,25 @@ public class PrimaryStageController {
 		alert.setContentText(message);
 		alert.setHeaderText(header);
 		alert.showAndWait();
+	}
+
+	public void sortByTitle(ActionEvent event) {
+		musicPlayer.getmu
+	}
+
+	public void sortByGenre(ActionEvent event) {
+
+	}
+
+	public void sortByAlbum(ActionEvent event) {
+
+	}
+
+	public void sortByArtist(ActionEvent event) {
+
+	}
+
+	public void sortBySize(ActionEvent event) {
+
 	}
 }

@@ -215,6 +215,15 @@
                                     <Insets left="250.0" />
                                  </VBox.margin>
                               </Button>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#sortByTile" prefHeight="25.0" prefWidth="102.0" text="Sort" />
+                                    <Button mnemonicParsing="false" onAction="#sortByGenre" prefHeight="25.0" prefWidth="124.0" text="Sort" />
+                                    <Button mnemonicParsing="false" onAction="#sortByAlbum" prefHeight="25.0" prefWidth="106.0" text="Sort" />
+                                    <Button mnemonicParsing="false" onAction="#sortByArtist" prefHeight="25.0" prefWidth="104.0" text="Sort" />
+                                    <Button mnemonicParsing="false" onAction="#sortBySize" prefHeight="25.0" prefWidth="74.0" text="Sort" />
+                                 </children>
+                              </HBox>
                               <TableView fx:id="musicInfoTableView" prefHeight="357.0" prefWidth="546.0">
                                 <columns>
                                   <TableColumn fx:id="titleTableColumn" prefWidth="101.0" text="Title" />
