@@ -11,11 +11,14 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 	 */
 	private PrimaryStageController psc;
 	
+	public boolean shuffle;
+	
 	/** CurrentTrackTimeUpdaterThread constructor method that receives the music player interface controller as parameter.
 	 * @param psc A PrimaryStageController that represents the music player interface controller.
 	 */
-	public CurrentTrackTimeUpdaterThread(PrimaryStageController psc) {
+	public CurrentTrackTimeUpdaterThread(PrimaryStageController psc, boolean sh) {
 		this.psc = psc;
+		shuffle = sh;
 	}
 	
 	/** This method allows to run and update the song time duration when a song is selected and played.
@@ -41,6 +44,15 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 
 						psc.getTrackTimeSlider().setValue(millis/totalMillis*psc.getTrackTimeSlider().getMax());
 					});
+					/*
+					 * if(llego al final de la cancion) {
+					 * 	if(shuffle) {
+					 * 		elija una cancion aleatroia
+					 * 	} else {
+					 * 		elija la siguiente cancion
+					 * 	}
+					 * }
+					 */
 				} catch(NullPointerException npe) {
 
 				}
@@ -51,5 +63,9 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void setShuffle(boolean sh) {
+		shuffle = sh;
 	}
 }
