@@ -199,7 +199,7 @@ public class MusicFolder implements Serializable {
 				}
 			}
 		}
-	}
+	} 
 	
 	/**The method allows to sort the songs in the playList according to its album.
 	 * It uses insertion sort.

@@ -66,6 +66,7 @@ public class PrimaryStageController {
 	 */
 	public final static Image MUTE_DISABLED_ICON = new Image(new File("imgs"+File.separator+"volume-1.png").toURI().toString(), 40, 40, false, false);
 	
+	public final static Image SHUFFLE_ACTIVED = new Image(new File("imgs"+File.separator+"volume-1.png").toURI().toString(), 40, 40, false, false);
 	/** It represents the MusicPlayer that will manage all the mp3 files.
 	 */
 	private MusicPlayer musicPlayer;
@@ -289,7 +290,7 @@ public class PrimaryStageController {
 	 */
 	@FXML
 	public void shuffleSwitchButtonPressed(ActionEvent event) {
-		//TODO implement shuffling for playList
+		
 	}
 	
 	/** This method allows to change the icon in the volume section when the song is muted or not.
