@@ -14,17 +14,17 @@ import customExceptions.FolderWithoutMP3ContentException;
 
 public class MusicFolderTest {	
 	/**
-	 * 
+	 * It represents the MusicFolder that will be tested.
 	 */
 	private MusicFolder mf;
 	/**
-	 * 
+	 * This method creates a scenario assigning null to MusicFolder mf.
 	 */
 	private void setupScenario1() {
 		mf = null;
 	}
 	/**
-	 * 
+	 * This method creates a scenario assigning a existing folder to the MusicFolder constructor.
 	 */
 	private void setupScenario2() {
 		try {
@@ -34,7 +34,8 @@ public class MusicFolderTest {
 		}
 	}
 	/**
-	 * 
+	 * This test method calls the setupScenario1 and creates a MusicFolder with an invalid path in order to test the
+	 * MusicFolder constructor method.
 	 */
 	@Test
 	public void createMusicFolderWithInvalidPathTest() {
@@ -47,7 +48,8 @@ public class MusicFolderTest {
 		}
 	}
 	/**
-	 * 
+	 * This test method calls the setupScenario1 and creates a MusicFolder with a valid path in order to test the
+	 * MusicFolder constructor method.
 	 */
 	@Test
 	public void createMusicFolderWithValidPathTest() {
@@ -61,7 +63,8 @@ public class MusicFolderTest {
 		}
 	}
 	/**
-	 * 
+	 * This test method calls the setupScenario1 and creates a MusicFolder with a valid path but without mp3 files 
+	 * in order to test the MusicFolder constructor method.
 	 */
 	@Test
 	public void createMusicFolderWithValidPathButNoMP3Content() {
@@ -77,7 +80,8 @@ public class MusicFolderTest {
 		}
 	}
 	/**
-	 * 
+	 * This test method calls the setupScenario2 and generates a Song ArrayList sorted in order to test the MusicFolder
+	 * inorder method.
 	 */
 	@Test
 	public void inorderTest() {
@@ -89,7 +93,8 @@ public class MusicFolderTest {
 		}
 	}
 	/**
-	 * 
+	 * This test method calls the setupScenario2 and generates a Song ArrayList that will be sorted by title in order to 
+	 * test the MusicFolder sortSongsByTitle. 
 	 */
 	@Test
 	public void sortSongsByTitleTest() {
@@ -103,7 +108,8 @@ public class MusicFolderTest {
 		}
 	}
 	/**
-	 * 
+	 * This test method calls the setupScenario2 and generates a Song ArrayList that will be sorted by album in order to 
+	 * test the MusicFolder sortSongsByAlbum. 
 	 */
 	@Test
 	public void sortSongsByAlbumTest() {
@@ -117,7 +123,8 @@ public class MusicFolderTest {
 		}
 	}
 	/**
-	 * 
+	 * This test method calls the setupScenario2 and generates a Song ArrayList that will be sorted by size in order to 
+	 * test the MusicFolder sortSongsBySize. 
 	 */
 	@Test
 	public void sortSongsBySizeTest() {
@@ -131,7 +138,8 @@ public class MusicFolderTest {
 		}
 	}
 	/**
-	 * 
+	 * This test method calls the setupScenario2 and generates a Song ArrayList that will be sorted by genre in order to 
+	 * test the MusicFolder sortSongsByGenre. 
 	 */
 	@Test
 	public void sortSongsByGenreTest() {
