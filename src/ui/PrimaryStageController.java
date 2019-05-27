@@ -186,11 +186,15 @@ public class PrimaryStageController {
 		l2.setText("project of the algorithms and programming 2 course.");
 		l3.setText("It was meant to apply the knowledge learned in the first");
 		l4.setText("two algorithm courses. Thanks for reading.");
+		Image java = new Image(new File("imgs/java.png").toURI().toString());
+		ImageView jav = new ImageView();
+		jav.setImage(java);
 		l2.relocate(0, 15);
 		l3.relocate(0, 30);
 		l4.relocate(0, 45);
-		pane.getChildren().addAll(l, l2, l3, l4);
-		Scene scene = new Scene(pane, 286, 300);
+		jav.relocate(63, 67);
+		pane.getChildren().addAll(l, l2, l3, l4, jav);
+		Scene scene = new Scene(pane, 286, 100);
 		about.setTitle("About Apo Music Player");
 		about.setResizable(false);
 		about.setScene(scene);
