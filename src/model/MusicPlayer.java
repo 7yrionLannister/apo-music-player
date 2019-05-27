@@ -19,52 +19,41 @@ import javafx.scene.media.MediaPlayer;
 
 
 public class MusicPlayer {
-	/**
-	 * It represents the path where the music folders are serialized. 
+	/**It represents the path where the music folders are serialized. 
 	 */
 	public final static String MUSIC_FOLDERS_PATH = "data"+File.separator+"mscfldrs.got";
-	/**
-	 * It represents the actual song put to be reproduced. 
+	/**It represents the actual song put to be reproduced. 
 	 */
 	private Media currentAudio;
-	/**
-	 * It represents the media player to reproduce the songs.
+	/**It represents the media player to reproduce the songs.
 	 */
 	private MediaPlayer mediaPlayer;
-	/**
-	 * It represents the first music folder in the linked list.
+	/** It represents the first music folder in the linked list.
 	 */
 	private MusicFolder firstMusicFolder;
-	/**
-	 * It represents the actual song title sounding in the media player.
+	/**It represents the actual song title sounding in the media player.
 	 */
 	private SimpleStringProperty currentSongTitle;
-	/**
-	 * It represents the actual song artist sounding in the media player.
+	/**It represents the actual song artist sounding in the media player.
 	 */
 	private SimpleStringProperty currentSongArtist;
-	/**
-	 * It represents the actual song album sounding in the media player.
+	/**It represents the actual song album sounding in the media player.
 	 */
 	private SimpleStringProperty currentSongAlbum;
-	/**
-	 * It represents the actual music folder songs as a Song ArrayList.
+	/**It represents the actual music folder songs as a Song ArrayList.
 	 */
 	private ArrayList<Song> currentPlaylist;
-	/**
-	 * It represents the song loaded position as an integer simple property.
+	/**It represents the song loaded position as an integer simple property.
 	 */
 	private SimpleIntegerProperty songLoaded;
-	/**
-	 * It represents the current song cover art to use it in the interface as a byte array.
+	/**It represents the current song cover art to use it in the interface as a byte array.
 	 */
 	private byte[] currentCoverArt;
-	/**
-	 * It represents the actual song playing in the media player.
+	/**It represents the actual song playing in the media player.
 	 */
 	private Song currentSong;
-	/**
-	 * Constructor MusicPlayer method that starts the entire current song metadata and the media player. 
+	
+	/** Constructor MusicPlayer method that starts the entire current song metadata and the media player. 
 	 * @throws ClassNotFoundException if the class definition is not there due to the library witch contains it 
 	 * is not in the application class path.
 	 * @throws IOException if the file has not been found, deleted or moved to another location.
@@ -88,8 +77,7 @@ public class MusicPlayer {
 		chargeMedia();
 	}
 	
-	/**
-	 * This method charges the entire metadata to the Media and the Media to the MediaPlayer.
+	/** This method charges the entire metadata to the Media and the Media to the MediaPlayer.
 	 */
 	private void chargeMedia() {
 		if(mediaPlayer != null) {
@@ -107,8 +95,8 @@ public class MusicPlayer {
 
 		songLoaded.set(songLoaded.get()+1);
 	}
-	/**
-	 * Method that deserializes the folder with music when the application is started again.
+	
+	/** Method that deserializes the folder with music when the application is started again.
 	 * @param mf A File that represents the folder with music to deserialize when the application is started again.  
 	 * @throws IOException if the file has not been found, deleted or moved to another location.
 	 * @throws ClassNotFoundException if the class definition is not there due to the library witch contains it is not
@@ -123,22 +111,22 @@ public class MusicPlayer {
 		ois.close();
 		fis.close();
 	}
-	/**
-	 * Method to get the current Song sounding in the media player.
+	
+	/** Method to get the current Song sounding in the media player.
 	 * @return A Song that represents the current Song sounding in the media player.
 	 */
 	public Song getCurrentSong() {
 		return currentSong;
 	}
-	/**
-	 * This method allows to get the actual song put to be reproduced.
+	
+	/**This method allows to get the actual song put to be reproduced.
 	 * @return A Media that represents the actual song put to be reproduced.
 	 */
 	public Media getCurrentAudio() {
 		return currentAudio;
 	}
-	/**
-	 * This method allows to set the Media through an index that represents the song position inside
+	
+	/**This method allows to set the Media through an index that represents the song position inside
 	 * its respective music folder and charges its media.
 	 * @param index the song position inside its respective music folder.
 	 */
@@ -147,20 +135,14 @@ public class MusicPlayer {
 		mediaPlayer.stop();
 		chargeMedia();
 	}
-	/**
-	 * This method allows to get the actual media player used to play the music.
+	
+	/** This method allows to get the actual media player used to play the music.
 	 * @return A MediaPlayer that represents the actual media player used to play the music.
 	 */
 	public MediaPlayer getMediaPlayer() {
 		return mediaPlayer;
 	}
-	/**
-	 * This method allows to set the actual media player used to play the music.
-	 * @param mediaPlayer A MediaPlayer that represents the actual media player used to play the music.
-	 */
-	public void setMediaPlayer(MediaPlayer mediaPlayer) {
-		this.mediaPlayer = mediaPlayer;
-	}
+	
 	/**
 	 * This method allows to obtain the first music folder in the list.
 	 * @return A MusicFolder that represents the first music folder in the list.
@@ -168,43 +150,43 @@ public class MusicPlayer {
 	public MusicFolder getFirstMusicFolder() {
 		return firstMusicFolder;
 	}
-	/**
-	 * This method allows to set the first music folder in the list.
+	
+	/** This method allows to set the first music folder in the list.
 	 * @param firstMusicFolder A MusicFolder that represents the first music folder in the list.
 	 */
 	public void setFirstMusicFolder(MusicFolder firstMusicFolder) {
 		this.firstMusicFolder = firstMusicFolder;
 	}
-	/**
-	 * This method allows to obtain a simple string representation of the current song title to use it in the interface.
+	
+	/** This method allows to obtain a simple string representation of the current song title to use it in the interface.
 	 * @return A SimpleStringProperty that represents a simple string representation of the current song title to use it in the interface
 	 */
 	public SimpleStringProperty getCurrentSongTitle() {
 		return currentSongTitle;
 	}
-	/**
-	 * This method allows to obtain a simple string representation of the current song artist to use it in the interface.
+	
+	/** This method allows to obtain a simple string representation of the current song artist to use it in the interface.
 	 * @return A SimpleStringProperty that represents a simple string representation of the current song artist to use it in the interface
 	 */
 	public SimpleStringProperty getCurrentSongArtist() {
 		return currentSongArtist;
 	}
-	/**
-	 * This method allows to obtain a simple string representation of the current song album to use it in the interface.
+	
+	/** This method allows to obtain a simple string representation of the current song album to use it in the interface.
 	 * @return A SimpleStringProperty that represents a simple string representation of the current song album to use it in the interface
 	 */
 	public SimpleStringProperty getCurrentSongAlbum() {
 		return currentSongAlbum;
 	}
-	/**
-	 * This method allows to obtain the current song cover art to use it in the interface as a byte array.
+	
+	/** This method allows to obtain the current song cover art to use it in the interface as a byte array.
 	 * @return An byte array that represents the current song cover art to use it in the interface.
 	 */
 	public byte[] getCurrentCoverArt() {
 		return currentCoverArt;
 	}
-	/**
-	 * This method allows to add a music folder into the linked list of music folders in the last place. 
+	
+	/** This method allows to add a music folder into the linked list of music folders in the last place. 
 	 * @param dir A File that represents the music folder to be added in the linked list of music folders.
 	 * @throws IOException if the file has not been found, deleted or moved to another location.
 	 * @throws FolderWithoutMP3ContentException if the selected folder does not have music files with mp3 extension.
@@ -225,10 +207,10 @@ public class MusicPlayer {
 			}
 		}
 	}
-	/**
-	 * This method allow to obtain a observable list of music folders adding them as a linked list and thus be able 
+	
+	/** This method allow to obtain an observable list of music folders adding them as a linked list and thus be able 
 	 * to display them in the in the interface. 
-	 * @return A ObservableList of MusicFolder that represents the linked list to display it in the interface. 
+	 * @return An ObservableList of MusicFolders that represents the linked list to display it in the interface. 
 	 */
 	public ObservableList<MusicFolder> getMusicFolders() {
 		ObservableList<MusicFolder> folders = FXCollections.observableArrayList();
@@ -239,8 +221,8 @@ public class MusicPlayer {
 		}
 		return folders;
 	}
-	/**
-	 * This method allows to save the music folders added when the application is running.
+	
+	/** This method allows to save the music folders added when the application is running.
 	 * @throws IOException if the file has not been found, deleted or moved to another location.
 	 */
 	public void save() throws IOException {
@@ -253,29 +235,29 @@ public class MusicPlayer {
 		oos.close();
 		fos.close();
 	}
-	/**
-	 * This method allows to obtain the song loaded position as a simple integer property.
+	
+	/** This method allows to obtain the song loaded position as a simple integer property.
 	 * @return A SimpleIntegerProperty that represents the song loaded position.
 	 */
 	public SimpleIntegerProperty getSongLoaded() {
 		return songLoaded;
 	}
-	/**
-	 * This method allows to set the actual music folder songs in the current play list. 
+	
+	/** This method allows to set the actual music folder songs in the current play list. 
 	 * @param current A MusicFolder that represents the actual music folder selected in the interface.
 	 */
 	public void setCurrentPlayList(MusicFolder current) {
 		currentPlaylist = current.getSongs();
 	}
-	/**
-	 * This method allows to obtain a Song array list that represents the actual play list.
+	
+	/** This method allows to obtain a Song array list that represents the actual play list.
 	 * @return A Song ArrayList that represents the actual play list.
 	 */
 	public ArrayList<Song> getCurrentPlayList() {
 		return currentPlaylist;
 	}
-	/**
-	 * This method allows to remove a music folder from the linked list.
+	
+	/** This method allows to remove a music folder from the linked list.
 	 * @param toremove A MusicFolder that represents the music folder that will be removed from the linked list.
 	 * @throws AttemptedToRemoveDemoLibraryException if the user tries to remove the default music folder. 
 	 */

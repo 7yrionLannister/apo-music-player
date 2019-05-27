@@ -30,10 +30,14 @@ import javafx.stage.Stage;
  * */
 public class Main extends Application {
 	
+	/**This methods launches the application
+	 * */
 	public static void main(String[] args) {
 		launch(args);
 	}
 	
+	/**This method starts the javaFX application thread
+	 * */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("PrimaryStage.fxml"));

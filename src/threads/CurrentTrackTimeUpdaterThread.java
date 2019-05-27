@@ -6,19 +6,19 @@ import javafx.scene.media.MediaPlayer;
 import ui.PrimaryStageController;
 
 public class CurrentTrackTimeUpdaterThread extends Thread {
-	/**
-	 * It represents music player interface controller.
+	
+	/** It represents music player interface controller.
 	 */
 	private PrimaryStageController psc;
-	/**
-	 * CurrentTrackTimeUpdaterThread constructor method that receives the music player interface controller as parameter.
+	
+	/** CurrentTrackTimeUpdaterThread constructor method that receives the music player interface controller as parameter.
 	 * @param psc A PrimaryStageController that represents the music player interface controller.
 	 */
 	public CurrentTrackTimeUpdaterThread(PrimaryStageController psc) {
 		this.psc = psc;
 	}
-	/**
-	 * This method allows to run and update the song time duration when a song is selected and played.
+	
+	/** This method allows to run and update the song time duration when a song is selected and played.
 	 */
 	@Override
 	public void run() {

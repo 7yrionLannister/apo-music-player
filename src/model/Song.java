@@ -12,53 +12,41 @@ import customExceptions.NotMP3FileException;
 
 
 public class Song implements Serializable, Comparable<Song>{
-	/**
-	 * It represents the song title.
+	/**It represents the song title.
 	 */
 	private String title;
-	/**
-	 * It represents the song artist.
+	/** It represents the song artist.
 	 */
 	private String artist;
-	/**
-	 * It represents the song album.
+	/** It represents the song album.
 	 */
 	private String album;
-	/**
-	 * It represents the song genre.
+	/**It represents the song genre.
 	 */
 	private String genre;
-	/**
-	 * It represents the song size as double value.
+	/**It represents the song size as double value.
 	 */
 	private double size;
-	/**
-	 * It represents the song path as String.
+	/**It represents the song path as String.
 	 */
 	private String songPath;
-	/**
-	 * It represents the song file name.
+	/**It represents the song file name.
 	 */
 	private String fileName;
-	/**
-	 * It represents the song parent folder path as String.
+	/**It represents the song parent folder path as String.
 	 */
 	private String parentFolderPath;
-	/**
-	 * It represents the song image as a byte array.
+	/**It represents the song image as a byte array.
 	 */
 	private byte[] image;
-	/**
-	 * It represents the right Song of this Song in the binary sorted three.
+	/**It represents the right Song of this Song in the binary search three.
 	 */
 	private Song right;
-	/**
-	 * It represents the left Song of this Song in the binary sorted three.
+	/**It represents the left Song of this Song in the binary search three.
 	 */
 	private Song left;
 	
-	/**
-	 * Song constructor method that receives a mp3 file as parameter and starts the entire song metadata. 
+	/**Song constructor method that receives a mp3 file as parameter and starts the entire song metadata. 
 	 * @param song A mp3 file that represents the song to instance this class.
 	 * @throws IOException if the file has not been found, deleted or moved to another location. 
 	 * @throws NotMP3FileException if the file delivered as parameter is not of mp3 type. 
@@ -85,36 +73,35 @@ public class Song implements Serializable, Comparable<Song>{
 		image = mp3.getPicture(PictureType.FRONT_COVER)!=null?mp3.getPicture(PictureType.FRONT_COVER).getImage():null;
 	}
 	
-	/**
-	 * Method that allows to get the song title.
+	/** Method that allows to get the song title.
 	 * @return A string that represents the song title.
 	 */
 	public String getTitle() {
 		return title;
 	}
-	/**
-	 * Method that allows to get the song artist.
+	
+	/**Method that allows to get the song artist.
 	 * @return A string that represents the song artist.
 	 */
 	public String getArtist() {
 		return artist;
 	}
-	/**
-	 * Method that allows to get the song title.
+	
+	/**Method that allows to get the song title.
 	 * @return A string that represents the song title.
 	 */
 	public String getAlbum() {
 		return album;
 	}
-	/**
-	 * Method that allows to get the song image as a byte array.
+	
+	/**Method that allows to get the song image as a byte array.
 	 * @return A byte array that represents the song image.
 	 */
 	public byte[] getImage() {
 		return image;
 	}
-	/**
-	 * Method that allows to get the song genre.
+	
+	/**Method that allows to get the song genre.
 	 * @return A string that represents the song genre.
 	 */
 	public String getGenre() {
@@ -124,65 +111,65 @@ public class Song implements Serializable, Comparable<Song>{
 	public void setCoverArt() {
 		//TODO complete this
 	}
-	/**
-	 * Method that allows to get the song path.
+	
+	/**Method that allows to get the song path.
 	 * @return A string that represents the song path.
 	 */
 	public String getSongPath() {
 		return songPath;
 	}
-	/** 
-	 * Method that allows to get the song size as a double type number. 
+	
+	/** Method that allows to get the song size as a double type number. 
 	 * @return A double that represents the song size.
 	 */
 	public double getSize() {
 		return size;
 	}
-	/**
-	 * Method that allows to get the song file name.
+	
+	/**Method that allows to get the song file name.
 	 * @return A string that represents the song file name.
 	 */
 	public String getFileName() {
 		return fileName;
 	}
 	
-	/**
-	 * Method that allows to get the song parent folder path.
+	/** Method that allows to get the song parent folder path.
 	 * @return A string that represents the song parent folder path.
 	 */
 	public String getParentFolderPath() {
 		return parentFolderPath;
 	}
-	/**
-	 * Method that allows to get the right Song associated with this Song in the binary sorted three.
-	 * @return A Song that represents the right Song associated with this Song in the binary sorted three.
+	
+	/**Method that allows to get the right Song associated with this Song in the binary search three.
+	 * @return A Song that represents the right Song associated with this Song in the binary search three.
 	 */
 	public Song getRight() {
 		return right;
 	}
+	
 	/**
-	 * Method that allows to set the right Song associated with this Song in the binary sorted three.
-	 * @param right A Song that represents the right Song associated with this Song in the binary sorted three.
+	 * Method that allows to set the right Song associated with this Song in the binary search three.
+	 * @param right A Song that represents the right Song associated with this Song in the binary search three.
 	 */
 	public void setRight(Song right) {
 		this.right = right;
 	}
-	/**
-	 * Method that allows to get the left Song associated with this Song in the binary sorted three.
-	 * @return A Song that represents the left Song associated with this Song in the binary sorted three.
+	
+	/**Method that allows to get the left Song associated with this Song in the binary search three.
+	 * @return A Song that represents the left Song associated with this Song in the binary search three.
 	 */
 	public Song getLeft() {
 		return left;
 	}
-	/**
-	 * Method that allows to set the left Song associated with this Song in the binary sorted three.
-	 * @param left A Song that represents the left Song associated with this Song in the binary sorted three.
+	
+	/** Method that allows to set the left Song associated with this Song in the binary search three.
+	 * @param left A Song that represents the left Song associated with this Song in the binary search three.
 	 */
 	public void setLeft(Song left) {
 		this.left = left;
 	}
-	/**
-	 * This method compares two song file names lexicographically as natural order.
+	
+	/**This method compares two song file names lexicographically as natural order.
 	 * @param s A song that represents the song that will be compared with this song lexicographically.
 	 * @return An integer that represents if this file name is greater, less or equal to s file name lexicographically.
 	 */

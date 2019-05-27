@@ -4,16 +4,16 @@ import javafx.application.Platform;
 import javafx.scene.shape.Circle;
 
 public class CoverArtAnimationThread extends Thread {
-	/**
-	 * It represents the song cover art in circle form.
+	
+	/** It represents the song cover art in circle form.
 	 */
 	private Circle coverArt;
-	/**
-	 * It represents if the song is paused or not.
+	
+	/** It represents if the song is paused or not.
 	 */
 	private boolean onPause;
-	/**
-	 * CoverArtAnimationThread constructor method allows to instance this class through a Circle that represents
+	
+	/** CoverArtAnimationThread constructor method allows to instance this class through a Circle that represents
 	 * the song cover art.
 	 * @param ca A Circle represents the song cover art in circle form.
 	 */
@@ -21,8 +21,8 @@ public class CoverArtAnimationThread extends Thread {
 		coverArt = ca;
 		onPause = false;
 	}
-	/**
-	 * This method allows to run the circle animation when the song is not paused. 
+	
+	/** This method allows to run the circle animation when the song is not paused. 
 	 */
 	@Override
 	public void run() {
@@ -40,8 +40,8 @@ public class CoverArtAnimationThread extends Thread {
 			}
 		}
 	}
-	/**
-	 * This method allows to set the song running state in paused.
+	
+	/** This method allows to set the song running state in paused.
 	 */
 	public void pause() {
 		onPause = true;
