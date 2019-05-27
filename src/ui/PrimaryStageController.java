@@ -169,16 +169,16 @@ public class PrimaryStageController {
 		refreshIcons();
 	}
 	/**
-	 * 
-	 * @param event An ActionEvent
+	 * This method shows an emergent window with info about this application.
+	 * @param event An ActionEvent that represents the event when the associated about button is pressed.
 	 */
 	@FXML
 	public void aboutButtonPressed(ActionEvent event) {
 		//TODO esto solo es una prube
 	}
 	/**
-	 * 
-	 * @param event An ActionEvent
+	 * This method allows to add a new list inside the application invoking a DirectoryChooser.
+	 * @param event An ActionEvent that represents the event when the associated add list button is pressed.
 	 */
 	@FXML
 	public void addListButtonPressed(ActionEvent event) {
@@ -195,8 +195,8 @@ public class PrimaryStageController {
 		librariesTableView.setItems(musicPlayer.getMusicFolders());
 	}
 	/**
-	 * 
-	 * @param event An ActionEvent
+	 * This method play the next track in the music folder when this exist.
+	 * @param event An ActionEvent that represents the event when the associated next track button is pressed.
 	 */
 	@FXML
 	public void nextTrackButtonPressed(ActionEvent event) {
@@ -213,7 +213,7 @@ public class PrimaryStageController {
 	}
 	/**
 	 * 
-	 * @param event An ActionEvent
+	 * @param event An ActionEvent that represents the event when the associated play pause button is pressed.
 	 */
 	@FXML
 	public void playPauseButtonPressed(ActionEvent event) {
@@ -235,7 +235,7 @@ public class PrimaryStageController {
 	}
 	/**
 	 * 
-	 * @param event An ActionEvent
+	 * @param event An ActionEvent that represents the event when the associated previous track button is pressed.
 	 */
 	@FXML
 	public void prevTrackButtonPressed(ActionEvent event) {
@@ -252,7 +252,7 @@ public class PrimaryStageController {
 	}
 	/**
 	 * 
-	 * @param event An ActionEvent
+	 * @param event An ActionEvent that represents the event when the associated settings button is pressed.
 	 */
 	@FXML
 	public void settingsButtonPressed(ActionEvent event) {
@@ -260,7 +260,7 @@ public class PrimaryStageController {
 	}
 	/**
 	 * 
-	 * @param event An ActionnEvent
+	 * @param event An ActionnEvent that represents the event when the associated shuffle switch button is pressed.
 	 */
 	@FXML
 	public void shuffleSwitchButtonPressed(ActionEvent event) {
@@ -268,7 +268,7 @@ public class PrimaryStageController {
 	}
 	/**
 	 * 
-	 * @param event An ActionEvent
+	 * @param event An ActionEvent that represents the event when the associated volume switch button is pressed.
 	 */
 	@FXML
 	public void volumeSwitchButtonPressed(ActionEvent event) {
@@ -282,7 +282,7 @@ public class PrimaryStageController {
 	}
 	/**
 	 * 
-	 * @param event An ActionEvent
+	 * @param event An ActionEvent that represents the event when the associated delete list button is pressed.
 	 */
 	@FXML
 	public void deleteListButtonPressed(ActionEvent event) {
@@ -298,8 +298,8 @@ public class PrimaryStageController {
 		librariesTableView.setItems(musicPlayer.getMusicFolders());
 	}
 	/**
-	 * 
-	 * @param event A WindowEvent
+	 * This method saves the current music folders inside a serializable file.
+	 * @param event A WindowEvent that represents the data is being saved.
 	 */
 	public void save(WindowEvent event) {
 		try {
