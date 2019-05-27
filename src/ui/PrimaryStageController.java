@@ -444,22 +444,22 @@ public class PrimaryStageController {
 	}
 
 	public void sortByTitle(ActionEvent event) {
-		musicPlayer.getmu
+		musicPlayer.getCurrentMusicFolder().sortSongsByTitle();
 	}
 
 	public void sortByGenre(ActionEvent event) {
-
+		musicPlayer.getCurrentMusicFolder().sortSongsByGenre();
 	}
 
 	public void sortByAlbum(ActionEvent event) {
-
+		musicPlayer.getCurrentMusicFolder().sortSongsByAlbum();
 	}
 
 	public void sortByArtist(ActionEvent event) {
-
+		musicPlayer.getCurrentMusicFolder().sortSongsByArtist();
 	}
 
 	public void sortBySize(ActionEvent event) {
-
+		musicPlayer.getCurrentMusicFolder().sortSongsBySize();
 	}
 }
