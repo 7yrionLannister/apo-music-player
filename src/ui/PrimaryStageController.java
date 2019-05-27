@@ -362,7 +362,7 @@ public class PrimaryStageController {
 		return shuffleSwitchButton;
 	}
 	/**
-	 * This method
+	 * This method refresh all the icons when another song is picked from the music folder.
 	 */
 	public void refreshIcons() {
 		songThumbnail.setImage(DEFAULT_THUMBNAIL);
