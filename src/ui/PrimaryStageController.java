@@ -197,6 +197,7 @@ public class PrimaryStageController {
 		about.setTitle("About Apo Music Player");
 		about.setResizable(false);
 		about.setScene(scene);
+		about.getIcons().add(new Image(new File("imgs"+File.separator+"cd.png").toURI().toString()));
 		about.show();
 	}
 	/**
