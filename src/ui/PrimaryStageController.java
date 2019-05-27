@@ -165,7 +165,7 @@ public class PrimaryStageController {
 				restartThreads();
 			}
 		});
-		CurrentTrackTimeUpdaterThread cttu = new CurrentTrackTimeUpdaterThread(this);
+		CurrentTrackTimeUpdaterThread cttu = new CurrentTrackTimeUpdaterThread(this, false);
 		cttu.setDaemon(true);
 		cttu.start();
 		refreshIcons();
