@@ -12,13 +12,20 @@ import org.junit.jupiter.api.Test;
 import customExceptions.FolderWithoutMP3ContentException;
 
 
-public class MusicFolderTest {
+public class MusicFolderTest {	
+	/**
+	 * 
+	 */
 	private MusicFolder mf;
-	
+	/**
+	 * 
+	 */
 	private void setupScenario1() {
 		mf = null;
 	}
-	
+	/**
+	 * 
+	 */
 	private void setupScenario2() {
 		try {
 			mf = new MusicFolder(new File("music"));
@@ -26,7 +33,9 @@ public class MusicFolderTest {
 			
 		}
 	}
-	
+	/**
+	 * 
+	 */
 	@Test
 	public void createMusicFolderWithInvalidPathTest() {
 		setupScenario1();
@@ -37,7 +46,9 @@ public class MusicFolderTest {
 			assertTrue(true);
 		}
 	}
-
+	/**
+	 * 
+	 */
 	@Test
 	public void createMusicFolderWithValidPathTest() {
 		setupScenario1();
@@ -49,7 +60,9 @@ public class MusicFolderTest {
 			fail("The music folder should have been created as the resources folder is the demo library that comes in the repository");
 		}
 	}
-	
+	/**
+	 * 
+	 */
 	@Test
 	public void createMusicFolderWithValidPathButNoMP3Content() {
 		setupScenario1();
@@ -63,7 +76,9 @@ public class MusicFolderTest {
 			}
 		}
 	}
-	
+	/**
+	 * 
+	 */
 	@Test
 	public void inorderTest() {
 		setupScenario2();
@@ -73,7 +88,9 @@ public class MusicFolderTest {
 			assertTrue("The returned list of songs is not in order", songs.get(i).compareTo(songs.get(i-1)) >= 0);
 		}
 	}
-	
+	/**
+	 * 
+	 */
 	@Test
 	public void sortSongsByTitleTest() {
 		setupScenario2();
@@ -85,7 +102,9 @@ public class MusicFolderTest {
 			assertTrue("The list is not sorted by title", tc.compare(songs.get(i), songs.get(i-1)) >= 0);
 		}
 	}
-	
+	/**
+	 * 
+	 */
 	@Test
 	public void sortSongsByAlbumTest() {
 		setupScenario2();
@@ -97,7 +116,9 @@ public class MusicFolderTest {
 			assertTrue("The list is not sorted by album", ac.compare(songs.get(i), songs.get(i-1)) >= 0);
 		}
 	}
-	
+	/**
+	 * 
+	 */
 	@Test
 	public void sortSongsBySizeTest() {
 		setupScenario2();
@@ -109,7 +130,9 @@ public class MusicFolderTest {
 			assertTrue("The list is not sorted by size", sc.compare(songs.get(i), songs.get(i-1)) >= 0);
 		}
 	}
-	
+	/**
+	 * 
+	 */
 	@Test
 	public void sortSongsByGenreTest() {
 		setupScenario2();

@@ -396,8 +396,8 @@ public class PrimaryStageController {
 	}
 	/**
 	 * 
-	 * @param header
-	 * @param message
+	 * @param header A String
+	 * @param message A String
 	 */
 	public void showErrorAlert(String header, String message) {
 		Alert alert = new Alert(AlertType.INFORMATION);
