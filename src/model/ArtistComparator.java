@@ -2,6 +2,7 @@ package model;
 
 import java.util.Comparator;
 
+
 public class ArtistComparator implements Comparator<Song>{
 	
 	/**

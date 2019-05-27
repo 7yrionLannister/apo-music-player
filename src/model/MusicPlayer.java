@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+
 public class MusicPlayer {
 	/**
 	 * It represents the path where the music folders are serialized. 

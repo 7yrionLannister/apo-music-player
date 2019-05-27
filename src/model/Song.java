@@ -10,6 +10,7 @@ import com.beaglebuddy.mp3.MP3;
 
 import customExceptions.NotMP3FileException;
 
+
 public class Song implements Serializable, Comparable<Song>{
 	/**
 	 * It represents the song title.
