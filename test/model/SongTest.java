@@ -11,20 +11,12 @@ import org.junit.jupiter.api.Test;
 import customExceptions.NotMP3FileException;
 
 public class SongTest {
-	/**
-	 * It represents the Song that will be tested.
-	 */
 	private Song s;
-	/**
-	 * This method creates a scenario assigning null to Song s.
-	 */
+	
 	private void setupScenario1() {
 		s = null;
 	}
-	/**
-	 * This test method calls the setupScenario1 and creates a Song with a valid mp3 file in order to test the Song
-	 * constructor method.
-	 */
+	
 	@Test
 	public void createSongWithValidPathAndValidAudioFormatTest() {
 		setupScenario1();
@@ -37,10 +29,7 @@ public class SongTest {
 			fail("The song should have been created as the file is the one that comes in the repository as a demo audio with MP3 format");
 		}
 	}
-	/**
-	 * This test method calls the setupScenario1 and creates a Song with an invalid path witch is not in the repository 
-	 * in order to test the Song constructor method.
-	 */
+	
 	@Test
 	public void createSongWithInvalidPathTest() {
 		setupScenario1();
@@ -51,10 +40,7 @@ public class SongTest {
 			assertTrue(true);
 		}
 	}	
-	/**
-	 * This test method calls the setupScenario1 and creates a Song with a valid path but with an invalid format  
-	 * in order to test the Song constructor method.
-	 */
+	
 	@Test
 	public void createSongWithValidPathButInvalidFileFormat() {
 		setupScenario1();

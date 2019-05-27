@@ -13,19 +13,12 @@ import customExceptions.FolderWithoutMP3ContentException;
 
 
 public class MusicFolderTest {	
-	/**
-	 * It represents the MusicFolder that will be tested.
-	 */
 	private MusicFolder mf;
-	/**
-	 * This method creates a scenario assigning null to MusicFolder mf.
-	 */
+	
 	private void setupScenario1() {
 		mf = null;
 	}
-	/**
-	 * This method creates a scenario assigning a existing folder to the MusicFolder constructor.
-	 */
+	
 	private void setupScenario2() {
 		try {
 			mf = new MusicFolder(new File("music"));
@@ -33,10 +26,7 @@ public class MusicFolderTest {
 			
 		}
 	}
-	/**
-	 * This test method calls the setupScenario1 and creates a MusicFolder with an invalid path in order to test the
-	 * MusicFolder constructor method.
-	 */
+	
 	@Test
 	public void createMusicFolderWithInvalidPathTest() {
 		setupScenario1();
@@ -47,10 +37,7 @@ public class MusicFolderTest {
 			assertTrue(true);
 		}
 	}
-	/**
-	 * This test method calls the setupScenario1 and creates a MusicFolder with a valid path in order to test the
-	 * MusicFolder constructor method.
-	 */
+	
 	@Test
 	public void createMusicFolderWithValidPathTest() {
 		setupScenario1();
@@ -62,10 +49,7 @@ public class MusicFolderTest {
 			fail("The music folder should have been created as the resources folder is the demo library that comes in the repository");
 		}
 	}
-	/**
-	 * This test method calls the setupScenario1 and creates a MusicFolder with a valid path but without mp3 files 
-	 * in order to test the MusicFolder constructor method.
-	 */
+	
 	@Test
 	public void createMusicFolderWithValidPathButNoMP3Content() {
 		setupScenario1();
@@ -79,10 +63,7 @@ public class MusicFolderTest {
 			}
 		}
 	}
-	/**
-	 * This test method calls the setupScenario2 and generates a Song ArrayList sorted in order to test the MusicFolder
-	 * inorder method.
-	 */
+	
 	@Test
 	public void inorderTest() {
 		setupScenario2();
@@ -92,10 +73,7 @@ public class MusicFolderTest {
 			assertTrue("The returned list of songs is not in order", songs.get(i).compareTo(songs.get(i-1)) >= 0);
 		}
 	}
-	/**
-	 * This test method calls the setupScenario2 and generates a Song ArrayList that will be sorted by title in order to 
-	 * test the MusicFolder sortSongsByTitle. 
-	 */
+	
 	@Test
 	public void sortSongsByTitleTest() {
 		setupScenario2();
@@ -107,10 +85,7 @@ public class MusicFolderTest {
 			assertTrue("The list is not sorted by title", tc.compare(songs.get(i), songs.get(i-1)) >= 0);
 		}
 	}
-	/**
-	 * This test method calls the setupScenario2 and generates a Song ArrayList that will be sorted by album in order to 
-	 * test the MusicFolder sortSongsByAlbum. 
-	 */
+	
 	@Test
 	public void sortSongsByAlbumTest() {
 		setupScenario2();
@@ -122,10 +97,7 @@ public class MusicFolderTest {
 			assertTrue("The list is not sorted by album", ac.compare(songs.get(i), songs.get(i-1)) >= 0);
 		}
 	}
-	/**
-	 * This test method calls the setupScenario2 and generates a Song ArrayList that will be sorted by size in order to 
-	 * test the MusicFolder sortSongsBySize. 
-	 */
+	
 	@Test
 	public void sortSongsBySizeTest() {
 		setupScenario2();
@@ -137,10 +109,7 @@ public class MusicFolderTest {
 			assertTrue("The list is not sorted by size", sc.compare(songs.get(i), songs.get(i-1)) >= 0);
 		}
 	}
-	/**
-	 * This test method calls the setupScenario2 and generates a Song ArrayList that will be sorted by genre in order to 
-	 * test the MusicFolder sortSongsByGenre. 
-	 */
+	
 	@Test
 	public void sortSongsByGenreTest() {
 		setupScenario2();
