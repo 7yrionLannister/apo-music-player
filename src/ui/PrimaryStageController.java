@@ -16,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -36,6 +37,7 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import model.MusicFolder;
 import model.MusicPlayer;
@@ -174,7 +176,25 @@ public class PrimaryStageController {
 	 */
 	@FXML
 	public void aboutButtonPressed(ActionEvent event) {
-		//TODO esto solo es una prube
+		Stage about = new Stage();
+		Pane pane = new Pane();
+		Label l = new Label();
+		Label l2 = new Label();
+		Label l3 = new Label();
+		Label l4 = new Label();
+		l.setText("Apo Music Player is a music player presented as a final ");
+		l2.setText("project of the algorithms and programming 2 course.");
+		l3.setText("It was meant to apply the knowledge learned in the first");
+		l4.setText("two algorithm courses. Thanks for reading.");
+		l2.relocate(0, 15);
+		l3.relocate(0, 30);
+		l4.relocate(0, 45);
+		pane.getChildren().addAll(l, l2, l3, l4);
+		Scene scene = new Scene(pane, 286, 300);
+		about.setTitle("About Apo Music Player");
+		about.setResizable(false);
+		about.setScene(scene);
+		about.show();
 	}
 	/**
 	 * This method allows to add a new list inside the application invoking a DirectoryChooser.
