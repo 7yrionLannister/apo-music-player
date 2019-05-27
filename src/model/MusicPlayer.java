@@ -119,7 +119,7 @@ public class MusicPlayer {
 		ObjectInputStream ois = new ObjectInputStream(fis);
 
 		firstMusicFolder = (MusicFolder)ois.readObject();
-
+		currentPlaylist = firstMusicFolder.getSongs();
 		ois.close();
 		fis.close();
 	}
