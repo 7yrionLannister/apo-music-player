@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-package customExceptions;
-
-public class AttemptedToRemoveCurrentPlayListException extends IllegalStateException {
-	private String library;
-	
-	public AttemptedToRemoveCurrentPlayListException(String path) {
-		library = path;
-	}
-	
-	@Override
-	public String getMessage() {
-		return "It is not possible to remove the playlist when it is being played: " + library;	
-	}
-}
-=======
 package customExceptions;
 
 public class AttemptedToRemoveCurrentPlayListException extends IllegalStateException {
@@ -37,4 +21,3 @@ public class AttemptedToRemoveCurrentPlayListException extends IllegalStateExcep
 		return "It is not possible to remove the playlist when it is being played: " + library;	
 	}
 }
->>>>>>> d10f835effaad2e3e461e09675b443a1c38ad300

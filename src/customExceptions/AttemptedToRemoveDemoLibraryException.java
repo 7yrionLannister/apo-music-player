@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-package customExceptions;
 
-public class AttemptedToRemoveDemoLibraryException extends Exception {
-	@Override
-	public String getMessage() {
-		return "Unable to remove demo library, permission denied";
-	}
-}
-=======
 package customExceptions;
 
 public class AttemptedToRemoveDemoLibraryException extends Exception {
@@ -20,4 +11,4 @@ public class AttemptedToRemoveDemoLibraryException extends Exception {
 		return "Unable to remove demo library, permission denied";
 	}
 }
->>>>>>> d10f835effaad2e3e461e09675b443a1c38ad300
+

@@ -1,19 +1,4 @@
-<<<<<<< HEAD
-package customExceptions;
 
-public class FolderWithoutMP3ContentException extends Exception {
-	private String folder;
-	
-	public FolderWithoutMP3ContentException(String f) {
-		folder = f;
-	}
-	
-	@Override
-	public String getMessage() {
-		return "The requested folder does not contain MP3 files: "+folder;
-	}
-}
-=======
 package customExceptions;
 
 public class FolderWithoutMP3ContentException extends Exception {
@@ -37,4 +22,4 @@ public class FolderWithoutMP3ContentException extends Exception {
 		return "The requested folder does not contain MP3 files: "+folder;
 	}
 }
->>>>>>> d10f835effaad2e3e461e09675b443a1c38ad300
+
