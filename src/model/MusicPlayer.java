@@ -52,6 +52,7 @@ public class MusicPlayer {
 	/**It represents the actual song playing in the media player.
 	 */
 	private Song currentSong;
+	private MusicFolder currentMusicFolder;
 	
 	/** Constructor MusicPlayer method that starts the entire current song metadata and the media player. 
 	 * @throws ClassNotFoundException if the class definition is not there due to the library witch contains it 
@@ -69,11 +70,13 @@ public class MusicPlayer {
 		firstMusicFolder = new MusicFolder(new File("music"));
 		currentPlaylist = firstMusicFolder.getSongs();
 		currentSong = currentPlaylist.get(0);
-
+		
 		File file = new File(MUSIC_FOLDERS_PATH);
 		if(file.exists()) {
 			loadMusicFolders(file);
 		}
+		
+		currentMusicFolder = firstMusicFolder;
 		chargeMedia();
 	}
 	
@@ -248,6 +251,7 @@ public class MusicPlayer {
 	 */
 	public void setCurrentPlayList(MusicFolder current) {
 		currentPlaylist = current.getSongs();
+		currentMusicFolder = current;
 	}
 	
 	/** This method allows to obtain a Song array list that represents the actual play list.
@@ -255,6 +259,10 @@ public class MusicPlayer {
 	 */
 	public ArrayList<Song> getCurrentPlayList() {
 		return currentPlaylist;
+	}
+	
+	public MusicFolder getCurrentMusicFolder() {
+		return currentMusicFolder;
 	}
 	
 	/** This method allows to remove a music folder from the linked list.
