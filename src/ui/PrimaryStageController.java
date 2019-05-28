@@ -291,11 +291,14 @@ public class PrimaryStageController {
 		}
 	}
 
-	/** This method shows a panel with some visual changes for the interface.
-	 * @param event An ActionEvent that represents the event when the associated settings button is pressed.
+	/** This method shows play list history text files when these exist.
+	 * @param event An ActionEvent that represents the event when the associated history button is pressed.
 	 */
 	@FXML
 	public void historyButtonPressed(ActionEvent event) {
+<<<<<<< HEAD
+		System.out.println("HELLO WORLD");
+=======
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("HistoryViewer.fxml"));
 			Scene s = new Scene(root);
@@ -307,6 +310,7 @@ public class PrimaryStageController {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+>>>>>>> 28f53c5be3c0756f2bbeaf5202db7fccec778a13
 	}
 
 	/** This method allows to set the media player in shuffle mode.
