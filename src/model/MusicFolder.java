@@ -11,7 +11,7 @@ import customExceptions.FolderWithoutMP3ContentException;
 import customExceptions.NotMP3FileException;
 
 public class MusicFolder implements Serializable {
-	
+
 	/** This is the folder that will be represented by this class
 	 */
 	private File folder;
@@ -35,7 +35,7 @@ public class MusicFolder implements Serializable {
 	private MusicFolder prevMusicFolder;
 	//TODO indica si esta ordenado el arraylist por filename o no, para asi mismo hacer busqueda binaria o no
 	private boolean sortedByFileName;
-	
+
 	/**The method allows to get an instance of MusicFolder that will represent the folder received as parameter.
 	 * @param folder The folder to be represented by this MusicFolder.
 	 * @throws IOException if the folder doesn't exist or there was another problem reading it.
@@ -72,7 +72,7 @@ public class MusicFolder implements Serializable {
 		folderName = folder.getName();
 		numberOfSongs = songs.size();
 	}
-	
+
 	/** The method allows to add a new Song to the binary search tree according to the natural order.
 	 * @param current The current node in the binary search tree that is responsible to add the requested 
 	 * node before or after itself depending on the natural order. 
@@ -93,18 +93,19 @@ public class MusicFolder implements Serializable {
 			}
 		}
 	}
-	
+
 	/** The method allows to obtain a list with the songs in the binary search tree in order. 
 	 * @return A Song ArrayList with the songs in order.
 	 */
 	public ArrayList<Song> inorder() {
 		ArrayList<Song> inorderSongs = new ArrayList<Song>();
+		sortedByFileName = true;
 		if(root != null) {
 			inorder(root, inorderSongs);
 		}
 		return inorderSongs;
 	}
-	
+
 	/** The method allows to fill an ArrayList with the songs in the binary search tree in order.
 	 * @param current The current node in the binary search tree that is going to be added to the ArrayList after its left 
 	 * subtree and before its right subtree.
@@ -119,56 +120,56 @@ public class MusicFolder implements Serializable {
 			inorder(current.getRight(), tofill);
 		}
 	}
-	
+
 	/** The method allows to obtain the next music folder in the linked list.
 	 * @return A MusicFolder that represents the next music folder in the linked list.
 	 */
 	public MusicFolder getNextMusicFolder() {
 		return nextMusicFolder;
 	}
-	
+
 	/**The method allows to change the next music folder in the linked list
 	 * @param next A Music folder that represents the next music folder in the linked list.
 	 */
 	public void setNextMusicFolder(MusicFolder next) {
 		nextMusicFolder = next;
 	}
-	
+
 	/** The method allows to obtain the previous music folder in the linked list.
 	 * @return A MusicFolder that represents the previous music folder in the linked list.
 	 */
 	public MusicFolder getPrevMusicFolder() {
 		return prevMusicFolder;
 	}
-	
+
 	/**The method allows to change the previous music folder in the linked list.
 	 * @param prevMusicFolder A MusicFolder that represents the previous music folder in the linked list.
 	 */
 	public void setPrevMusicFolder(MusicFolder prevMusicFolder) {
 		this.prevMusicFolder = prevMusicFolder;
 	}
-	
+
 	/**The method allows to obtain the folder that this MusicFolder represents.
 	 * @return A File that shows the folder that this MusicFolder represents.
 	 */
 	public File getFolder() {
 		return folder;
 	}
-	
+
 	/**The method allows to obtain the name of the folder that this MusicFolder represents.
 	 * @return A String that shows the name of the folder that this MusicFolder represents.
 	 */
 	public String getFolderName() {
 		return folderName;
 	}
-	
+
 	/**The method allows to obtain the number of songs inside the music folder.
 	 * @return An integer that represents the number of songs inside the music folder.
 	 * */
 	public int getNumberOfSongs() {
 		return numberOfSongs;
 	}
-	
+
 	/**The method allows to know whether this MusicFolder is equal to another one.
 	 * @param another The music folder to make the comparison.
 	 */
@@ -179,18 +180,20 @@ public class MusicFolder implements Serializable {
 		}
 		return equal;
 	}
-	
+
 	/** The method allows to sort the songs in the playList according to its title.
 	 * It uses Collections.sort.
 	 */
 	public void sortSongsByTitle() {
+		sortedByFileName = false;
 		Collections.sort(songs, new TitleComparator());
 	}
-	
+
 	/**The method allows to sort the songs in the playList according to its artist.
 	 * It uses bubble sort.
 	 */
 	public void sortSongsByArtist() {
+		sortedByFileName = false;
 		ArtistComparator ac = new ArtistComparator();
 		for(int i = 0; i < songs.size(); i++) {
 			for(int j = 0; j < songs.size()-1-i; j++) {
@@ -202,11 +205,12 @@ public class MusicFolder implements Serializable {
 			}
 		}
 	} 
-	
+
 	/**The method allows to sort the songs in the playList according to its album.
 	 * It uses insertion sort.
 	 */
 	public void sortSongsByAlbum() {
+		sortedByFileName = false;
 		AlbumComparator ac = new AlbumComparator();
 		for(int i = 1; i < songs.size(); i++) {
 			Song current = songs.get(i);
@@ -218,11 +222,12 @@ public class MusicFolder implements Serializable {
 			songs.set(j+1, current);
 		}
 	}
-	
+
 	/**The method allows to sort the songs in the playList according to its size.
 	 * It uses selection sort.
 	 */
 	public void sortSongsBySize() {
+		sortedByFileName = false;
 		SizeComparator sc = new SizeComparator();
 		for(int i = 0; i < songs.size()-1; i++) {
 			int low = i;
@@ -236,36 +241,40 @@ public class MusicFolder implements Serializable {
 			songs.set(i, temp);
 		}
 	}
-	
+
 	/**The method allows to sort the songs in the playList according to its genre.
 	 * It uses Collections.sort.
 	 */
 	public void sortSongsByGenre() {
+		sortedByFileName = false;
 		Collections.sort(songs, new GenreComparator());
 	}
-	
+
 	/**The method allows to obtain a Song ArrayList that represents all the songs inside the music folder.
 	 * @return A Song ArrayList that represents all the songs inside the music folder.
 	 */
 	public ArrayList<Song> getSongs() {
 		return songs;
 	}
-	
-	//TODO implementar esto, dependiendo de si esta ordenado por nombre de archivo o no, se realiza busqueda binaria o lineal
-		/*public void search() {
-			int low = 0;
-			int high = flights.size()-1;
-			while(low <= high && flight == null) {
-				int mid = (low+high)/2;
-				if(tc.compare(key, flights.get(mid)) < 0) {
-					high = mid-1;
-				}
-				else if(tc.compare(key, flights.get(mid)) > 0) {
-					low = mid+1;
-				}
-				else {
-					flight = flights.get(mid);
-				}
+
+	public boolean isSortedByFileName() {
+		return sortedByFileName;
+	}
+
+	public void search() {
+		int low = 0;
+		int high = flights.size()-1;
+		while(low <= high && flight == null) {
+			int mid = (low+high)/2;
+			if(tc.compare(key, flights.get(mid)) < 0) {
+				high = mid-1;
 			}
-		}*/
+			else if(tc.compare(key, flights.get(mid)) > 0) {
+				low = mid+1;
+			}
+			else {
+				flight = flights.get(mid);
+			}
+		}
+	}
 }
