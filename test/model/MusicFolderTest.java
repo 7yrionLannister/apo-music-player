@@ -79,10 +79,9 @@ public class MusicFolderTest {
 		setupScenario2();
 		mf.sortSongsByTitle();
 		ArrayList<Song> songs = mf.getSongs();
-		TitleComparator tc = new TitleComparator();
 		
 		for(int i = 1; i < songs.size(); i++) {
-			assertTrue("The list is not sorted by title", tc.compare(songs.get(i), songs.get(i-1)) >= 0);
+			assertTrue("The list is not sorted by title", songs.get(i).compareTo(songs.get(i-1)) >= 0);
 		}
 	}
 	

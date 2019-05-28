@@ -205,7 +205,7 @@ public class MusicFolder implements Serializable {
 	 */
 	public void sortSongsByTitle() {
 		sortedByTitle = false;
-		Collections.sort(songs, new TitleComparator());
+		Collections.sort(songs);
 	}
 
 	/**The method allows to sort the songs in the playList according to its artist.
