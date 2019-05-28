@@ -288,12 +288,11 @@ public class PrimaryStageController {
 		}
 	}
 
-	/** This method shows a panel with some visual changes for the interface.
-	 * @param event An ActionEvent that represents the event when the associated settings button is pressed.
+	/** This method shows play list history text files when these exist.
+	 * @param event An ActionEvent that represents the event when the associated history button is pressed.
 	 */
 	@FXML
 	public void historyButtonPressed(ActionEvent event) {
-		//TODO implement the pane with the history
 		System.out.println("HELLO WORLD");
 	}
 
