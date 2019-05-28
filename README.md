@@ -22,6 +22,20 @@
 
   <b>apo-music-player</b> is a music player presented as a final project of the algorithms and programming 2 course.
 	It was meant to apply the knowledge learned in the first two algorithm courses.
+  The subjects applied in this project are:
+  <ul>
+  <li>Building applications with graphical interfaces in JavaFX</li>
+  <li>Handling exceptions and own exceptions</li>
+  <li>Concurrence</li>
+  <li>Persistence by handling text files ***</li>
+  <li>Persistence through serialization of objects</li>
+  <li>Sorting algorithms. (Bubble, selection and insertion)</li>
+  <li>Use of the Comparable and Comparator interfaces</li>
+  <li>Binary search ***</li>
+  <li>Linked lists</li>
+  <li>Recursive algorithms</li>
+  <li>Binary search trees</li>
+  </ul>
 ## Overview
   ![Overview](overview/main-section.png?raw=true)
 
