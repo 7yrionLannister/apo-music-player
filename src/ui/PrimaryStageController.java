@@ -46,7 +46,7 @@ import threads.CurrentTrackTimeUpdaterThread;
 
 public class PrimaryStageController {
 	
-	/** It represents the current thread to modify the song time inside the application and the shuffle mode. 
+	/** It represents the current thread to modify the song time inside the application and the shuffle mode.	 
 	 */
 	private CurrentTrackTimeUpdaterThread cttu;
 	
@@ -442,23 +442,38 @@ public class PrimaryStageController {
 		alert.setHeaderText(header);
 		alert.showAndWait();
 	}
-
+	
+	/** This method allows to sort the songs in the table view by title.
+	 * @param event An ActionEvent that represents the event when the associated sort by title button is pressed.
+	 */
 	public void sortByTitle(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByTitle();
 	}
-
+	
+	/** This method allows to sort the songs in the table view by genre.
+	 * @param event An ActionEvent that represents the event when the associated sort by genre button is pressed.
+	 */
 	public void sortByGenre(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByGenre();
 	}
-
+	
+	/** This method allows to sort the songs in the table view by album.
+	 * @param event An ActionEvent that represents the event when the associated sort by album button is pressed.
+	 */
 	public void sortByAlbum(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByAlbum();
 	}
-
+	
+	/** This method allows to sort the songs in the table view by artist.
+	 * @param event An ActionEvent that represents the event when the associated sort by artist button is pressed.
+	 */
 	public void sortByArtist(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByArtist();
 	}
-
+	
+	/** This method allows to sort the songs in the table view by size.
+	 * @param event An ActionEvent that represents the event when the associated sort by size button is pressed.
+	 */
 	public void sortBySize(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsBySize();
 	}
