@@ -68,14 +68,14 @@ public class MusicPlayer {
 		currentSongTitle = new SimpleStringProperty();
 
 		firstMusicFolder = new MusicFolder(new File("music"));
-		currentPlaylist = firstMusicFolder.getSongs();
-		currentSong = currentPlaylist.get(0);
 		
 		File file = new File(MUSIC_FOLDERS_PATH);
 		if(file.exists()) {
 			loadMusicFolders(file);
 		}
 		
+		currentPlaylist = firstMusicFolder.getSongs();
+		currentSong = currentPlaylist.get(0);
 		currentMusicFolder = firstMusicFolder;
 		chargeMedia();
 	}

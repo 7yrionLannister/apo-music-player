@@ -448,6 +448,7 @@ public class PrimaryStageController {
 	 */
 	public void sortByTitle(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByTitle();
+		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
 	
 	/** This method allows to sort the songs in the table view by genre.
@@ -455,6 +456,7 @@ public class PrimaryStageController {
 	 */
 	public void sortByGenre(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByGenre();
+		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
 	
 	/** This method allows to sort the songs in the table view by album.
@@ -462,6 +464,7 @@ public class PrimaryStageController {
 	 */
 	public void sortByAlbum(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByAlbum();
+		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
 	
 	/** This method allows to sort the songs in the table view by artist.
@@ -469,6 +472,7 @@ public class PrimaryStageController {
 	 */
 	public void sortByArtist(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByArtist();
+		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
 	
 	/** This method allows to sort the songs in the table view by size.
@@ -476,5 +480,6 @@ public class PrimaryStageController {
 	 */
 	public void sortBySize(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsBySize();
+		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
 }

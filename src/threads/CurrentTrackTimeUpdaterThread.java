@@ -69,7 +69,6 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 						});
 					}
 				} catch(NullPointerException npe) {
-					npe.printStackTrace();
 				}
 			}
 			try {
