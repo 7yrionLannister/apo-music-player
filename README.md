@@ -35,8 +35,9 @@
   <li>Recursive algorithms</li>
   <li>Binary search trees</li>
   </ul>
+  
 ## Overview
-  ![Overview](overview/main-section.png?raw=true)
+  ![Overview](overview/main-view.png?raw=true)
 
   [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com)
   [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
