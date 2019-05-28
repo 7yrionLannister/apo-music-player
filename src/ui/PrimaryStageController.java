@@ -445,21 +445,26 @@ public class PrimaryStageController {
 
 	public void sortByTitle(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByTitle();
+		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
 
 	public void sortByGenre(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByGenre();
+		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
 
 	public void sortByAlbum(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByAlbum();
+		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
 
 	public void sortByArtist(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByArtist();
+		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
 
 	public void sortBySize(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsBySize();
+		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
 }
