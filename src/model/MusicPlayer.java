@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import customExceptions.AttemptedToRemoveCurrentPlayListException;
 import customExceptions.AttemptedToRemoveDemoLibraryException;
@@ -22,6 +23,9 @@ public class MusicPlayer {
 	/**It represents the path where the music folders are serialized. 
 	 */
 	public final static String MUSIC_FOLDERS_PATH = "data"+File.separator+"mscfldrs.got";
+	/**It represents the path in which the playback history is saved
+	 * */
+	public final static String PLAYBACK_HISTORY_PATH = "history";
 	/**It represents the actual song put to be reproduced. 
 	 */
 	private Media currentAudio;
@@ -52,7 +56,10 @@ public class MusicPlayer {
 	/**It represents the actual song playing in the media player.
 	 */
 	private Song currentSong;
+	/**It represents the current folder that is being played
+	 * */
 	private MusicFolder currentMusicFolder;
+	private String history;
 	
 	/** Constructor MusicPlayer method that starts the entire current song metadata and the media player. 
 	 * @throws ClassNotFoundException if the class definition is not there due to the library witch contains it 
@@ -62,6 +69,7 @@ public class MusicPlayer {
 	 */
 	public MusicPlayer() throws ClassNotFoundException, IOException, FolderWithoutMP3ContentException {
 		songLoaded = new SimpleIntegerProperty(Integer.MIN_VALUE);
+		history = LocalDateTime.now().toString() + "\n";
 
 		currentSongAlbum = new SimpleStringProperty();
 		currentSongArtist = new SimpleStringProperty();
@@ -97,6 +105,7 @@ public class MusicPlayer {
 		currentSongTitle.setValue(currentSong.getTitle());
 
 		songLoaded.set(songLoaded.get()+1);
+		history += "\n"+currentSong.getFileName();
 	}
 	
 	/** Method that deserializes the folder with music when the application is started again.
@@ -287,5 +296,13 @@ public class MusicPlayer {
 		if(next != null) {
 			next.setPrevMusicFolder(prev);
 		}
+	}
+	
+	public void saveHistory() {
+		File dir = new File(PLAYBACK_HISTORY_PATH);
+		if(!dir.exists()) {
+			dir.mkdir();
+		}
+		File historyFile = new File();
 	}
 }
