@@ -14,6 +14,8 @@ import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -35,6 +37,7 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import model.MusicFolder;
@@ -293,7 +296,21 @@ public class PrimaryStageController {
 	 */
 	@FXML
 	public void historyButtonPressed(ActionEvent event) {
+<<<<<<< HEAD
 		System.out.println("HELLO WORLD");
+=======
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("HistoryViewer.fxml"));
+			Scene s = new Scene(root);
+			Stage st = new Stage();
+			st.setScene(s);
+			st.initOwner(songTitleLabel.getParent().getScene().getWindow());
+			st.initModality(Modality.WINDOW_MODAL);
+			st.showAndWait();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+>>>>>>> 28f53c5be3c0756f2bbeaf5202db7fccec778a13
 	}
 
 	/** This method allows to set the media player in shuffle mode.
