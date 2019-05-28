@@ -296,9 +296,7 @@ public class PrimaryStageController {
 	 */
 	@FXML
 	public void historyButtonPressed(ActionEvent event) {
-<<<<<<< HEAD
-		System.out.println("HELLO WORLD");
-=======
+
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("HistoryViewer.fxml"));
 			Scene s = new Scene(root);
@@ -310,7 +308,6 @@ public class PrimaryStageController {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
->>>>>>> 28f53c5be3c0756f2bbeaf5202db7fccec778a13
 	}
 
 	/** This method allows to set the media player in shuffle mode.
