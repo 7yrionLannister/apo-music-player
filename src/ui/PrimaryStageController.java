@@ -293,7 +293,8 @@ public class PrimaryStageController {
 	 */
 	@FXML
 	public void historyButtonPressed(ActionEvent event) {
-		//TODO implement the pane with the options
+		//TODO implement the pane with the history
+		System.out.println("HELLO WORLD");
 	}
 
 	/** This method allows to set the media player in shuffle mode.
