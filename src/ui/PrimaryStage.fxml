@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -18,8 +19,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="725.0" stylesheets="@PrimaryStageStyleSheet.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.PrimaryStageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="725.0" stylesheets="@PrimaryStageStyleSheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.PrimaryStageController">
    <bottom>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -210,11 +212,27 @@
                      <center>
                         <VBox BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="deleteListButton" mnemonicParsing="false" onAction="#deleteListButtonPressed" text="X remove library">
+                              <HBox>
                                  <VBox.margin>
-                                    <Insets left="250.0" />
+                                    <Insets left="100.0" />
                                  </VBox.margin>
-                              </Button>
+                                 <children>
+                                    <Label text="Search:">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="searchTextField" onAction="#searchPressed" prefHeight="25.0" prefWidth="216.0">
+                                       <HBox.margin>
+                                          <Insets right="60.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Button fx:id="deleteListButton" mnemonicParsing="false" onAction="#deleteListButtonPressed" text="X remove library" />
+                                 </children>
+                              </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#sortByTitle" prefHeight="25.0" prefWidth="102.0" text="Sort" />
