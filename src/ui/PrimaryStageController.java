@@ -104,7 +104,6 @@ public class PrimaryStageController {
 	@FXML private Slider volumeSlider;
 	@FXML private Button shuffleSwitchButton;
 	@FXML private Button addListButton;
-	@FXML private Button settingsButton;
 	@FXML private Button aboutButton;
 	@FXML private TableView<MusicFolder> librariesTableView;
 	@FXML private TableColumn<MusicFolder, String> libraryTableColumn;
@@ -293,8 +292,9 @@ public class PrimaryStageController {
 	 * @param event An ActionEvent that represents the event when the associated settings button is pressed.
 	 */
 	@FXML
-	public void settingsButtonPressed(ActionEvent event) {
-		//TODO implement the pane with the options
+	public void historyButtonPressed(ActionEvent event) {
+		//TODO implement the pane with the history
+		System.out.println("HELLO WORLD");
 	}
 
 	/** This method allows to set the media player in shuffle mode.
@@ -348,6 +348,7 @@ public class PrimaryStageController {
 	public void save(WindowEvent event) {
 		try {
 			musicPlayer.save();
+			musicPlayer.saveHistory();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
