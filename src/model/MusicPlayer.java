@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import customExceptions.AttemptedToRemoveCurrentPlayListException;
@@ -298,11 +299,16 @@ public class MusicPlayer {
 		}
 	}
 	
-	public void saveHistory() {
+	public void saveHistory() throws IOException {
 		File dir = new File(PLAYBACK_HISTORY_PATH);
 		if(!dir.exists()) {
 			dir.mkdir();
 		}
-		File historyFile = new File();
+		File historyFile = new File(PLAYBACK_HISTORY_PATH+File.separator+"history_"+history.split("\n")[0].replace(':', '_')+".txt");
+		System.out.println(historyFile.getPath());
+		historyFile.createNewFile();
+		PrintWriter pw = new PrintWriter(historyFile);
+		pw.println(history);
+		pw.close();
 	}
 }

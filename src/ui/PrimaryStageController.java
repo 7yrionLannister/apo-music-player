@@ -348,6 +348,7 @@ public class PrimaryStageController {
 	public void save(WindowEvent event) {
 		try {
 			musicPlayer.save();
+			musicPlayer.saveHistory();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
