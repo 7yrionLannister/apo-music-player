@@ -34,7 +34,7 @@ public class MusicFolder implements Serializable {
 	 */
 	private MusicFolder prevMusicFolder;
 	//TODO indica si esta ordenado el arraylist por filename o no, para asi mismo hacer busqueda binaria o no
-	private boolean sortedByFileName;
+	private boolean sortedByTitle;
 
 	/**The method allows to get an instance of MusicFolder that will represent the folder received as parameter.
 	 * @param folder The folder to be represented by this MusicFolder.
@@ -99,7 +99,7 @@ public class MusicFolder implements Serializable {
 	 */
 	public ArrayList<Song> inorder() {
 		ArrayList<Song> inorderSongs = new ArrayList<Song>();
-		sortedByFileName = true;
+		sortedByTitle = true;
 		if(root != null) {
 			inorder(root, inorderSongs);
 		}
@@ -116,6 +116,25 @@ public class MusicFolder implements Serializable {
 			inorder(current.getLeft(), tofill);
 		}
 		tofill.add(current);
+		if(current.getRight() != null) {
+			inorder(current.getRight(), tofill);
+		}
+	}
+	
+	public ArrayList<Song> preorder() {
+		ArrayList<Song> preorderSongs = new ArrayList<Song>();
+		sortedByTitle = true;
+		if(root != null) {
+			preorder(root, preorderSongs);
+		}
+		return preorderSongs;
+	}
+	
+	private void preorder(Song current, ArrayList<Song> tofill) {
+		tofill.add(current);
+		if(current.getLeft() != null) {
+			inorder(current.getLeft(), tofill);
+		}
 		if(current.getRight() != null) {
 			inorder(current.getRight(), tofill);
 		}
@@ -185,7 +204,7 @@ public class MusicFolder implements Serializable {
 	 * It uses Collections.sort.
 	 */
 	public void sortSongsByTitle() {
-		sortedByFileName = false;
+		sortedByTitle = false;
 		Collections.sort(songs, new TitleComparator());
 	}
 
@@ -193,7 +212,7 @@ public class MusicFolder implements Serializable {
 	 * It uses bubble sort.
 	 */
 	public void sortSongsByArtist() {
-		sortedByFileName = false;
+		sortedByTitle = false;
 		ArtistComparator ac = new ArtistComparator();
 		for(int i = 0; i < songs.size(); i++) {
 			for(int j = 0; j < songs.size()-1-i; j++) {
@@ -210,7 +229,7 @@ public class MusicFolder implements Serializable {
 	 * It uses insertion sort.
 	 */
 	public void sortSongsByAlbum() {
-		sortedByFileName = false;
+		sortedByTitle = false;
 		AlbumComparator ac = new AlbumComparator();
 		for(int i = 1; i < songs.size(); i++) {
 			Song current = songs.get(i);
@@ -227,7 +246,7 @@ public class MusicFolder implements Serializable {
 	 * It uses selection sort.
 	 */
 	public void sortSongsBySize() {
-		sortedByFileName = false;
+		sortedByTitle = false;
 		SizeComparator sc = new SizeComparator();
 		for(int i = 0; i < songs.size()-1; i++) {
 			int low = i;
@@ -246,7 +265,7 @@ public class MusicFolder implements Serializable {
 	 * It uses Collections.sort.
 	 */
 	public void sortSongsByGenre() {
-		sortedByFileName = false;
+		sortedByTitle = false;
 		Collections.sort(songs, new GenreComparator());
 	}
 
@@ -257,24 +276,34 @@ public class MusicFolder implements Serializable {
 		return songs;
 	}
 
-	public boolean isSortedByFileName() {
-		return sortedByFileName;
+	public void search(String title) {
+		if(sortedByTitle) {
+			searchInArrayList(title);
+		} else {
+			searchInBinarySearchTree(title);
+		}	
 	}
-
-	public void search() {
+	
+	private Song searchInArrayList(String title) {
+		Song found = null;
 		int low = 0;
-		int high = flights.size()-1;
-		while(low <= high && flight == null) {
+		int high = songs.size()-1;
+		while(low <= high && found == null) {
 			int mid = (low+high)/2;
-			if(tc.compare(key, flights.get(mid)) < 0) {
+			if(title.compareTo(songs.get(mid).getTitle()) < 0) {
 				high = mid-1;
 			}
-			else if(tc.compare(key, flights.get(mid)) > 0) {
+			else if(title.compareTo(songs.get(mid).getTitle()) > 0) {
 				low = mid+1;
 			}
 			else {
-				flight = flights.get(mid);
+				found = songs.get(mid);
 			}
 		}
+		return found;
+	}
+	
+	private void searchInBinarySearchTree(String title) {
+		
 	}
 }

@@ -175,6 +175,6 @@ public class Song implements Serializable, Comparable<Song>{
 	 */
 	@Override
 	public int compareTo(Song s) {
-		return fileName.compareTo(s.fileName);
+		return title.compareTo(s.title);
 	}
 }

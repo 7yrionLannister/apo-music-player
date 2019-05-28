@@ -3,6 +3,8 @@ package ui;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 
 import customExceptions.AttemptedToRemoveCurrentPlayListException;
@@ -506,6 +508,14 @@ public class PrimaryStageController {
 	
 	@FXML
 	public void searchPressed(ActionEvent event) {
-		
+		ArrayList<Song> songs = musicPlayer.getFirstMusicFolder().preorder();
+		for(Song s:songs) {
+			System.out.println(s.getFileName());
+		}
+		System.out.println("\nAAA");
+		songs = musicPlayer.getFirstMusicFolder().inorder();
+		for(Song s:songs) {
+			System.out.println(s.getFileName());
+		}
 	}
 }
