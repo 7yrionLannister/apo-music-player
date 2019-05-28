@@ -94,7 +94,7 @@ public class MusicPlayer {
 	private void chargeMedia() {
 		if(mediaPlayer != null) {
 			mediaPlayer.stop();
-		}System.out.println(currentSong.getSongPath());
+		}
 		currentAudio = new Media(currentSong.getSongPath());
 		mediaPlayer = new MediaPlayer(currentAudio);
 		mediaPlayer.stop();
@@ -305,7 +305,6 @@ public class MusicPlayer {
 			dir.mkdir();
 		}
 		File historyFile = new File(PLAYBACK_HISTORY_PATH+File.separator+"history_"+history.split("\n")[0].replace(':', '_')+".txt");
-		System.out.println(historyFile.getPath());
 		historyFile.createNewFile();
 		PrintWriter pw = new PrintWriter(historyFile);
 		pw.println(history);

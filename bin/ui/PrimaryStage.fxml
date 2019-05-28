@@ -150,11 +150,11 @@
                                  </graphic>
                               </Button>
                               <Separator orientation="VERTICAL" />
-                              <Button fx:id="settingsButton" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#settingsButtonPressed" prefHeight="40.0" prefWidth="40.0">
+                              <Button maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#historyButtonPressed" prefHeight="40.0" prefWidth="40.0">
                                  <graphic>
                                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../imgs/settings.png" />
+                                          <Image url="@../../imgs/history.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
