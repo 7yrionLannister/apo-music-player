@@ -33,6 +33,8 @@ public class MusicFolder implements Serializable {
 	/**This is the previous folder in the folders linked list
 	 */
 	private MusicFolder prevMusicFolder;
+	//TODO indica si esta ordenado el arraylist por filename o no, para asi mismo hacer busqueda binaria o no
+	private boolean sortedByFileName;
 	
 	/**The method allows to get an instance of MusicFolder that will represent the folder received as parameter.
 	 * @param folder The folder to be represented by this MusicFolder.
@@ -248,4 +250,22 @@ public class MusicFolder implements Serializable {
 	public ArrayList<Song> getSongs() {
 		return songs;
 	}
+	
+	//TODO implementar esto, dependiendo de si esta ordenado por nombre de archivo o no, se realiza busqueda binaria o lineal
+		/*public void search() {
+			int low = 0;
+			int high = flights.size()-1;
+			while(low <= high && flight == null) {
+				int mid = (low+high)/2;
+				if(tc.compare(key, flights.get(mid)) < 0) {
+					high = mid-1;
+				}
+				else if(tc.compare(key, flights.get(mid)) > 0) {
+					low = mid+1;
+				}
+				else {
+					flight = flights.get(mid);
+				}
+			}
+		}*/
 }

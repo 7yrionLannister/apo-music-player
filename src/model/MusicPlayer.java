@@ -206,6 +206,7 @@ public class MusicPlayer {
 	 */
 	public void addMusicFolder(File dir) throws IOException, FolderWithoutMP3ContentException {
 		if(dir != null) {
+			//TODO hacer esto recursivo
 			MusicFolder toAdd = new MusicFolder(dir);
 			MusicFolder current = firstMusicFolder;
 			boolean duplicated = false;
