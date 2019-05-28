@@ -280,7 +280,7 @@ public class MusicFolder implements Serializable {
 		if(sortedByTitle) {
 			searchInArrayList(title);
 		} else {
-			searchInBinarySearchTree(title);
+			searchInBinarySearchTree(root, title);
 		}	
 	}
 	
@@ -303,7 +303,13 @@ public class MusicFolder implements Serializable {
 		return found;
 	}
 	
-	private void searchInBinarySearchTree(String title) {
-		
+	private Song searchInBinarySearchTree(Song current, String title) {
+		if(current == null || title.compareTo(current.getTitle()) == 0) {
+			return current;
+		} else if(title.compareTo(current.getTitle()) < 0) {
+			return searchInBinarySearchTree(current.getLeft(), title);
+		} else {
+			return searchInBinarySearchTree(current.getRight(), title);
+		}
 	}
 }
