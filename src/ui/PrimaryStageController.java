@@ -25,6 +25,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -118,6 +119,7 @@ public class PrimaryStageController {
 	@FXML private TableColumn<Song, String> albumTableColumn;
 	@FXML private TableColumn<Song, String> artistTableColumn;
 	@FXML private TableColumn<Song, Double> sizeTableColumn;
+	@FXML private TextField searchTextField;
 
 	/** This method starts and setups all the necessary components inside the interface and bind them with the model when is started.
 	 */
@@ -460,6 +462,7 @@ public class PrimaryStageController {
 	/** This method allows to sort the songs in the table view by title.
 	 * @param event An ActionEvent that represents the event when the associated sort by title button is pressed.
 	 */
+	@FXML
 	public void sortByTitle(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByTitle();
 		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
@@ -468,6 +471,7 @@ public class PrimaryStageController {
 	/** This method allows to sort the songs in the table view by genre.
 	 * @param event An ActionEvent that represents the event when the associated sort by genre button is pressed.
 	 */
+	@FXML
 	public void sortByGenre(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByGenre();
 		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
@@ -476,6 +480,7 @@ public class PrimaryStageController {
 	/** This method allows to sort the songs in the table view by album.
 	 * @param event An ActionEvent that represents the event when the associated sort by album button is pressed.
 	 */
+	@FXML
 	public void sortByAlbum(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByAlbum();
 		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
@@ -484,6 +489,7 @@ public class PrimaryStageController {
 	/** This method allows to sort the songs in the table view by artist.
 	 * @param event An ActionEvent that represents the event when the associated sort by artist button is pressed.
 	 */
+	@FXML
 	public void sortByArtist(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByArtist();
 		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
@@ -492,8 +498,14 @@ public class PrimaryStageController {
 	/** This method allows to sort the songs in the table view by size.
 	 * @param event An ActionEvent that represents the event when the associated sort by size button is pressed.
 	 */
+	@FXML
 	public void sortBySize(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsBySize();
 		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
+	}
+	
+	@FXML
+	public void searchPressed(ActionEvent event) {
+		
 	}
 }
