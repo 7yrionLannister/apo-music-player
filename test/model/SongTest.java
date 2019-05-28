@@ -42,7 +42,7 @@ public class SongTest {
 	}	
 	
 	@Test
-	public void createSongWithValidPathButInvalidFileFormat() {
+	public void createSongWithValidPathButInvalidFileFormatTest() {
 		setupScenario1();
 		try {
 			s = new Song(new File("data"+File.separator+"testfile.txt"));
