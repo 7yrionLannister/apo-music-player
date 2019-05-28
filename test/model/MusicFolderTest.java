@@ -121,16 +121,16 @@ public class MusicFolderTest {
 			assertTrue("The list is not sorted by genre", gc.compare(songs.get(i), songs.get(i-1)) >= 0);
 		}
 	}
-	
+
 	@Test
 	public void sortSongsByArtistTest() {
 		setupScenario2();
 		mf.sortSongsByArtist();
 		ArrayList<Song> songs = mf.getSongs();
-		ArtistComparator gc = new ArtistComparator();
-		
+		ArtistComparator arc = new ArtistComparator();
+	
 		for(int i = 1; i < songs.size(); i++) {
-			assertTrue("The list is not sorted by genre", gc.compare(songs.get(i), songs.get(i-1)) >= 0);
+			assertTrue("The list is not sorted by genre", arc.compare(songs.get(i), songs.get(i-1)) >= 0);
 		}
 	}
 }
