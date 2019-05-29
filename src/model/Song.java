@@ -169,9 +169,9 @@ public class Song implements Serializable, Comparable<Song>{
 		this.left = left;
 	}
 	
-	/**This method compares two song file names lexicographically as natural order.
+	/**This method compares two song title lexicographically as natural order.
 	 * @param s A song that represents the song that will be compared with this song lexicographically.
-	 * @return An integer that represents if this file name is greater, less or equal to s file name lexicographically.
+	 * @return An integer that represents if this title is greater, less or equal to s title lexicographically.
 	 */
 	@Override
 	public int compareTo(Song s) {

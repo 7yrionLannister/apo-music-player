@@ -33,7 +33,8 @@ public class MusicFolder implements Serializable {
 	/**This is the previous folder in the folders linked list
 	 */
 	private MusicFolder prevMusicFolder;
-	//TODO indica si esta ordenado el arraylist por filename o no, para asi mismo hacer busqueda binaria o no
+	/** This indicates if the Song ArrayList is sorted by title or not.
+	 */
 	private boolean sortedByTitle;
 
 	/**The method allows to get an instance of MusicFolder that will represent the folder received as parameter.
@@ -122,6 +123,9 @@ public class MusicFolder implements Serializable {
 		}
 	}
 	
+	/** This method allows to obtain a Song ArrayList that is sorted in preorder.
+	 * @return A Song ArrayList that is sorted in preorder.
+	 */
 	public ArrayList<Song> preorder() {
 		ArrayList<Song> preorderSongs = new ArrayList<Song>();
 		if(root != null) {
@@ -130,6 +134,10 @@ public class MusicFolder implements Serializable {
 		return preorderSongs;
 	}
 	
+	/** This method allows to fill a Song ArrayList with songs in preorder.
+	 * @param current A Song that represents the current song to be sorted in the Song ArrayList.
+	 * @param tofill A Song ArrayList that represents the array where songs in preorder are going to added.
+	 */
 	private void preorder(Song current, ArrayList<Song> tofill) {
 		tofill.add(current);
 		if(current.getLeft() != null) {
@@ -275,7 +283,12 @@ public class MusicFolder implements Serializable {
 	public ArrayList<Song> getSongs() {
 		return songs;
 	}
-
+	
+	/** This method allows to obtain a song specifying its title. When the list is sorted by title, it performs a binary
+	 * searching in the array. Else, the searching is performed by linear way. 
+	 * @param title A String that represents the song title from the song to find. 
+	 * @return A Song that represents the found song when this is in the array or the three.
+	 */
 	public Song search(String title) {
 		Song match = null;System.out.println(sortedByTitle);
 		if(sortedByTitle) {System.out.println("en el arreglo");
@@ -286,6 +299,10 @@ public class MusicFolder implements Serializable {
 		return match;
 	}
 	
+	/** This method performs a binary searching to look for a song by title.
+	 * @param title A String that represents the song title from the song to find.
+	 * @return A Song that represents the found song when this is in the array.
+	 */
 	private Song searchInArrayList(String title) {
 		Song found = null;
 		int low = 0;
@@ -305,6 +322,11 @@ public class MusicFolder implements Serializable {
 		return found;
 	}
 	
+	/** This method performs a linear searching to look for a song by title.
+	 * @param current A Song that represents the current song in the binary searching three.
+	 * @param title A String that represents the song title from the song to find.
+	 * @return A Song that represents the found song when this is in the binary searching three.
+	 */
 	private Song searchInBinarySearchTree(Song current, String title) {
 		if(current == null || title.compareTo(current.getTitle()) == 0) {
 			return current;
