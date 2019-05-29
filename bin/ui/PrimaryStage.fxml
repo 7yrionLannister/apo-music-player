@@ -21,7 +21,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="725.0" stylesheets="@PrimaryStageStyleSheet.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.PrimaryStageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="522.0" prefWidth="725.0" stylesheets="@PrimaryStageStyleSheet.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.PrimaryStageController">
    <bottom>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -189,8 +189,8 @@
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Circle fx:id="backgroundCircle" fill="#bcc4cd" layoutX="355.0" layoutY="127.0" radius="120.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Circle fx:id="coverImageCircle" fill="#ced4da" layoutX="355.0" layoutY="127.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="backgroundCircle" fill="#bcc4cd" layoutX="355.0" layoutY="161.0" radius="120.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="coverImageCircle" fill="#ced4da" layoutX="355.0" layoutY="161.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
                      </children>
                   </Pane>
                </content></Tab>
@@ -235,11 +235,11 @@
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#sortByTitle" prefHeight="25.0" prefWidth="102.0" text="Sort" />
-                                    <Button mnemonicParsing="false" onAction="#sortByGenre" prefHeight="25.0" prefWidth="124.0" text="Sort" />
-                                    <Button mnemonicParsing="false" onAction="#sortByAlbum" prefHeight="25.0" prefWidth="106.0" text="Sort" />
-                                    <Button mnemonicParsing="false" onAction="#sortByArtist" prefHeight="25.0" prefWidth="104.0" text="Sort" />
-                                    <Button mnemonicParsing="false" onAction="#sortBySize" prefHeight="25.0" prefWidth="74.0" text="Sort" />
+                                    <Button fx:id="titleSort" mnemonicParsing="false" onAction="#sortByTitle" prefHeight="25.0" prefWidth="102.0" text="Sort" />
+                                    <Button fx:id="genreSort" mnemonicParsing="false" onAction="#sortByGenre" prefHeight="25.0" prefWidth="124.0" text="Sort" />
+                                    <Button fx:id="albumSort" mnemonicParsing="false" onAction="#sortByAlbum" prefHeight="25.0" prefWidth="106.0" text="Sort" />
+                                    <Button fx:id="artistSort" mnemonicParsing="false" onAction="#sortByArtist" prefHeight="25.0" prefWidth="104.0" text="Sort" />
+                                    <Button fx:id="sizeSort" mnemonicParsing="false" onAction="#sortBySize" prefHeight="25.0" prefWidth="74.0" text="Sort" />
                                  </children>
                               </HBox>
                               <TableView fx:id="musicInfoTableView" prefHeight="357.0" prefWidth="546.0">

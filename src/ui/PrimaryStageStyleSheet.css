@@ -1,6 +1,5 @@
 .button {
     -fx-background-color: null;
-    -fx-background-radius: 50%;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
 }
 
@@ -21,4 +20,12 @@ ProgressBar {
 #deleteListButton {
     -fx-background-color: lightgrey;
     -fx-font-weight: bold;
+}
+
+#sizeSort, #artistSort, #albumSort, #genreSort, #titleSort {
+    -fx-background-color:rgb(19, 209, 200);
+}
+
+#deleteListButton {
+    -fx-background-color:rgba(248, 44, 29, 0.712);
 }
