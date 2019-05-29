@@ -68,6 +68,7 @@ public class MusicFolder implements Serializable {
 				addSongToBST(root, new Song(content[i]));
 			}
 		}
+		sortedByTitle = true;
 		songs = inorder();
 		folderName = folder.getName();
 		numberOfSongs = songs.size();
@@ -123,7 +124,6 @@ public class MusicFolder implements Serializable {
 	
 	public ArrayList<Song> preorder() {
 		ArrayList<Song> preorderSongs = new ArrayList<Song>();
-		sortedByTitle = true;
 		if(root != null) {
 			preorder(root, preorderSongs);
 		}
@@ -204,7 +204,7 @@ public class MusicFolder implements Serializable {
 	 * It uses Collections.sort.
 	 */
 	public void sortSongsByTitle() {
-		sortedByTitle = false;
+		sortedByTitle = true;
 		Collections.sort(songs);
 	}
 
@@ -277,10 +277,10 @@ public class MusicFolder implements Serializable {
 	}
 
 	public Song search(String title) {
-		Song match = null;
-		if(sortedByTitle) {
+		Song match = null;System.out.println(sortedByTitle);
+		if(sortedByTitle) {System.out.println("en el arreglo");
 			match = searchInArrayList(title);
-		} else {
+		} else {System.out.println("en el arbol");
 			match = searchInBinarySearchTree(root, title);
 		}	
 		return match;
