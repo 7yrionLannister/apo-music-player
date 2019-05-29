@@ -60,7 +60,7 @@ public class MusicPlayer {
 	/**It represents the current folder that is being played
 	 * */
 	private MusicFolder currentMusicFolder;
-	/** It represents 
+	/** It represents the songs played register.
 	 */
 	private String history;
 	
@@ -274,6 +274,9 @@ public class MusicPlayer {
 		return currentPlaylist;
 	}
 	
+	/** This method allows to obtain a the current music folder.
+	 * @return A MusicFolder that represents the current music folder.
+	 */
 	public MusicFolder getCurrentMusicFolder() {
 		return currentMusicFolder;
 	}
@@ -302,6 +305,9 @@ public class MusicPlayer {
 		}
 	}
 	
+	 /** This method allows to save the songs played register when the application is closed.
+	  * @throws IOException if the file has not been found, deleted or moved to another location.
+	  */
 	public void saveHistory() throws IOException {
 		File dir = new File(PLAYBACK_HISTORY_PATH);
 		if(!dir.exists()) {
