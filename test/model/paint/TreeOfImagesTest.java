@@ -32,14 +32,14 @@ class TreeOfImagesTest {
 	}
 	
 	@Test
-	void testTreeOfImages() {
+	public void testTreeOfImages() {
 		setupScenary1();
 		this.tree = new TreeOfImages();
 		assertTrue(tree.getRoot() == null, "The first attribute should be null.");
 	}
 
 	@Test
-	void testAddNodeInt() {
+	public void testAddNodeInt() {
 		setupScenary3();
 		int value = 10;
 		tree.addNode(value);
@@ -47,7 +47,7 @@ class TreeOfImagesTest {
 	}
 
 	@Test
-	void testAddNodeImageOnTreeImageOnTree() {
+	public void testAddNodeImageOnTreeImageOnTree() {
 		setupScenary3();
 		ImageOnTree n = new ImageOnTree(9);
 		tree.addNode(n, tree.getRoot());
@@ -55,13 +55,13 @@ class TreeOfImagesTest {
 	}
 
 	@Test
-	void testSelectRandomNode() {
+	public void testSelectRandomNode() {
 		setupScenary3();
 		ImageOnTree iot = tree.selectRandomNode();
 		assertTrue(search(tree, iot.getValue()), "The random node selected doesn't belong to the tree.");
 	}
 	@Test
-	void testSelectRandomNode2() {
+	public void testSelectRandomNode2() {
 		setupScenary3();
 		int[] values = new int[2000];
 		for (int i = 0; i < 2000; i++) {
@@ -72,25 +72,25 @@ class TreeOfImagesTest {
 	}
 
 	@Test
-	void testSize() {
+	public void testSize() {
 		setupScenary3();
 		assertTrue(tree.size() == 7, "The size method doesn't return the actual weight of the tree.");
 	}
 	
 	@Test
-	void testSize2() {
+	public void testSize2() {
 		setupScenary2();
 		assertTrue(tree.size() == 0, "The size method does not return 0 when the tree is empty");
 	}
 
 	@Test
-	void testGetRoot2() {
+	public void testGetRoot2() {
 		setupScenary3();
 		assertTrue(tree.getRoot().getValue() == 5, "The root reference hasn't been correctly assigned.");
 	}
 	
 	@Test
-	void testGetRoot1() {
+	public void testGetRoot1() {
 		setupScenary2();
 		assertNull(tree.getRoot(), "The root reference should be null");
 	}

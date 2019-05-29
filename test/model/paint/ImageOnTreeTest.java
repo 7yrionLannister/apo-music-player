@@ -34,13 +34,13 @@ class ImageOnTreeTest {
 	}
 
 	@Test
-	void testImageOnTree() {
+	public void testImageOnTree() {
 		setupStage1();
 		assertNotNull(root, "The object must not be null because it has just been instantiated");
 	}
 
 	@Test
-	void testGetLeft() {
+	public void testGetLeft() {
 		setupStage1();
 		setupStage2();
 
@@ -54,7 +54,7 @@ class ImageOnTreeTest {
 	}
 
 	@Test
-	void testSetLeft() {
+	public void testSetLeft() {
 		setupStage1();
 		setupStage2();
 
@@ -76,7 +76,7 @@ class ImageOnTreeTest {
 	}
 
 	@Test
-	void testGetRight() {
+	public void testGetRight() {
 		setupStage1();
 		setupStage2();
 
@@ -90,7 +90,7 @@ class ImageOnTreeTest {
 	}
 
 	@Test
-	void testSetRight() {
+	public void testSetRight() {
 		setupStage1();
 		setupStage2();
 

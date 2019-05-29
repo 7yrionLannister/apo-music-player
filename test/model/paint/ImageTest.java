@@ -11,13 +11,13 @@ class ImageTest {
 	}
 
 	@Test
-	void testGetValue() {
+	public void testGetValue() {
 		setupStage1();
 		assertEquals(image.getValue(), 3, "The value should be 3, not: " + image.getValue());
 	}
 
 	@Test
-	void testSetValue() {
+	public void testSetValue() {
 		setupStage1();
 		image.setValue(50);
 		assertEquals(image.getValue(), 50,
@@ -25,7 +25,7 @@ class ImageTest {
 	}
 
 	@Test
-	void testToString() {
+	public void testToString() {
 		setupStage1();
 		String value = "3";
 		assertEquals(image.toString(), value, "The value should be 3, not: " + image.toString());

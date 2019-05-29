@@ -37,7 +37,7 @@ class ListOfImagesTest {
 	}
 
 	@Test
-	void testListOfImages() {
+	public void testListOfImages() {
 		setupStage();
 		ListOfImages list = new ListOfImages();
 		assertNotNull(list, "The object can not be null, since it has just been instantiated");
@@ -45,7 +45,7 @@ class ListOfImagesTest {
 	}
 
 	@Test
-	void testAddNode() {
+	public void testAddNode() {
 		setupStage2();
 		assertNotNull(list.getFirst(),
 				"The first element must not be null since the first element has just been added to the list");
@@ -70,13 +70,13 @@ class ListOfImagesTest {
 	}
 
 	@Test
-	void testGetFirst() {
+	public void testGetFirst() {
 		setupStage2();
 		assertTrue(list.getFirst().getValue() == 0, "The attribute first hasn't been initialized correctly");
 	}
 
 	@Test
-	void testSetFirst() {
+	public void testSetFirst() {
 		setupStage2();
 		ImageOnList temp = new ImageOnList(21);
 		list.setFirst(temp);
@@ -87,13 +87,13 @@ class ListOfImagesTest {
 	}
 
 	@Test
-	void testSize() {
+	public void testSize() {
 		setupStage2();
 		assertEquals(6, list.size());
 	}
 
 	@Test
-	void testSelectPrevious() {
+	public void testSelectPrevious() {
 		setupStage2();
 		list.selectPrevious();
 		list.selectPrevious();
@@ -101,13 +101,13 @@ class ListOfImagesTest {
 	}
 
 	@Test
-	void testGetLastNode() {
+	public void testGetLastNode() {
 		setupStage2();
 		assertTrue(list.getLastNode().getValue() == 4, "The last object of the list doesn't coincide with the correct one");
 	}
 
 	@Test
-	void testLastSelected() {
+	public void testLastSelected() {
 		setupStage2();
 		list.selectNext();
 		list.selectNext();

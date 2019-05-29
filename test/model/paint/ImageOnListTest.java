@@ -23,7 +23,7 @@ class ImageOnListTest {
 	}
 
 	@Test
-	void testGetNext() {
+	public void testGetNext() {
 		setupStage1();
 		setupStage2();
 		ImageOnList second = new ImageOnList(30);
@@ -40,7 +40,7 @@ class ImageOnListTest {
 	}
 
 	@Test
-	void testSetNext() {
+	public void testSetNext() {
 		setupStage1();
 		ImageOnList object = new ImageOnList(3);
 		imageOnList.setNext(object);
@@ -49,7 +49,7 @@ class ImageOnListTest {
 	}
 
 	@Test
-	void testGetPrevious() {
+	public void testGetPrevious() {
 		setupStage1();
 		setupStage2();
 		ImageOnList second = new ImageOnList(30);
@@ -65,7 +65,7 @@ class ImageOnListTest {
 	}
 
 	@Test
-	void testSetPrevious() {
+	public void testSetPrevious() {
 		setupStage1();
 		setupStage2();
 		ImageOnList object = new ImageOnList(40);
@@ -86,7 +86,7 @@ class ImageOnListTest {
 	}
 
 	@Test
-	void testSetSelected() {
+	public void testSetSelected() {
 		setupStage1();
 		setupStage2();
 		imageOnList.setSelected(true);
