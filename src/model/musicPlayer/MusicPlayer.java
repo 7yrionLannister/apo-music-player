@@ -103,16 +103,16 @@ public class MusicPlayer {
 
 		currentCoverArt = currentSong.getImage();
 
-		currentSongAlbum.setValue(currentSong.getAlbum());
-		currentSongArtist.setValue(currentSong.getArtist());
-		currentSongTitle.setValue(currentSong.getTitle());
+		currentSongAlbum.set(currentSong.getAlbum());
+		currentSongArtist.set(currentSong.getArtist());
+		currentSongTitle.set(currentSong.getTitle());
 
 		songLoaded.set(songLoaded.get()+1);
 		history += "\n"+currentSong.getFileName();
 	}
 	
 	/** Method that deserializes the folder with music when the application is started again.
-	 * @param mf A File that represents the folder with music to deserialize when the application is started again.  
+	 * @param mf A File that represents the first music folder in the linked list to deserialize when the application is started again<br>mf != null
 	 * @throws IOException if the file has not been found, deleted or moved to another location.
 	 * @throws ClassNotFoundException if the class definition is not there due to the library witch contains it is not
 	 * in the application class path.
@@ -208,7 +208,6 @@ public class MusicPlayer {
 	 */
 	public void addMusicFolder(File dir) throws IOException, FolderWithoutMP3ContentException {
 		if(dir != null) {
-			//TODO hacer esto recursivo
 			MusicFolder toAdd = new MusicFolder(dir);
 			MusicFolder current = firstMusicFolder;
 			boolean duplicated = false;
@@ -260,7 +259,7 @@ public class MusicPlayer {
 	}
 	
 	/** This method allows to set the actual music folder songs in the current play list. 
-	 * @param current A MusicFolder that represents the actual music folder selected in the interface.
+	 * @param current A MusicFolder that represents the actual music folder selected in the interface<br>current != null
 	 */
 	public void setCurrentPlayList(MusicFolder current) {
 		currentPlaylist = current.getSongs();
@@ -274,7 +273,7 @@ public class MusicPlayer {
 		return currentPlaylist;
 	}
 	
-	/** This method allows to obtain a the current music folder.
+	/** This method allows to obtain the current music folder.
 	 * @return A MusicFolder that represents the current music folder.
 	 */
 	public MusicFolder getCurrentMusicFolder() {
@@ -282,7 +281,7 @@ public class MusicPlayer {
 	}
 	
 	/** This method allows to remove a music folder from the linked list.
-	 * @param toremove A MusicFolder that represents the music folder that will be removed from the linked list.
+	 * @param toremove A MusicFolder that represents the music folder that will be removed from the linked list<br>toremove != null
 	 * @throws AttemptedToRemoveDemoLibraryException if the user tries to remove the default music folder. 
 	 */
 	public void removeMusicFolderFromLibraries(MusicFolder toremove) throws AttemptedToRemoveDemoLibraryException, AttemptedToRemoveCurrentPlayListException {

@@ -5,8 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-
 import customExceptions.FolderWithoutMP3ContentException;
 import customExceptions.NotMP3FileException;
 
@@ -38,7 +36,7 @@ public class MusicFolder implements Serializable {
 	private boolean sortedByTitle;
 
 	/**The method allows to get an instance of MusicFolder that will represent the folder received as parameter.
-	 * @param folder The folder to be represented by this MusicFolder.
+	 * @param folder The folder to be represented by this MusicFolder<br>folder is different to null and is a valid directory in this device
 	 * @throws IOException if the folder doesn't exist or there was another problem reading it.
 	 * @throws FolderWithoutMP3ContentException if the folder doesn't contain any MP3 files in it.
 	 */
@@ -77,7 +75,7 @@ public class MusicFolder implements Serializable {
 
 	/** The method allows to add a new Song to the binary search tree according to the natural order.
 	 * @param current The current node in the binary search tree that is responsible to add the requested 
-	 * node before or after itself depending on the natural order. 
+	 * node before or after itself depending on the natural order<br>current != null 
 	 * @param addme The node that is going to be added to the binary search tree.
 	 */
 	private void addSongToBST(Song current, Song addme) {
@@ -110,7 +108,7 @@ public class MusicFolder implements Serializable {
 
 	/** The method allows to fill an ArrayList with the songs in the binary search tree in order.
 	 * @param current The current node in the binary search tree that is going to be added to the ArrayList after its left 
-	 * subtree and before its right subtree.
+	 * subtree and before its right subtree<br>current != null
 	 * @param tofill the ArrayList where the songs are going to accumulate.
 	 */
 	private void inorder(Song current, ArrayList<Song> tofill) {
@@ -135,8 +133,8 @@ public class MusicFolder implements Serializable {
 	}
 	
 	/** This method allows to fill a Song ArrayList with songs in preorder.
-	 * @param current A Song that represents the current song to be sorted in the Song ArrayList.
-	 * @param tofill A Song ArrayList that represents the array where songs in preorder are going to added.
+	 * @param current A Song that represents the current song to be added in the Song ArrayList<br>current != null
+	 * @param tofill A Song ArrayList that represents the array where songs in preorder are going to be added.
 	 */
 	private void preorder(Song current, ArrayList<Song> tofill) {
 		tofill.add(current);
@@ -208,7 +206,7 @@ public class MusicFolder implements Serializable {
 		return equal;
 	}
 
-	/** The method allows to sort the songs in the playList according to its title.
+	/** The method allows to sort the songs in the playList according to its title.<br>
 	 * It uses bubble sort.
 	 */
 	public void sortSongsByTitle() {
@@ -224,7 +222,7 @@ public class MusicFolder implements Serializable {
 		}
 	}
 
-	/**The method allows to sort the songs in the playList according to its artist.
+	/**The method allows to sort the songs in the playList according to its artist.<br>
 	 * It uses bubble sort.
 	 */
 	public void sortSongsByArtist() {
@@ -241,7 +239,7 @@ public class MusicFolder implements Serializable {
 		}
 	} 
 
-	/**The method allows to sort the songs in the playList according to its album.
+	/**The method allows to sort the songs in the playList according to its album.<br>
 	 * It uses insertion sort.
 	 */
 	public void sortSongsByAlbum() {
@@ -258,7 +256,7 @@ public class MusicFolder implements Serializable {
 		}
 	}
 
-	/**The method allows to sort the songs in the playList according to its size.
+	/**The method allows to sort the songs in the playList according to its size.<br>
 	 * It uses selection sort.
 	 */
 	public void sortSongsBySize() {
@@ -277,7 +275,7 @@ public class MusicFolder implements Serializable {
 		}
 	}
 
-	/**The method allows to sort the songs in the playList according to its genre.
+	/**The method allows to sort the songs in the playList according to its genre.<br>
 	 * It uses insertion sort.
 	 */
 	public void sortSongsByGenre() {
@@ -302,9 +300,9 @@ public class MusicFolder implements Serializable {
 	}
 	
 	/** This method allows to obtain a song specifying its title. When the list is sorted by title, it performs a binary
-	 * searching in the array. Else, the searching is performed by linear way. 
-	 * @param title A String that represents the song title from the song to find. 
-	 * @return A Song that represents the found song when this is in the array or the three.
+	 * searching in the array. Else, the searching is performed in the binary search tree. 
+	 * @param title A String that represents the song title from the song to find.<br>title != null
+	 * @return A Song that represents the found song when this is in the array or the three. If the method does not find the requested song it returns null
 	 */
 	public Song search(String title) {
 		Song match = null;System.out.println(sortedByTitle);
@@ -317,8 +315,8 @@ public class MusicFolder implements Serializable {
 	}
 	
 	/** This method performs a binary searching to look for a song by title.
-	 * @param title A String that represents the song title from the song to find.
-	 * @return A Song that represents the found song when this is in the array.
+	 * @param title A String that represents the song title from the song to find<br>title != null
+	 * @return A Song that represents the found song when this is in the array. If the method does not find the requested song it returns null
 	 */
 	private Song searchInArrayList(String title) {
 		Song found = null;
@@ -341,8 +339,8 @@ public class MusicFolder implements Serializable {
 	
 	/** This method performs a linear searching to look for a song by title.
 	 * @param current A Song that represents the current song in the binary searching three.
-	 * @param title A String that represents the song title from the song to find.
-	 * @return A Song that represents the found song when this is in the binary searching three.
+	 * @param title A String that represents the song title from the song to find<br>title != null
+	 * @return A Song that represents the found song when this is in the binary searching three. If the method does not find the requested song it returns null
 	 */
 	private Song searchInBinarySearchTree(Song current, String title) {
 		if(current == null || title.compareTo(current.getTitle()) == 0) {

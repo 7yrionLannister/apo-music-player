@@ -45,11 +45,12 @@ public class Song implements Serializable, Comparable<Song>{
 	/**It represents the left Song of this Song in the binary search three.
 	 */
 	private Song left;
-	
+	/**It is the file that is being represented by this Song
+	 * */
 	private File songFile;
 	
 	/**Song constructor method that receives a mp3 file as parameter and starts the entire song metadata. 
-	 * @param song A mp3 file that represents the song to instance this class.
+	 * @param song A mp3 file that represents the song to instance this class<br>song is different to null and is a valid mp3 file
 	 * @throws IOException if the file has not been found, deleted or moved to another location. 
 	 * @throws NotMP3FileException if the file delivered as parameter is not of mp3 type. 
 	 */
@@ -76,43 +77,43 @@ public class Song implements Serializable, Comparable<Song>{
 		image = mp3.getPicture(PictureType.FRONT_COVER)!=null?mp3.getPicture(PictureType.FRONT_COVER).getImage():null;
 	}
 	
-	/** Method that allows to get the song title.
-	 * @return A string that represents the song title.
+	/** Method that allows to get the song title
+	 * @return A string that represents the song title
 	 */
 	public String getTitle() {
 		return title;
 	}
 	
-	/**Method that allows to get the song artist.
-	 * @return A string that represents the song artist.
+	/**Method that allows to get the song artist
+	 * @return A string that represents the song artist
 	 */
 	public String getArtist() {
 		return artist;
 	}
 	
-	/**Method that allows to get the song title.
-	 * @return A string that represents the song title.
+	/**Method that allows to get the song title
+	 * @return A string that represents the song title
 	 */
 	public String getAlbum() {
 		return album;
 	}
 	
-	/**Method that allows to get the song image as a byte array.
-	 * @return A byte array that represents the song image.
+	/**Method that allows to get the song image as a byte array
+	 * @return A byte array that represents the song image
 	 */
 	public byte[] getImage() {
 		return image;
 	}
 	
-	/**Method that allows to get the song genre.
-	 * @return A string that represents the song genre.
+	/**Method that allows to get the song genre
+	 * @return A string that represents the song genre
 	 */
 	public String getGenre() {
 		return genre;
 	}
 	
 	/** This method allows to set the song cover art specifying a image file as parameter.
-	 * @param imageFile A File that represents the song cover art.
+	 * @param imageFile A File that represents the song cover art<br>imageFile is different to null and is a valid image file
 	 */
 	public void setCoverArt(File imageFile) {
 		try {
@@ -124,51 +125,51 @@ public class Song implements Serializable, Comparable<Song>{
 		}
 	}
 	
-	/**Method that allows to get the song path.
-	 * @return A string that represents the song path.
+	/**Method that allows to get the song path
+	 * @return A string that represents the song path
 	 */
 	public String getSongPath() {
 		return songPath;
 	}
 	
-	/** Method that allows to get the song size as a double type number. 
-	 * @return A double that represents the song size.
+	/** Method that allows to get the song size as a double type number.
+	 * @return A double that represents the song size
 	 */
 	public double getSize() {
 		return size;
 	}
 	
-	/**Method that allows to get the song file name.
-	 * @return A string that represents the song file name.
+	/**Method that allows to get the song file name
+	 * @return A string that represents the song file name
 	 */
 	public String getFileName() {
 		return fileName;
 	}
 	
-	/** Method that allows to get the song parent folder path.
-	 * @return A string that represents the song parent folder path.
+	/** Method that allows to get the song parent folder path
+	 * @return A string that represents the song parent folder path
 	 */
 	public String getParentFolderPath() {
 		return parentFolderPath;
 	}
 	
-	/**Method that allows to get the right Song associated with this Song in the binary search three.
-	 * @return A Song that represents the right Song associated with this Song in the binary search three.
+	/**Method that allows to get the right Song associated with this Song in the binary search three
+	 * @return A Song that represents the right Song associated with this Song in the binary search three
 	 */
 	public Song getRight() {
 		return right;
 	}
 	
 	/**
-	 * Method that allows to set the right Song associated with this Song in the binary search three.
-	 * @param right A Song that represents the right Song associated with this Song in the binary search three.
+	 * Method that allows to set the right Song associated with this Song in the binary search three
+	 * @param right A Song that represents the right Song associated with this Song in the binary search three
 	 */
 	public void setRight(Song right) {
 		this.right = right;
 	}
 	
-	/**Method that allows to get the left Song associated with this Song in the binary search three.
-	 * @return A Song that represents the left Song associated with this Song in the binary search three.
+	/**Method that allows to get the left Song associated with this Song in the binary search three
+	 * @return A Song that represents the left Song associated with this Song in the binary search three
 	 */
 	public Song getLeft() {
 		return left;
@@ -181,9 +182,9 @@ public class Song implements Serializable, Comparable<Song>{
 		this.left = left;
 	}
 	
-	/**This method compares two song title lexicographically as natural order.
-	 * @param s A song that represents the song that will be compared with this song lexicographically.
-	 * @return An integer that represents if this title is greater, less or equal to s title lexicographically.
+	/**This method compares two song title lexicographically by natural order
+	 * @param s A song that represents the song that will be compared with this song lexicographically<br>s != null
+	 * @return An integer that represents if this title is greater, less or equal to s title lexicographically
 	 */
 	@Override
 	public int compareTo(Song s) {
