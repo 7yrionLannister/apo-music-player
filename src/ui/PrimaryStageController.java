@@ -544,7 +544,7 @@ public class PrimaryStageController {
 
 			Stage popUp = new Stage();
 			Scene scene = new Scene(result);
-			popUp.setWidth(600);
+			popUp.setWidth(350);
 			popUp.setHeight(90);
 			popUp.setScene(scene);
 			popUp.setTitle("Your song has been found");
@@ -577,6 +577,5 @@ public class PrimaryStageController {
 		Window window = dialog.getDialogPane().getScene().getWindow();
 		window.setOnCloseRequest(event -> window.hide());
 		dialog.showAndWait();
-	
 	}
 }
