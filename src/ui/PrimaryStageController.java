@@ -199,7 +199,10 @@ public class PrimaryStageController {
 			Parent root = FXMLLoader.load(getClass().getResource("window.fxml"));
 			Scene s = new Scene(root);
 			Stage st = new Stage();
+			st.getIcons().add(new Image(new File("imgs"+File.separator+"cd.png").toURI().toString()));
+			st.setTitle("Customize cover art");
 			st.setScene(s);
+			st.setResizable(false);
 			st.initOwner(backgroundCircle.getParent().getScene().getWindow());
 			st.initModality(Modality.WINDOW_MODAL);
 			st.showAndWait();
