@@ -60,6 +60,8 @@ public class MusicPlayer {
 	/**It represents the current folder that is being played
 	 * */
 	private MusicFolder currentMusicFolder;
+	/** It represents 
+	 */
 	private String history;
 	
 	/** Constructor MusicPlayer method that starts the entire current song metadata and the media player. 
