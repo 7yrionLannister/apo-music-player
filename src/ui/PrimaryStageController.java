@@ -54,11 +54,11 @@ import threads.CurrentTrackTimeUpdaterThread;
 
 
 public class PrimaryStageController {
-	
+
 	/** It represents the current thread to modify the song time inside the application and the shuffle mode.	 
 	 */
 	private CurrentTrackTimeUpdaterThread cttu;
-	
+
 	/** It represents the default cover art image in the left corner when the current song metadata does not have this property. 
 	 */
 	public final static Image DEFAULT_THUMBNAIL = new Image(new File("imgs"+File.separator+"music-player.png").toURI().toString());
@@ -82,11 +82,11 @@ public class PrimaryStageController {
 	/** It represents the shuffle activated icon when the shuffle mode is activated. 	
 	 */
 	public final static Image SHUFFLE_ACTIVATED = new Image(new File("imgs"+File.separator+"shuffle.png").toURI().toString(), 40, 40, false, false);
-	
+
 	/** It represents the shuffle disabled icon when the shuffle mode is disabled..
 	 */
 	public final static Image SHUFFLE_DISABLED = new Image(new File("imgs"+File.separator+"not-shuffle.png").toURI().toString(), 40, 40, false, false);
-	
+
 	/** It represents the MusicPlayer that will manage all the mp3 files.
 	 */
 	private MusicPlayer musicPlayer;
@@ -186,7 +186,7 @@ public class PrimaryStageController {
 			}
 		});
 		shuffleSwitchButton.setGraphic(new ImageView(SHUFFLE_DISABLED));
-	    cttu = new CurrentTrackTimeUpdaterThread(this, false);
+		cttu = new CurrentTrackTimeUpdaterThread(this, false);
 		cttu.setDaemon(true);
 		cttu.start();
 		refreshIcons();
@@ -246,15 +246,20 @@ public class PrimaryStageController {
 	 */
 	@FXML
 	public void nextTrackButtonPressed(ActionEvent event) {
-		try {
-			if(caat != null) {
-				caat.pause();
+		if(!cttu.getShuffle()) {
+			try {
+				if(caat != null) {
+					caat.pause();
+				}
+				int cI = musicPlayer.getCurrentPlayList().indexOf(musicPlayer.getCurrentSong());
+				int nI = cI+1;
+				musicPlayer.setMedia(nI);
+			} catch(IndexOutOfBoundsException aioobe) {
+				restartThreads();
 			}
-			int cI = musicPlayer.getCurrentPlayList().indexOf(musicPlayer.getCurrentSong());
-			int nI = cI+1;
-			musicPlayer.setMedia(nI);
-		} catch(IndexOutOfBoundsException aioobe) {
-			restartThreads();
+		} else {
+			int song = (int) (Math.random() * musicPlayer.getCurrentPlayList().size()) + 1;
+			musicPlayer.setMedia(song);
 		}
 	}
 
@@ -286,15 +291,20 @@ public class PrimaryStageController {
 	 */
 	@FXML
 	public void prevTrackButtonPressed(ActionEvent event) {
-		try {
-			if(caat != null) {
-				caat.pause();
+		if(!cttu.getShuffle()) {
+			try {
+				if(caat != null) {
+					caat.pause();
+				}
+				int cI = musicPlayer.getCurrentPlayList().indexOf(musicPlayer.getCurrentSong());
+				int nI = cI-1;
+				musicPlayer.setMedia(nI);
+			} catch(IndexOutOfBoundsException aioobe) {
+				restartThreads();
 			}
-			int cI = musicPlayer.getCurrentPlayList().indexOf(musicPlayer.getCurrentSong());
-			int nI = cI-1;
-			musicPlayer.setMedia(nI);
-		} catch(IndexOutOfBoundsException aioobe) {
-			restartThreads();
+		} else {
+			int song = (int) (Math.random() * musicPlayer.getCurrentPlayList().size()) + 1;
+			musicPlayer.setMedia(song);
 		}
 	}
 
@@ -326,8 +336,8 @@ public class PrimaryStageController {
 			shuffleSwitchButton.setGraphic(new ImageView(SHUFFLE_DISABLED));
 			cttu.setShuffle(false);
 		} else {
-		shuffleSwitchButton.setGraphic(new ImageView(SHUFFLE_ACTIVATED));
-		cttu.setShuffle(true);
+			shuffleSwitchButton.setGraphic(new ImageView(SHUFFLE_ACTIVATED));
+			cttu.setShuffle(true);
 		}
 	}
 
@@ -463,7 +473,7 @@ public class PrimaryStageController {
 		alert.setHeaderText(header);
 		alert.showAndWait();
 	}
-	
+
 	/** This method allows to sort the songs in the table view by title.
 	 * @param event An ActionEvent that represents the event when the associated sort by title button is pressed.
 	 */
@@ -472,7 +482,7 @@ public class PrimaryStageController {
 		musicPlayer.getCurrentMusicFolder().sortSongsByTitle();
 		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
-	
+
 	/** This method allows to sort the songs in the table view by genre.
 	 * @param event An ActionEvent that represents the event when the associated sort by genre button is pressed.
 	 */
@@ -481,7 +491,7 @@ public class PrimaryStageController {
 		musicPlayer.getCurrentMusicFolder().sortSongsByGenre();
 		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
-	
+
 	/** This method allows to sort the songs in the table view by album.
 	 * @param event An ActionEvent that represents the event when the associated sort by album button is pressed.
 	 */
@@ -490,7 +500,7 @@ public class PrimaryStageController {
 		musicPlayer.getCurrentMusicFolder().sortSongsByAlbum();
 		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
-	
+
 	/** This method allows to sort the songs in the table view by artist.
 	 * @param event An ActionEvent that represents the event when the associated sort by artist button is pressed.
 	 */
@@ -499,7 +509,7 @@ public class PrimaryStageController {
 		musicPlayer.getCurrentMusicFolder().sortSongsByArtist();
 		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
-	
+
 	/** This method allows to sort the songs in the table view by size.
 	 * @param event An ActionEvent that represents the event when the associated sort by size button is pressed.
 	 */
@@ -508,7 +518,7 @@ public class PrimaryStageController {
 		musicPlayer.getCurrentMusicFolder().sortSongsBySize();
 		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
-	
+
 	/** This method allows to found a song in the current folder specifying its file name.
 	 * @param event An ActionEvent that represents the event when the associated search enter button is pressed.
 	 */
@@ -517,7 +527,7 @@ public class PrimaryStageController {
 		Song match = musicPlayer.getCurrentMusicFolder().search(searchTextField.getText());
 		showResult(match);
 	}
-	
+
 	/** This method allows to show a new window with the searched song in a table view. 
 	 * @param s A Song that represents the searched song in the current music folder.
 	 */
@@ -555,7 +565,7 @@ public class PrimaryStageController {
 			showDialog("Your Song has not been found");
 		}
 	}
-	
+
 	/** This method allows to know what was the searching time if the song was found. Else, it allows to know why the 
 	 * wasn't be found in the music folder.
 	 * @param message A String that represents the sorting time if the searching is achieved. Else, it shows that searching
