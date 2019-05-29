@@ -509,8 +509,7 @@ public class PrimaryStageController {
 		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
 	
-	/**
-	 * 
+	/** This method allows to found a song in the current folder specifying its file name.
 	 * @param event An ActionEvent that represents the event when the associated search enter button is pressed.
 	 */
 	@FXML
@@ -519,6 +518,9 @@ public class PrimaryStageController {
 		showResult(match);
 	}
 	
+	/** This method allows to show a new window with the searched song in a table view. 
+	 * @param s A Song that represents the searched song in the current music folder.
+	 */
 	public void showResult(Song s) {
 		if(s != null) {
 			ObservableList<Song> SongResults = FXCollections.observableArrayList();
@@ -554,6 +556,11 @@ public class PrimaryStageController {
 		}
 	}
 	
+	/** This method allows to know what was the searching time if the song was found. Else, it allows to know why the 
+	 * wasn't be found in the music folder.
+	 * @param message A String that represents the sorting time if the searching is achieved. Else, it shows that searching
+	 * can't be performed such by the searched song is not in that folder or the user introduced a invalid input.
+	 */
 	public void showDialog(String message) {
 
 		Dialog dialog = new Dialog();
