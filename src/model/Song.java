@@ -108,8 +108,14 @@ public class Song implements Serializable, Comparable<Song>{
 		return genre;
 	}
 	
-	public void setCoverArt() {
-		//TODO complete this
+	public void setCoverArt(File imageFile) {
+		try {
+			MP3 mp3 = new MP3(songPath);
+			mp3.setPicture(PictureType.FRONT_COVER, imageFile);
+			image = mp3.getPicture(PictureType.FRONT_COVER).getImage();
+		} catch (IOException e) {
+			System.out.println("NO FUNCIONO");
+		}
 	}
 	
 	/**Method that allows to get the song path.
