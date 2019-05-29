@@ -46,12 +46,15 @@ public class Song implements Serializable, Comparable<Song>{
 	 */
 	private Song left;
 	
+	private File songFile;
+	
 	/**Song constructor method that receives a mp3 file as parameter and starts the entire song metadata. 
 	 * @param song A mp3 file that represents the song to instance this class.
 	 * @throws IOException if the file has not been found, deleted or moved to another location. 
 	 * @throws NotMP3FileException if the file delivered as parameter is not of mp3 type. 
 	 */
 	public Song(File song) throws IOException, NotMP3FileException {
+		songFile = song;
 		String path = song.toURI().toString();
 		if(!song.exists()) {
 			throw new FileNotFoundException();
@@ -113,11 +116,11 @@ public class Song implements Serializable, Comparable<Song>{
 	 */
 	public void setCoverArt(File imageFile) {
 		try {
-			MP3 mp3 = new MP3(songPath);
+			MP3 mp3 = new MP3(songFile);
 			mp3.setPicture(PictureType.FRONT_COVER, imageFile);
 			image = mp3.getPicture(PictureType.FRONT_COVER).getImage();
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	

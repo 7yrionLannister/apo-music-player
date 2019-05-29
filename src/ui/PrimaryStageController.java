@@ -112,7 +112,6 @@ public class PrimaryStageController {
 	@FXML private Slider volumeSlider;
 	@FXML private Button shuffleSwitchButton;
 	@FXML private Button addListButton;
-	@FXML private Button aboutButton;
 	@FXML private TableView<MusicFolder> librariesTableView;
 	@FXML private TableColumn<MusicFolder, String> libraryTableColumn;
 	@FXML private TableColumn<MusicFolder, Integer> songsTableColumn;
@@ -195,31 +194,24 @@ public class PrimaryStageController {
 	 * @param event An ActionEvent that represents the event when the associated about button is pressed.
 	 */
 	@FXML
-	public void aboutButtonPressed(ActionEvent event) {
-		Stage about = new Stage();
-		Pane pane = new Pane();
-		Label l = new Label();
-		Label l2 = new Label();
-		Label l3 = new Label();
-		Label l4 = new Label();
-		l.setText("Apo Music Player is a music player presented as a final ");
-		l2.setText("project of the algorithms and programming 2 course.");
-		l3.setText("It was meant to apply the knowledge learned in the first");
-		l4.setText("two algorithm courses. Thanks for reading.");
-		Image java = new Image(new File("imgs/java.png").toURI().toString());
-		ImageView jav = new ImageView();
-		jav.setImage(java);
-		l2.relocate(0, 15);
-		l3.relocate(0, 30);
-		l4.relocate(0, 45);
-		jav.relocate(63, 67);
-		pane.getChildren().addAll(l, l2, l3, l4, jav);
-		Scene scene = new Scene(pane, 286, 100);
-		about.setTitle("About Apo Music Player");
-		about.setResizable(false);
-		about.setScene(scene);
-		about.getIcons().add(new Image(new File("imgs"+File.separator+"cd.png").toURI().toString()));
-		about.show();
+	public void editButtonPressed(ActionEvent event) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("window.fxml"));
+			Scene s = new Scene(root);
+			Stage st = new Stage();
+			st.setScene(s);
+			st.initOwner(backgroundCircle.getParent().getScene().getWindow());
+			st.initModality(Modality.WINDOW_MODAL);
+			st.showAndWait();
+			File icon = new File(PaintController.ICON);
+			if(icon.exists()) {
+				musicPlayer.getCurrentSong().setCoverArt(icon);
+				icon.delete();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		refreshIcons();
 	}
 
 	/** This method allows to add a new music library inside the application invoking a DirectoryChooser.
@@ -409,7 +401,7 @@ public class PrimaryStageController {
 	public void refreshIcons() {
 		songThumbnail.setImage(DEFAULT_THUMBNAIL);
 		coverImageCircle.setFill(new ImagePattern(songThumbnail.getImage()));
-		byte[] picture = musicPlayer.getCurrentCoverArt();
+		byte[] picture = musicPlayer.getCurrentSong().getImage();
 		if(picture != null && picture.length>0) {
 			ByteArrayInputStream bais = new ByteArrayInputStream(picture);
 			try {

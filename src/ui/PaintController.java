@@ -20,7 +20,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class PaintController {
-
+	
+	public final static String EXPORTED_IMGS_PATH = "img";  
+	public final static String ICON = EXPORTED_IMGS_PATH + File.separator + "icon.PNG";
 	@FXML
 	private BorderPane borderPane;
 
@@ -175,14 +177,11 @@ public class PaintController {
     public void onSave() {
         try {
             Image snapshot = canvas.snapshot(null, null);
-            FileChooser saveAs = new FileChooser();
-            saveAs.setTitle("Save");
-            FileChooser.ExtensionFilter extFilterJPG =  new FileChooser.ExtensionFilter("JPG files (*.JPG)", "*.JPG");
-            FileChooser.ExtensionFilter extFilterjpg =  new FileChooser.ExtensionFilter("jpg files (*.jpg)", "*.jpg");
-            FileChooser.ExtensionFilter extFilterPNG =  new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG");
-            FileChooser.ExtensionFilter extFilterpng = new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
-            saveAs.getExtensionFilters().addAll(extFilterJPG, extFilterjpg, extFilterPNG, extFilterpng);
-            ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", new File(saveAs.showSaveDialog(null)+""));
+            File dir = new File(EXPORTED_IMGS_PATH);
+    		if(!dir.exists()) {
+    			dir.mkdir();
+    		}
+            ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", new File(ICON));
         } catch (IOException e) {
         	e.printStackTrace();
         }
@@ -197,7 +196,7 @@ public class PaintController {
 	 * @see #listOfImages
 	 */
     @FXML
-    void prevImg(ActionEvent event) {
+    public void prevImg(ActionEvent event) {
     	canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     	listOfImages.selectPrevious();
     	String imageFile = listOfImages.lastSelected().getValue()+".jpg";
@@ -215,7 +214,7 @@ public class PaintController {
 	 * @see #listOfImages
 	 */
     @FXML
-    void nextImg(ActionEvent event) {
+    public void nextImg(ActionEvent event) {
     	canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     	listOfImages.selectNext();
     	String imageFile = listOfImages.lastSelected().getValue()+".jpg";
@@ -233,7 +232,7 @@ public class PaintController {
 	 * @param event the event received after clicking on the <<Load image>> button.
 	 */
 	@FXML
-	void loadImage(ActionEvent event) {
+	public void loadImage(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
 		FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.JPG)", "*.JPG");
 		FileChooser.ExtensionFilter extFilterjpg = new FileChooser.ExtensionFilter("jpg files (*.jpg)", "*.jpg");
@@ -259,7 +258,7 @@ public class PaintController {
 	 * displayed on the canvas.
 	 */
     @FXML
-    void randomImg(ActionEvent event) throws IOException {
+    public void randomImg(ActionEvent event) throws IOException {
     	canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     	String imageFile = treeOfImages.selectRandomNode().getValue()+".jpg";
     	String path = System.getProperty("user.dir").replace(File.separator, "/") + "/src/ui/img/" + imageFile;

@@ -161,11 +161,11 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="aboutButton" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#aboutButtonPressed" prefHeight="40.0" prefWidth="40.0">
+                              <Button fx:id="editButton" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#editButtonPressed" prefHeight="40.0" prefWidth="40.0">
                                  <graphic>
                                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../imgs/about.png" />
+                                          <Image url="@../../imgs/pencil.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -242,7 +242,7 @@
                                     <Button fx:id="sizeSort" mnemonicParsing="false" onAction="#sortBySize" prefHeight="25.0" prefWidth="74.0" text="Sort" />
                                  </children>
                               </HBox>
-                              <TableView fx:id="musicInfoTableView" prefHeight="357.0" prefWidth="546.0">
+                              <TableView fx:id="musicInfoTableView" prefHeight="401.0" prefWidth="552.0">
                                 <columns>
                                   <TableColumn fx:id="titleTableColumn" prefWidth="101.0" sortable="false" text="Title" />
                                   <TableColumn fx:id="genreTableColumn" prefWidth="124.0" sortable="false" text="Genre" />
