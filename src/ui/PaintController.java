@@ -200,7 +200,7 @@ public class PaintController {
     	canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     	listOfImages.selectPrevious();
     	String imageFile = listOfImages.lastSelected().getValue()+".jpg";
-    	String path = System.getProperty("user.dir").replace(File.separator, "/") + "/src/ui/img/" + imageFile;
+    	String path = System.getProperty("user.dir").replace(File.separator, "/") + "/img/" + imageFile;
     	Image image = new Image("file:///"+path, canvas.getWidth(), canvas.getHeight(), false, false);
     	canvas.getGraphicsContext2D().drawImage(image, 0, 0);
     }
@@ -218,7 +218,7 @@ public class PaintController {
     	canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     	listOfImages.selectNext();
     	String imageFile = listOfImages.lastSelected().getValue()+".jpg";
-    	String path = System.getProperty("user.dir").replace(File.separator, "/") + "/src/ui/img/" + imageFile;
+    	String path = System.getProperty("user.dir").replace(File.separator, "/") + "/img/" + imageFile;
     	Image image = new Image("file:///"+path, canvas.getWidth(), canvas.getHeight(), false, false);
     	canvas.getGraphicsContext2D().drawImage(image, 0, 0);
     }
@@ -261,7 +261,7 @@ public class PaintController {
     public void randomImg(ActionEvent event) throws IOException {
     	canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     	String imageFile = treeOfImages.selectRandomNode().getValue()+".jpg";
-    	String path = System.getProperty("user.dir").replace(File.separator, "/") + "/src/ui/img/" + imageFile;
+    	String path = System.getProperty("user.dir").replace(File.separator, "/") + "/img/" + imageFile;
     	Image image = new Image("file:///"+path, canvas.getWidth(), canvas.getHeight(), false, false);
     	canvas.getGraphicsContext2D().drawImage(image, 0, 0);
     }
