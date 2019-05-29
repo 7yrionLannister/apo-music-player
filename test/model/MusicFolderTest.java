@@ -10,6 +10,12 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import customExceptions.FolderWithoutMP3ContentException;
+import model.musicPlayer.AlbumComparator;
+import model.musicPlayer.ArtistComparator;
+import model.musicPlayer.GenreComparator;
+import model.musicPlayer.MusicFolder;
+import model.musicPlayer.SizeComparator;
+import model.musicPlayer.Song;
 
 
 public class MusicFolderTest {	

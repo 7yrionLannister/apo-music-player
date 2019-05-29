@@ -1,4 +1,4 @@
-package model;
+package model.musicPlayer;
 
 import java.util.Comparator;
 

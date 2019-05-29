@@ -45,9 +45,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
-import model.MusicFolder;
-import model.MusicPlayer;
-import model.Song;
+import model.musicPlayer.MusicFolder;
+import model.musicPlayer.MusicPlayer;
+import model.musicPlayer.Song;
 import threads.CoverArtAnimationThread;
 import threads.CurrentTrackTimeUpdaterThread;
 

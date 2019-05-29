@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import javafx.application.Platform;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import model.MusicPlayer;
-import model.Song;
+import model.musicPlayer.MusicPlayer;
+import model.musicPlayer.Song;
 import ui.PrimaryStageController;
 
 public class CurrentTrackTimeUpdaterThread extends Thread {

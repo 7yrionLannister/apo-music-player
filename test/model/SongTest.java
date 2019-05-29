@@ -9,6 +9,7 @@ import java.io.IOException;
 import org.junit.jupiter.api.Test;
 
 import customExceptions.NotMP3FileException;
+import model.musicPlayer.Song;
 
 public class SongTest {
 	private Song s;
