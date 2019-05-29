@@ -509,6 +509,10 @@ public class PrimaryStageController {
 		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
 	}
 	
+	/**
+	 * 
+	 * @param event An ActionEvent that represents the event when the associated search enter button is pressed.
+	 */
 	@FXML
 	public void searchPressed(ActionEvent event) {
 		Song match = musicPlayer.getCurrentMusicFolder().search(searchTextField.getText());
