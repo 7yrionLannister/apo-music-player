@@ -285,7 +285,7 @@ public class MusicPlayer {
 	 * @param toremove A MusicFolder that represents the music folder that will be removed from the linked list.
 	 * @throws AttemptedToRemoveDemoLibraryException if the user tries to remove the default music folder. 
 	 */
-	public void removeMusicFolderFromLibraries(MusicFolder toremove) throws AttemptedToRemoveDemoLibraryException {
+	public void removeMusicFolderFromLibraries(MusicFolder toremove) throws AttemptedToRemoveDemoLibraryException, AttemptedToRemoveCurrentPlayListException {
 		if(toremove == firstMusicFolder) {
 			throw new AttemptedToRemoveDemoLibraryException();
 		}

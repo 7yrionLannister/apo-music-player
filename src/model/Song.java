@@ -117,7 +117,7 @@ public class Song implements Serializable, Comparable<Song>{
 			mp3.setPicture(PictureType.FRONT_COVER, imageFile);
 			image = mp3.getPicture(PictureType.FRONT_COVER).getImage();
 		} catch (IOException e) {
-			System.out.println("NO FUNCIONO");
+			System.out.println(e.getMessage());
 		}
 	}
 	

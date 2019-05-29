@@ -11,7 +11,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import javafx.scene.text.Text;
+import javafx.scene.control.TextArea;
 
 public class HistoryViewerController {
 	
@@ -19,7 +19,7 @@ public class HistoryViewerController {
 	private ListView<File> historyFilesListView;
 
 	@FXML
-	private Text historyText;
+	private TextArea historyText;
 	
 	/** This method starts and setups all the necessary components inside the interface and bind them with the model when is started.
 	 */
