@@ -201,11 +201,19 @@ public class MusicFolder implements Serializable {
 	}
 
 	/** The method allows to sort the songs in the playList according to its title.
-	 * It uses Collections.sort.
+	 * It uses bubble sort.
 	 */
 	public void sortSongsByTitle() {
 		sortedByTitle = true;
-		Collections.sort(songs);
+		for(int i = 0; i < songs.size(); i++) {
+			for(int j = 0; j < songs.size()-1-i; j++) {
+				if(songs.get(j).compareTo(songs.get(j+1)) > 0) {
+					Song temp = songs.get(j);
+					songs.set(j, songs.get(j+1));
+					songs.set(j+1, temp);
+				}
+			}
+		}
 	}
 
 	/**The method allows to sort the songs in the playList according to its artist.
@@ -262,11 +270,20 @@ public class MusicFolder implements Serializable {
 	}
 
 	/**The method allows to sort the songs in the playList according to its genre.
-	 * It uses Collections.sort.
+	 * It uses insertion sort.
 	 */
 	public void sortSongsByGenre() {
 		sortedByTitle = false;
-		Collections.sort(songs, new GenreComparator());
+		GenreComparator gc = new GenreComparator();
+		for(int i = 1; i < songs.size(); i++) {
+			Song current = songs.get(i);
+			int j = i-1;
+			while(j >= 0 && gc.compare(songs.get(j), current) > 0) {
+				songs.set(j+1, songs.get(j));
+				j--;
+			}
+			songs.set(j+1, current);
+		}
 	}
 
 	/**The method allows to obtain a Song ArrayList that represents all the songs inside the music folder.
