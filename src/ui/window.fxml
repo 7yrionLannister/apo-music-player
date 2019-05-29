@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="701.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.PaintController">
+
+    <top>
+        <VBox>
+            <MenuBar>
+                <Menu text="File">
+                    <MenuItem onAction="#onSave" text="Save" />
+               <MenuItem mnemonicParsing="false" onAction="#loadImage" text="Load image" />
+                    <MenuItem onAction="#onExit" text="Exit" />
+                </Menu>
+            </MenuBar>
+
+            <ToolBar>
+                <HBox alignment="CENTER" spacing="5">
+               <Label text="Pencil size:">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Label>
+               <ComboBox fx:id="brushSize" prefHeight="31.0" prefWidth="60.0" promptText="" />
+                    <ColorPicker fx:id="colorPicker" prefHeight="25.0" prefWidth="113.0" />
+                    <CheckBox fx:id="eraser" text="Eraser" />
+               <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="5.0" />
+               <Label layoutX="10.0" layoutY="12.0" text="Pencil type:">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Label>
+                </HBox>
+            <ComboBox fx:id="pencilType" prefHeight="31.0" prefWidth="70.0" promptText="" />
+            <Separator orientation="VERTICAL" prefHeight="30.0" prefWidth="15.0" />
+            <CheckBox fx:id="shape" mnemonicParsing="false" />
+            <Label prefHeight="27.0" prefWidth="63.0" text="Effects:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="shapes" layoutX="487.0" layoutY="10.0" prefHeight="31.0" prefWidth="70.0" promptText="" />
+            <Separator orientation="VERTICAL" prefHeight="31.0" prefWidth="14.0" />
+            <Label text="Images:">
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="previous" mnemonicParsing="false" onAction="#prevImg" text="previous" />
+            <Button mnemonicParsing="false" onAction="#nextImg" text="next" />
+            <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="0.0" />
+            <Button mnemonicParsing="false" onAction="#randomImg" text="Random IMG" />
+            </ToolBar>
+        </VBox>
+    </top>
+   <center>
+        <Canvas fx:id="canvas" height="635.0" width="989.0" BorderPane.alignment="CENTER" />
+   </center>
+
+</BorderPane>
