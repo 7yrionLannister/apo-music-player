@@ -108,6 +108,9 @@ public class Song implements Serializable, Comparable<Song>{
 		return genre;
 	}
 	
+	/** This method allows to set the song cover art specifying a image file as parameter.
+	 * @param imageFile A File that represents the song cover art.
+	 */
 	public void setCoverArt(File imageFile) {
 		try {
 			MP3 mp3 = new MP3(songPath);
