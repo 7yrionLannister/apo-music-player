@@ -13,6 +13,7 @@ import customExceptions.FolderWithoutMP3ContentException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
@@ -42,6 +44,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 import model.MusicFolder;
 import model.MusicPlayer;
@@ -508,14 +511,61 @@ public class PrimaryStageController {
 	
 	@FXML
 	public void searchPressed(ActionEvent event) {
-		ArrayList<Song> songs = musicPlayer.getFirstMusicFolder().preorder();
-		for(Song s:songs) {
-			System.out.println(s.getFileName());
+		Song match = musicPlayer.getCurrentMusicFolder().search(searchTextField.getText());
+		showResult(match);
+	}
+	
+	public void showResult(Song s) {
+		if(s != null) {
+			ObservableList<Song> SongResults = FXCollections.observableArrayList();
+			SongResults.add(s);
+
+			TableView<Song> result = new TableView<Song>();
+			TableColumn<Song, String> titleColumn = new TableColumn<Song, String>("Title");
+			TableColumn<Song, String> genreColumn = new TableColumn<Song, String>("Genre");
+			TableColumn<Song, Integer> albumColumn = new TableColumn<Song, Integer>("Album");
+			TableColumn<Song, String> artistColumn = new TableColumn<Song, String>("Artist");
+			TableColumn<Song, String> sizeColumn = new TableColumn<Song, String>("Size");
+
+			titleColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("title"));
+			genreColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("genre"));
+			albumColumn.setCellValueFactory(new PropertyValueFactory<Song, Integer>("album"));
+			artistColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("artist"));
+			sizeColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("size"));
+
+			result.getColumns().addAll(titleColumn, genreColumn, albumColumn, artistColumn, sizeColumn);
+			result.setItems(SongResults);
+
+			Stage popUp = new Stage();
+			Scene scene = new Scene(result);
+			popUp.setWidth(600);
+			popUp.setHeight(90);
+			popUp.setScene(scene);
+			popUp.setTitle("Your song has been found");
+			popUp.setResizable(false);
+			popUp.show();
 		}
-		System.out.println("\nAAA");
-		songs = musicPlayer.getFirstMusicFolder().inorder();
-		for(Song s:songs) {
-			System.out.println(s.getFileName());
+		else {
+			showDialog("Your Song has not been found");
 		}
+	}
+	
+	public void showDialog(String message) {
+
+		Dialog dialog = new Dialog();
+		dialog.setContentText(message);
+		if(message.substring(0, 4).equalsIgnoreCase("time")) {
+			dialog.setTitle("Time sorting");
+		}
+		else if(message.substring(0, 4).equalsIgnoreCase("your")) {
+			dialog.setTitle("Unsuccessful search");
+		}
+		else {
+			dialog.setTitle("Invalid input");
+		}
+		Window window = dialog.getDialogPane().getScene().getWindow();
+		window.setOnCloseRequest(event -> window.hide());
+		dialog.showAndWait();
+	
 	}
 }

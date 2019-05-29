@@ -276,12 +276,14 @@ public class MusicFolder implements Serializable {
 		return songs;
 	}
 
-	public void search(String title) {
+	public Song search(String title) {
+		Song match = null;
 		if(sortedByTitle) {
-			searchInArrayList(title);
+			match = searchInArrayList(title);
 		} else {
-			searchInBinarySearchTree(root, title);
+			match = searchInBinarySearchTree(root, title);
 		}	
+		return match;
 	}
 	
 	private Song searchInArrayList(String title) {
