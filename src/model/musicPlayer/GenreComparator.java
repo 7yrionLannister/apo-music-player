@@ -11,8 +11,8 @@ public class GenreComparator implements Comparator<Song>{
 	 * @return An integer that represents if the Song s1 genre is greater, less or equal to Song s2 genre lexicographically.  
 	 */
 	@Override
-	public int compare(Song o1, Song o2) {
-		return o1.getGenre().compareTo(o2.getGenre());
+	public int compare(Song s1, Song s2) {
+		return s1.getGenre().compareTo(s2.getGenre());
 	}
 	
 }

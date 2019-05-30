@@ -197,6 +197,7 @@ public class MusicFolder implements Serializable {
 
 	/**The method allows to know whether this MusicFolder is equal to another one.
 	 * @param another The music folder to make the comparison.
+	 * @return A boolean that represents whether this MusicFolder equals to another
 	 */
 	public boolean equals(MusicFolder another) {
 		boolean equal = false;

@@ -20,7 +20,8 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 	private boolean shuffle;
 	
 	/** CurrentTrackTimeUpdaterThread constructor method that receives the music player interface controller as parameter.
-	 * @param psc A PrimaryStageController that represents the music player interface controller.
+	 * @param psc A PrimaryStageController that represents the music player interface controller<br>psc != null
+	 * @param sh A boolean that indicates whether the music player is in shuffle mode or not
 	 */
 	public CurrentTrackTimeUpdaterThread(PrimaryStageController psc, boolean sh) {
 		this.psc = psc;

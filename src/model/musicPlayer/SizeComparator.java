@@ -11,11 +11,11 @@ public class SizeComparator implements Comparator <Song>{
 	 * @return An integer that represents if the Song s1 size is greater, less or equal to Song s2 size.  
 	 */
 	@Override
-	public int compare(Song o1, Song o2) {
+	public int compare(Song s1, Song s2) {
 		int comp = 0;
-		if(o1.getSize() > o2.getSize()) {
+		if(s1.getSize() > s2.getSize()) {
 			comp = 1;
-		} else if(o1.getSize() < o2.getSize()) {
+		} else if(s1.getSize() < s2.getSize()) {
 			comp = -1;
 		}
 		return comp;
