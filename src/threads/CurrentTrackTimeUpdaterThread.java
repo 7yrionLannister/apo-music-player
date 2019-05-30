@@ -1,6 +1,7 @@
 package threads;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javafx.application.Platform;
 import javafx.scene.media.Media;
@@ -57,7 +58,8 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 							MusicPlayer mp = psc.getMusicPlayer();
 							ArrayList<Song> toShuffle = mp.getCurrentPlayList();
 							if(shuffle) {
-								int song = (int) (Math.random() * toShuffle.size()) + 1;
+								Random r = new Random();
+								int song = r.nextInt(toShuffle.size());
 								psc.getMusicPlayer().setMedia(song);
 							} else {
 								int song = toShuffle.indexOf(mp.getCurrentSong()) + 1;

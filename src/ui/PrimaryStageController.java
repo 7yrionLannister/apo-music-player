@@ -3,6 +3,7 @@ package ui;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -252,7 +253,8 @@ public class PrimaryStageController {
 				restartThreads();
 			}
 		} else {
-			int song = (int) (Math.random() * musicPlayer.getCurrentPlayList().size()) + 1;
+			Random r = new Random();
+			int song = r.nextInt(musicPlayer.getCurrentPlayList().size());
 			musicPlayer.setMedia(song);
 		}
 	}
@@ -297,7 +299,8 @@ public class PrimaryStageController {
 				restartThreads();
 			}
 		} else {
-			int song = (int) (Math.random() * musicPlayer.getCurrentPlayList().size()) + 1;
+			Random r = new Random();
+			int song = r.nextInt(musicPlayer.getCurrentPlayList().size());
 			musicPlayer.setMedia(song);
 		}
 	}
@@ -474,7 +477,7 @@ public class PrimaryStageController {
 	@FXML
 	public void sortByTitle(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByTitle();
-		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
+		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getCurrentMusicFolder().getSongs()));
 	}
 
 	/** This method allows to sort the songs in the table view by genre.
@@ -483,7 +486,7 @@ public class PrimaryStageController {
 	@FXML
 	public void sortByGenre(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByGenre();
-		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
+		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getCurrentMusicFolder().getSongs()));
 	}
 
 	/** This method allows to sort the songs in the table view by album.
@@ -492,7 +495,7 @@ public class PrimaryStageController {
 	@FXML
 	public void sortByAlbum(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByAlbum();
-		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
+		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getCurrentMusicFolder().getSongs()));
 	}
 
 	/** This method allows to sort the songs in the table view by artist.
@@ -501,7 +504,7 @@ public class PrimaryStageController {
 	@FXML
 	public void sortByArtist(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsByArtist();
-		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
+		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getCurrentMusicFolder().getSongs()));
 	}
 
 	/** This method allows to sort the songs in the table view by size.
@@ -510,7 +513,7 @@ public class PrimaryStageController {
 	@FXML
 	public void sortBySize(ActionEvent event) {
 		musicPlayer.getCurrentMusicFolder().sortSongsBySize();
-		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getFirstMusicFolder().getSongs()));
+		musicInfoTableView.setItems(FXCollections.observableArrayList(musicPlayer.getCurrentMusicFolder().getSongs()));
 	}
 
 	/** This method allows to found a song in the current folder specifying its file name.
