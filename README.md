@@ -38,7 +38,7 @@
   </ul>
   
 ## Overview
-  ![Overview](overview/app-main-view.png?raw=true)
+  ![Overview](overview/app-view.png?raw=true)
 
   [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com)
   [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
