@@ -35,6 +35,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.ImagePattern;
@@ -46,6 +47,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 import model.musicPlayer.MusicFolder;
 import model.musicPlayer.MusicPlayer;
 import model.musicPlayer.Song;
@@ -182,6 +184,34 @@ public class PrimaryStageController {
 				int cI = musicPlayer.getCurrentPlayList().indexOf(newSelection);
 				musicPlayer.setMedia(cI);
 				restartThreads();
+			}
+		});
+		trackTimeSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>() {
+			//Allows to change the current time in the song
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, 
+					Boolean oldValue, Boolean newValue) {
+				if (oldValue && !newValue) {
+					double pos = trackTimeSlider.getValue()/100.0;
+					MediaPlayer mediaPlayer = musicPlayer.getMediaPlayer();
+					Duration seekTo = mediaPlayer.getTotalDuration().multiply(pos);
+					if (mediaPlayer.getStatus() == Status.STOPPED) {
+						mediaPlayer.pause();
+					}
+					mediaPlayer.seek(seekTo);
+					if (mediaPlayer.getStatus() != Status.PLAYING) {
+						if (trackTimeSlider.isValueChanging())
+							return;
+
+						Duration total = mediaPlayer.getTotalDuration();
+
+						if (total == null || seekTo == null) {
+							trackTimeSlider.setValue(0);
+						} else {
+							trackTimeSlider.setValue(seekTo.toMillis() / total.toMillis());
+						}
+					}
+				}
 			}
 		});
 		shuffleSwitchButton.setGraphic(new ImageView(SHUFFLE_DISABLED));

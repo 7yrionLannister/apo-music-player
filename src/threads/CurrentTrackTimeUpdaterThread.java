@@ -11,15 +11,15 @@ import model.musicPlayer.Song;
 import ui.PrimaryStageController;
 
 public class CurrentTrackTimeUpdaterThread extends Thread {
-	
+
 	/** It represents music player interface controller.
 	 */
 	private PrimaryStageController psc;
-	
+
 	/** It represents if the shuffle mode is activated or not.
 	 */
 	private boolean shuffle;
-	
+
 	/** CurrentTrackTimeUpdaterThread constructor method that receives the music player interface controller as parameter.
 	 * @param psc A PrimaryStageController that represents the music player interface controller<br>psc != null
 	 * @param sh A boolean that indicates whether the music player is in shuffle mode or not
@@ -28,7 +28,7 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 		this.psc = psc;
 		shuffle = sh;
 	}
-	
+
 	/** This method allows to run and update the song time duration when a song is selected and played. Besides, it changes
 	 * the reproduction order when shuffle is enabled.
 	 */
@@ -50,8 +50,9 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 					Platform.runLater(() -> {
 						psc.getDurationLabel().setText(String.format("%02d:%02d", totalMinutes, totalSeconds));
 						psc.getCurrentTimeLabel().setText(String.format("%02d:%02d", minutes, seconds));
-
-						psc.getTrackTimeSlider().setValue(millis/totalMillis*psc.getTrackTimeSlider().getMax());
+						if(!psc.getTrackTimeSlider().isValueChanging()) {
+							psc.getTrackTimeSlider().setValue(millis/totalMillis*psc.getTrackTimeSlider().getMax());
+						}
 					});
 					if(totalMillis == millis) {
 						Platform.runLater(() -> {
@@ -81,14 +82,14 @@ public class CurrentTrackTimeUpdaterThread extends Thread {
 			}
 		}
 	}
-	
+
 	/** This method allows to set the shuffle value when is needed.
 	 * @param sh A boolean that represents if the shuffle mode is activated or not.
 	 */
 	public void setShuffle(boolean sh) {
 		shuffle = sh;
 	}
-	
+
 	/** This method allows to obtain the shuffle value when is needed.
 	 * @return A boolean that represents if the shuffle mode is activated or not.
 	 */
