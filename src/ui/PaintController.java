@@ -3,15 +3,25 @@ package ui;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DialogEvent;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.paint.ListOfImages;
 import model.paint.TreeOfImages;
 import java.awt.image.BufferedImage;
@@ -46,7 +56,7 @@ public class PaintController {
     
     @FXML
     private ComboBox<String> pencilType;
-
+    
     private TreeOfImages treeOfImages;
     private ListOfImages listOfImages;
     
@@ -244,7 +254,7 @@ public class PaintController {
 		try {
 			BufferedImage bufferedImage = ImageIO.read(file);
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-			canvas.getGraphicsContext2D().drawImage(image, 0, 0, 962, 624);
+			canvas.getGraphicsContext2D().drawImage(image, 0, 0,1111, 635);
 		} catch (IOException e) {
 		} catch (IllegalArgumentException e) {
 		}
@@ -266,11 +276,50 @@ public class PaintController {
     	canvas.getGraphicsContext2D().drawImage(image, 0, 0);
     }
     
-    /**
-     * This method allows to close the program when the exit button is pressed.
-     */
-    public void onExit() {
-        Platform.exit();
+    @FXML
+   public  void inserShape(ActionEvent event) {
+    	try {
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("popUp.fxml"));
+    		Parent root = loader.load();
+
+    		final PopUp p = (PopUp)loader.getController();
+    		
+			Scene s = new Scene(root);
+			Stage st = new Stage();
+			st.getIcons().add(new Image(new File("imgs"+File.separator+"cd.png").toURI().toString()));
+			st.setTitle("Customize cover art");
+			st.setScene(s);
+			st.setResizable(false);
+			st.initModality(Modality.WINDOW_MODAL);
+			st.showAndWait();
+			
+			try {
+	    		if(p.getShape().getValue().equals("Oval")) {
+	    			canvas.getGraphicsContext2D().setFill(colorPicker.getValue());
+	    			canvas.getGraphicsContext2D().fillOval(Integer.parseInt(p.getPosX().getText()), Integer.parseInt(p.getPosY().getText()), Integer.parseInt(p.getWidth().getText()), Integer.parseInt(p.getHeight().getText()));
+	    		}else  {
+	    			canvas.getGraphicsContext2D().setFill(colorPicker.getValue());
+	    			canvas.getGraphicsContext2D().fillRect(Integer.parseInt(p.getPosX().getText()), Integer.parseInt(p.getPosY().getText()), Integer.parseInt(p.getWidth().getText()), Integer.parseInt(p.getHeight().getText()));
+	    		}
+	    	} catch(Exception e) {
+	    		Alert a = new Alert(AlertType.ERROR, "The input data is incorrect, please enter the data again");
+	    		a.show();
+	    		a.setOnCloseRequest(new EventHandler<DialogEvent>() {
+					@Override
+					public void handle(DialogEvent event) {
+						p.getHeight().setText("");
+						p.getWidth().setText("");
+						p.getPosX().setText("");
+						p.getPosY().setText("");
+					}
+				});
+	    	}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    	
+    	
     }
 
 }

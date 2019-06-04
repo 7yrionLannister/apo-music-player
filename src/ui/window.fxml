@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="701.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.PaintController">
+<BorderPane prefHeight="701.0" prefWidth="1112.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.PaintController">
 
     <top>
         <VBox>
@@ -25,7 +25,6 @@
                 <Menu text="File">
                     <MenuItem onAction="#onSave" text="Save" />
                <MenuItem mnemonicParsing="false" onAction="#loadImage" text="Load image" />
-                    <MenuItem onAction="#onExit" text="Exit" />
                 </Menu>
             </MenuBar>
 
@@ -68,11 +67,13 @@
             <Button mnemonicParsing="false" onAction="#nextImg" text="next" />
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="0.0" />
             <Button mnemonicParsing="false" onAction="#randomImg" text="Random IMG" />
+            <Separator layoutX="682.0" layoutY="10.0" orientation="VERTICAL" prefHeight="31.0" prefWidth="14.0" />
+            <Button mnemonicParsing="false" onAction="#inserShape" text="Insert Shape" />
             </ToolBar>
         </VBox>
     </top>
    <center>
-        <Canvas fx:id="canvas" height="635.0" width="989.0" BorderPane.alignment="CENTER" />
+        <Canvas fx:id="canvas" height="635.0" width="1111.0" BorderPane.alignment="CENTER" />
    </center>
 
 </BorderPane>
